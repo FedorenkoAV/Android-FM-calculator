@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">#37363b</color>
+    <color name="lcd_background">#1d1d1f</color>
+    <color name="keys_background">#515465</color>
+
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+
+
+    <color name="colorButtonWhiteText">#ffffff</color>
+
+    <color name="colorLabelYellowText">#E8CF7F</color>
+    <color name="colorLabelBlueText">#77A7D7</color>
+    <color name="colorLabelRedText">#C0818C</color>
+
+    <color name="colorBlackText">#000000</color>
+
+
+    <color name="colorLCDBackground">#c0c0c0</color>
+    <color name="colorLCDFont">#000000</color>
+
+
+</resources>

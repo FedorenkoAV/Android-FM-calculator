@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/top_display_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/bottom_display_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/left_display_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/right_display_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/center_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/bottom_keys_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/middle_keys_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/top_keys_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/FuncTableLayout"
+        app:layout_constraintDimensionRatio="4:1"
+        app:layout_constraintEnd_toEndOf="@+id/TableLayout02"
+        app:layout_constraintStart_toStartOf="@+id/TableLayout02">
+
+        <ImageView
+            android:id="@+id/imageViewMode"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_mode_all"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ru.fmproject.android.calculator.TextViewPlus
+            android:id="@+id/protocol"
+            style="@style/protocol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMode"
+            tools:text="(-0.1+2)-3*4/56789=÷^√πʸ√x³√°ʹʺeˣxʸ∑×%" />
+
+        <ImageView
+            android:id="@+id/imageView01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView02"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView01"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView03"
+            app:layout_constraintTop_toTopOf="@+id/imageView01" />
+
+        <ImageView
+            android:id="@+id/imageView03"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView02"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView04"
+            app:layout_constraintTop_toTopOf="@+id/imageView02" />
+
+
+        <ImageView
+            android:id="@+id/imageView04"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView03"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView05"
+            app:layout_constraintTop_toTopOf="@+id/imageView03" />
+
+
+        <ImageView
+            android:id="@+id/imageView05"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView04"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView06"
+            app:layout_constraintTop_toTopOf="@+id/imageView04" />
+
+
+        <ImageView
+            android:id="@+id/imageView06"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView05"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView07"
+            app:layout_constraintTop_toTopOf="@+id/imageView05" />
+
+
+        <ImageView
+            android:id="@+id/imageView07"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView06"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView08"
+            app:layout_constraintTop_toTopOf="@+id/imageView06" />
+
+        <ImageView
+            android:id="@+id/imageView08"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView07"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView09"
+            app:layout_constraintTop_toTopOf="@+id/imageView07" />
+
+        <ImageView
+            android:id="@+id/imageView09"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView08"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView10"
+            app:layout_constraintTop_toTopOf="@+id/imageView08" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView09"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView11"
+            app:layout_constraintTop_toTopOf="@+id/imageView09" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_seven_segment_8_dot"
+            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageViewMemory"
+            app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+        <ImageView
+            android:id="@+id/imageViewMemory"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_seven_segment_memory"
+            app:layout_constraintEnd_toStartOf="@+id/imageView11"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView11" />
+
+        <ImageView
+            android:id="@+id/imageViewMinus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_seven_segment_minus"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewError"
+            app:layout_constraintEnd_toStartOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewError" />
+
+        <ImageView
+            android:id="@+id/imageViewError"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_seven_segment_error"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintEnd_toStartOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView11" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <TableLayout
+        android:id="@+id/FuncTableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toTopOf="@+id/TableLayout02"
+        app:layout_constraintEnd_toEndOf="@+id/TableLayout02"
+        app:layout_constraintStart_toStartOf="@+id/TableLayout02">
+
+        <TableRow
+            android:id="@+id/TableRow01"
+            style="@style/tableRowsFuncText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_archyp"
+                style="@style/yellow_text"
+                android:text="@string/lab_arc_hyp" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_sd"
+                style="@style/red_text"
+                android:text="@string/lab_sd" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow02"
+            style="@style/tableRowsFuncButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonShift"
+                style="@style/FuncButton"
+                android:background="@drawable/func_btn_yellow_selector"
+                android:shadowColor="@color/colorBlackText"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="1"
+                android:text="@string/shift"
+                android:textSize="10dp" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonHyp"
+                style="@style/FuncButton"
+                android:text="@string/hyp" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonGear"
+                style="@style/FuncButton"
+                android:visibility="invisible" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButton4"
+                style="@style/FuncButton"
+                android:visibility="invisible" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonOff"
+                style="@style/FuncButton"
+                android:text="@string/off" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonOnC"
+                style="@style/FuncButton"
+                android:background="@drawable/func_btn_red_selector"
+                android:shadowColor="@color/colorBlackText"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="1"
+                android:text="@string/on_c"
+                android:textSize="10dp" />
+        </TableRow>
+
+        <!--<ImageView-->
+        <!--android:layout_width="00dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:contentDescription="Line"-->
+        <!--android:src="@drawable/ic_line2" />-->
+
+        <TableRow
+            android:id="@+id/TableRow03"
+            style="@style/tableRowsFuncText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_cplx"
+                style="@style/yellow_text"
+                android:text="@string/lab_cplx" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_fix"
+                style="@style/yellow_text"
+                android:text="@string/lab_fix" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_drg"
+                style="@style/yellow_text"
+                android:text="@string/lab_drg" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_arcsin"
+                style="@style/yellow_text"
+                android:text="@string/lab_arcsin" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_arccos"
+                style="@style/yellow_text"
+                android:text="@string/lab_arccos" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_arctan"
+                style="@style/yellow_text"
+                android:text="@string/lab_arctan" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow04"
+            style="@style/tableRowsFuncButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonDel"
+                style="@style/FuncButton"
+                android:text="@string/del" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonSci"
+                style="@style/FuncButton"
+                android:text="@string/sci" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonDrg"
+                style="@style/FuncButton"
+                android:text="@string/drg" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonSin"
+                style="@style/FuncButton"
+                android:text="@string/sin" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonCos"
+                style="@style/FuncButton"
+                android:text="@string/cos" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonTan"
+                style="@style/FuncButton"
+                android:text="@string/tan" />
+        </TableRow>
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:contentDescription="Line"-->
+        <!--android:src="@drawable/ic_line2" />-->
+
+        <TableRow
+            android:id="@+id/TableRow05"
+            style="@style/tableRowsFuncText">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/yellow_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_pi" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="A" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/lab_y_sqr_x"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:src="@drawable/ic_lab_y_sqr_x" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="B" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/yellow_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_cbt" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="C" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/yellow_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_todrg" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="D" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/yellow_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_ex" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="E" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/yellow_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_10x" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/blue_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="F" />
+            </RelativeLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow06"
+            style="@style/tableRowsFuncButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonExp"
+                style="@style/FuncButton"
+                android:text="@string/exp" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonXpowY"
+                style="@style/FuncButton"
+                android:text="@string/x_pow_y" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonSqr"
+                style="@style/FuncButton"
+                android:text="@string/sqr" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonToRad"
+                style="@style/FuncButton"
+                android:text="@string/from_drg" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonLn"
+                style="@style/FuncButton"
+                android:text="@string/ln" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonLog"
+                style="@style/FuncButton"
+                android:text="@string/log" />
+        </TableRow>
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:contentDescription="Line"-->
+        <!--android:src="@drawable/ic_line2" />-->
+
+        <TableRow
+            android:id="@+id/TableRow07"
+            style="@style/tableRowsFuncText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_1x"
+                style="@style/yellow_text"
+                android:text="@string/lab_1_x" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_r_to_p"
+                style="@style/yellow_text"
+                android:text="@string/lab_r_to_p" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_p_to_r"
+                style="@style/yellow_text"
+                android:text="@string/lab_p_to_r" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_x_to_y"
+                style="@style/yellow_text"
+                android:text="@string/lab_x_y" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/red_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/lab_n" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/red_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/lab_summ_x" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/lab_x"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="6dp"
+                    android:src="@drawable/ic_average_x" />
+
+                <ru.fmproject.android.calculator.TextViewPlus
+                    style="@style/red_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/lab_summ_x2" />
+            </RelativeLayout>
+
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/TableRow08"
+            style="@style/tableRowsFuncButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonX2"
+                style="@style/FuncButton"
+                android:text="@string/x2" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonA"
+                style="@style/FuncButton"
+                android:text="@string/a"
+                tools:textAllCaps="false" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonB"
+                style="@style/FuncButton"
+                android:text="@string/b" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonOpenBracket"
+                style="@style/FuncButton"
+                android:text="@string/open_bracket" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonCloseBracket"
+                style="@style/FuncButton"
+                android:text="@string/close_bracket" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/FuncButtonXtoM"
+                style="@style/FuncButton"
+                android:text="@string/x_to_memory" />
+        </TableRow>
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:contentDescription="Line"-->
+        <!--android:src="@drawable/ic_line2" />-->
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/TableLayout02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_keys_guideline"
+        app:layout_constraintEnd_toEndOf="@id/right_display_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/left_display_guideline">
+
+        <TableRow
+            android:id="@+id/Table2Row01"
+            style="@style/tableRowsBasicText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_data_del"
+                style="@style/red_text"
+                android:text="@string/lab_data_del" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_deviation"
+                style="@style/red_text"
+                android:text="@string/lab_deviation" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row02"
+            style="@style/tableRowsBasicButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button07"
+                style="@style/BasicButton"
+                android:text="@string/btn_7" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button08"
+                style="@style/BasicButton"
+                android:text="@string/btn_8" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button09"
+                style="@style/BasicButton"
+                android:text="@string/btn_9" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonMem"
+                style="@style/BasicButton"
+                android:text="@string/btn_memory_plus" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonMR"
+                style="@style/BasicButton"
+                android:text="@string/btn_mr" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row03"
+            style="@style/tableRowsBasicText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="$" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="€" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/bitcoin"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/ic_bitcoin" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_oct"
+                style="@style/blue_text"
+                android:text="@string/lab_oct" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_bin"
+                style="@style/blue_text"
+                android:text="@string/lab_bin" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row04"
+            style="@style/tableRowsBasicButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button04"
+                style="@style/BasicButton"
+                android:text="@string/btn_4" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button05"
+                style="@style/BasicButton"
+                android:text="@string/btn_5" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button06"
+                style="@style/BasicButton"
+                android:text="@string/btn_6" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonMult"
+                style="@style/BasicButton"
+                android:text="@string/btn_mult" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonDiv"
+                style="@style/BasicButton"
+                android:text="@string/btn_div" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row05"
+            style="@style/tableRowsBasicText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/dbm_to_w"
+                style="@style/yellow_text"
+                android:text="@string/dbm_to_w" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/w_to_dbm"
+                style="@style/yellow_text"
+                android:text="@string/w_to_dbm" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_dec"
+                style="@style/blue_text"
+                android:text="@string/lab_dec" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_hex"
+                style="@style/blue_text"
+                android:text="@string/lab_hex" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row06"
+            style="@style/tableRowsBasicButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button01"
+                style="@style/BasicButton"
+                android:text="@string/btn_1" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button02"
+                style="@style/BasicButton"
+                android:text="@string/btn_2" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button03"
+                style="@style/BasicButton"
+                android:text="@string/btn_3" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonPlus"
+                style="@style/BasicButton"
+                android:text="@string/btn_plus" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonMinus"
+                style="@style/BasicButton"
+                android:text="@string/btn_minus" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row07"
+            style="@style/tableRowsBasicText">
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_rnd"
+                style="@style/yellow_text"
+                android:text="@string/lab_rnd" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                style="@style/yellow_text"
+                android:text="" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_percent"
+                style="@style/yellow_text"
+                android:text="@string/lab_percent" />
+
+            <ru.fmproject.android.calculator.TextViewPlus
+                android:id="@+id/lab_factorial"
+                style="@style/yellow_text"
+                android:text="@string/lab_factorial" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Table2Row08"
+            style="@style/tableRowsBasicButtons">
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/Button0"
+                style="@style/BasicButton"
+                android:text="@string/btn_0" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonDot"
+                style="@style/BasicButton"
+                android:text="@string/btn_dot" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonSign"
+                style="@style/BasicButton"
+                android:text="@string/btn_sign" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonCalc"
+                style="@style/BasicButton"
+                android:text="@string/btn_calc" />
+
+            <ru.fmproject.android.calculator.ButtonPlus
+                android:id="@+id/ButtonCE"
+                style="@style/BasicButton"
+                android:text="@string/btn_ce"
+
+                />
+        </TableRow>
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

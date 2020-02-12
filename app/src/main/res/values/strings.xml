@@ -1,0 +1,131 @@
+<resources>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">FM Calculator</string>
+    <string name="nav_header_subtitle">fedorenko@mail.ru</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="font_liberation_serif_bold">LiberationSerif-Bold.ttf</string>
+    <string name="font_lin_libertine_riah">LinLibertine_RIah.ttf</string>
+    <string name="font_liberation_serif_regular">LiberationSerif-Regular.ttf</string>
+    <string name="font_7segment">7segment.ttf</string>
+
+    <string name="texasLED2">TexasLED2.ttf</string>
+    <string name="_888888888888">-888888888888</string>
+
+    <string name="lab_arc_hyp">arc HYP</string>
+    <string name="lab_sd">SD</string>
+
+    <string name="shift">SHIFT</string>
+    <string name="hyp">HYP</string>
+    <string name="off">OFF</string>
+    <string name="on_c"><sup>ON</sup>/<sub>C</sub></string>
+
+    <string name="lab_cplx">CPLX</string>
+    <string name="lab_fix">FIX</string>
+    <string name="lab_drg">DRG►</string>
+    <string name="lab_arcsin">sinˉ¹</string>
+    <string name="lab_arccos">cosˉ¹</string>
+    <string name="lab_arctan">tanˉ¹</string>
+
+    <string name="del">►</string>
+    <string name="sci">SCI</string>
+    <string name="drg">DRG</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+
+    <string name="lab_pi">π</string>
+    <string name="lab_y_sqr_x">ʸ√x</string>
+    <string name="lab_cbt">³√‾‾</string>
+    <string name="lab_todrg">►°ʹʺ</string>
+    <string name="lab_ex">eˣ</string>
+    <string name="lab_10x">10ˣ</string>
+
+    <string name="exp">EXP</string>
+    <string name="x_pow_y">xʸ</string>
+    <string name="sqr">√‾‾</string>
+    <string name="from_drg">°ʹʺ►</string>
+    <string name="ln">ln</string>
+    <string name="log">Log</string>
+
+    <string name="lab_1_x">1/x</string>
+    <string name="lab_r_to_p">R►P</string>
+    <string name="lab_p_to_r">P►R</string>
+    <string name="lab_x_y">X↔Y</string>
+    <string name="lab_n">n</string>
+    <string name="lab_summ_x">∑x</string>
+    <string name="lab_x">x</string>
+    <string name="lab_summ_x2">∑x²</string>
+
+    <string name="x2">x²</string>
+    <string name="a">a</string>
+    <string name="b">b</string>
+    <string name="open_bracket">(</string>
+    <string name="close_bracket">)</string>
+    <string name="x_to_memory">X→M</string>
+
+    <string name="lab_deviation">σ<sub>n-1</sub>/σ<sub>n</sub></string>
+    <string name="sampleStdDevi">σ<sub>n-1</sub></string>
+    <string name="stdDeviOfPopu">σ<sub>n</sub></string>
+    <string name="lab_data_del">DATA/DEL</string>
+
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+    <string name="btn_memory_plus">M+</string>
+    <string name="btn_mr">MR</string>
+
+    <string name="lab_oct">OCT</string>
+    <string name="lab_bin">BIN</string>
+
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_mult">×</string>
+    <string name="btn_div">÷</string>
+
+    <string name="lab_dec">DEC</string>
+    <string name="lab_hex">HEX</string>
+
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_minus">-</string>
+
+    <string name="lab_rnd">RND</string>
+    <string name="lab_percent">%</string>
+    <string name="lab_factorial">x<i>!</i></string>
+
+    <string name="btn_0">0</string>
+    <string name="btn_dot">•</string>
+    <string name="btn_sign">+/-</string>
+    <string name="btn_calc">=</string>
+    <string name="btn_ce">CE</string>
+
+    <string name="dbm_to_w">dbm►W</string>
+    <string name="w_to_dbm">W►dbm</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9802856203007191/1230561785</string>
+    <string name="app_name">FM Calculator</string>
+
+    <string name="title_activity_currency_rate_query">CurrencyRateQueryActivity</string>
+
+    <string name="bitcoin">₿</string>
+    <string name="protocol">Протокол</string>
+    <string name="settings">Настройки</string>
+    <string name="about">О программе</string>
+    <string name="clear">Очистить</string>
+    <string name="ok_copy_to_clipboard">Число скопировано в буфер обмена</string>
+    <string name="ok_paste_from_clipboard">Число вставлено из буфер обмена</string>
+    <string name="settings_message">Скоро здесь будут настройки программы.</string>
+    <string name="about_message">Автор программы Федоренко Александр.</string>
+    <string name="download_ok">Данные успешно загружены.</string>
+    <string name="download_cancelled">Запрос отменен.</string>
+    <string name="download_error">Ошибка во время запроса.</string>
+    <string name="invalute">INV</string>
+    <string name="evolvent">evo</string>
+    <string name="ok">Ок</string>
+
+</resources>

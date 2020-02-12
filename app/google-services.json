@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "959729016000",
+    "firebase_url": "https://fmcalculator.firebaseio.com",
+    "project_id": "fmcalculator",
+    "storage_bucket": "fmcalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959729016000:android:90980e5071ecf37a",
+        "android_client_info": {
+          "package_name": "ru.fmproject.android.calculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959729016000-081igmtki6nlou6pkj4cpsn8jeukog8d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.fmproject.android.calculator",
+            "certificate_hash": "7679ad6acd580ee49045ccb2de2b53adfbf16b89"
+          }
+        },
+        {
+          "client_id": "959729016000-1ruh78mjd9h0jgn6fbmu3h1d9c86026v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiLSyO1k8T3hKg63g8-lyqXzPpCYDJ0Gg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959729016000-1ruh78mjd9h0jgn6fbmu3h1d9c86026v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
