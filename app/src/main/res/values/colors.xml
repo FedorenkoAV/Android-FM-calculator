@@ -15,6 +15,7 @@
     <color name="colorButtonWhiteText">#ffffff</color>
 
     <color name="colorLabelYellowText">#E8CF7F</color>
+    <color name="colorLabelSuperYellowText">#FFFF00</color>
     <color name="colorLabelBlueText">#77A7D7</color>
     <color name="colorLabelRedText">#C0818C</color>
 

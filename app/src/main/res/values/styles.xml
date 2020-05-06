@@ -71,6 +71,13 @@
         <item name="customFont">@string/font_liberation_serif_bold</item>
     </style>
 
+    <style name="super_yellow_text">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/colorLabelSuperYellowText</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="customFont">@string/font_liberation_serif_bold</item>
+    </style>
+
     <style name="red_text">
         <item name="android:textSize">10dp</item>
         <item name="android:textColor">@color/colorLabelRedText</item>

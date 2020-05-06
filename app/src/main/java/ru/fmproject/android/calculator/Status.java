@@ -1,11 +1,6 @@
 package ru.fmproject.android.calculator;
 
-import android.support.v4.content.ContextCompat;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * Created by User on 06.06.2017.
@@ -19,10 +14,10 @@ class Status {
     private boolean memory = false;
     private boolean error = false;
     private StatusDisplay statusDisplay;
-    Button btnStore[];
+    Button[] btnStore;
 
 
-    Status(StatusDisplay statusDisplay, Button btnStore[]) {
+    Status(StatusDisplay statusDisplay, Button[] btnStore) {
         this.statusDisplay = statusDisplay;
         this.btnStore = btnStore;
     }

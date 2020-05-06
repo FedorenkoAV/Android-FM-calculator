@@ -12,7 +12,7 @@ import android.util.AttributeSet;
  * ButtonPlus - класс, объекты которого это кнопки позволяющие менять шрифт
  */
 
-class ButtonPlus extends android.support.v7.widget.AppCompatButton {
+class ButtonPlus extends androidx.appcompat.widget.AppCompatButton {
     private static final String TAG = "ButtonPlus";
 
     public ButtonPlus(Context context) {

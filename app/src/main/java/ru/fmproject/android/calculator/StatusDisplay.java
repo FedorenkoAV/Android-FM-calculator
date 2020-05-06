@@ -1,12 +1,10 @@
 package ru.fmproject.android.calculator;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
+import androidx.core.content.ContextCompat;
+
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import ru.fmproject.android.calculator.R;
 
 
 /**

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FM_Calculator.iml" filepath="$PROJECT_DIR$/FM_Calculator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FM_Calculator.iml" filepath="$PROJECT_DIR$/FM_Calculator.iml" group="FM_Calculator" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FM_Calculator/app" />
     </modules>
   </component>
 </project>

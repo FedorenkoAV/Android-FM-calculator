@@ -8,16 +8,16 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -25,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
@@ -531,7 +530,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void run() {
                     AdView mAdView = findViewById(R.id.adView);
                     //AdRequest adRequest = new AdRequest.Builder().addTestDevice("C656855C66D6AB6FF2E42A97286F3B59").build(); //Genymotion Custom Phone - 8.0 API26
-                    AdRequest adRequest = new AdRequest.Builder().addTestDevice("7AC37A42A3DEC77A354D9A0C0B1C4325").build();// Xiaomi Redmi 5A
+                    //AdRequest adRequest = new AdRequest.Builder().addTestDevice("7AC37A42A3DEC77A354D9A0C0B1C4325").build();// Xiaomi Redmi 5A
+                    AdRequest adRequest = new AdRequest.Builder().build();
                     mAdView.loadAd(adRequest);
                     mAdView.setAdListener(new AdListener() {
                         @Override
@@ -955,6 +955,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         L.d(TAG, "onActivityResult(int requestCode, int resultCode, Intent data) запущен.");
         switch (requestCode) {
             case (REQUEST_CODE_CURRENCY):
@@ -971,8 +972,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             currency_rate = CurrencyRateQueryActivity.getCurrencyRate(data);
                         }
                         L.d(TAG, "currency_rate = " + currency_rate);
-                        customToast.setToastText(getString(R.string.download_ok));
-                        customToast.show();
+//                        customToast.setToastText(getString(R.string.download_ok));
+//                        customToast.show();
                         editX.dollar(currency_rate);
                         break;
                     case (Activity.RESULT_CANCELED):

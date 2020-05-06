@@ -11,7 +11,7 @@ import android.util.AttributeSet;
  * Created by User on 05.06.2017.
  */
 
-public class TextViewPlus extends android.support.v7.widget.AppCompatTextView {
+public class TextViewPlus extends androidx.appcompat.widget.AppCompatTextView {
     private static final String TAG = "TextView";
 
     public TextViewPlus(Context context) {

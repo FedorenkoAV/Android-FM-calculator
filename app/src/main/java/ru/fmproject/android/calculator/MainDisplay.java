@@ -2,7 +2,7 @@ package ru.fmproject.android.calculator;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -66,7 +66,7 @@ class MainDisplay {
         withZeros = false;
 
         setFixModeScale(getFixModeScale());
-
+        exponentLength = preferences.getExpLength();
         sciMode = false;
         normForm = new DecimalFormat("##############.##############");
         switch (exponentLength) {
@@ -82,7 +82,7 @@ class MainDisplay {
         }
         L.d(TAG, "MainDisplay создан");
         L.d(TAG, "mainTextSize = " + mainTextSize);
-        exponentLength = preferences.getExpLength();
+
         numberLength = preferences.getNumLength();
         byteLengthBin = preferences.getBinLength();
         byteLengthOct = preferences.getOctLength();
@@ -153,6 +153,7 @@ class MainDisplay {
             try {
                 str = sciForm.format(num);
             } catch (Exception e) {
+                L.printStackTrace(e);
                 L.d(TAG, "Ошибка: " + e);
             }
             L.d(TAG, "Преобразовали к формату SCI: " + str);
