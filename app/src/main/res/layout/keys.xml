@@ -14,13 +14,12 @@
         android:layout_gravity="top"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id"
-        app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/main_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/keys"
         android:background="@color/lcd_background"
         android:orientation="vertical"
         android:paddingTop="50dp"
@@ -725,7 +724,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             ads:srcCompat="@drawable/ic_bitcoin"
-            app:layout_constraintBottom_toTopOf="@+id/button41"
+            app:layout_constraintBottom_toTopOf="@+id/button33"
+            app:layout_constraintLeft_toLeftOf="@+id/button33"
             tools:layout_editor_absoluteX="42dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package ru.fmproject.android.calculator;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import android.content.ClipData;
@@ -9,6 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.ResponseInfo;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.FragmentManager;
@@ -31,35 +37,33 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyDialogFragment.NoticeDialogListener {
+
+    private AdView mAdView;
 
     private static final String TAG = "MainActivity";
 
     private static final int REQUEST_CODE_CURRENCY = 0;
 
-    public final static int TOAST = 0;
-    public final static int STATUS_DISPLAY = 1;
-    public final static int STATUS = 2;
-    public final static int MODE = 3;
-    public final static int ANGLE = 4;
-    public final static int MEMORY = 5;
-    public final static int MAIN_DISPLAY = 6;
-    public final static int STACK_CALCULATOR = 7;
-    public final static int EDIT_X = 8;
-    public final static int CPLX = 9;
-    public final static int SD = 10;
-    public final static int INPUT_DRIVER = 11;
-    public final static int MAIN_ACTIVITY = 12;
-    public final static int PREFERENCES = 13;
-    public final static int EDIT_X_BIN = 14;
-    public final static int EDIT_X_OCT = 15;
-    public final static int EDIT_X_HEX = 16;
-    public final static int PROTOCOL = 17;
-    public final static int FRAGMENT_MANAGER = 18;
+    public static final int TOAST = 0;
+    public static final int STATUS_DISPLAY = 1;
+    public static final int STATUS = 2;
+    public static final int MODE = 3;
+    public static final int ANGLE = 4;
+    public static final int MEMORY = 5;
+    public static final int MAIN_DISPLAY = 6;
+    public static final int STACK_CALCULATOR = 7;
+    public static final int EDIT_X = 8;
+    public static final int CPLX = 9;
+    public static final int SD = 10;
+    public static final int INPUT_DRIVER = 11;
+    public static final int MAIN_ACTIVITY = 12;
+    public static final int PREFERENCES = 13;
+    public static final int EDIT_X_BIN = 14;
+    public static final int EDIT_X_OCT = 15;
+    public static final int EDIT_X_HEX = 16;
+    public static final int PROTOCOL = 17;
+    public static final int FRAGMENT_MANAGER = 18;
 
     Button btn_shift;
     Button btn_hyp;
@@ -149,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MemoryStore memoryStore;
     InputDriver inputDriver;
 
-    Object objStore[] = new Object[19];
+    Object[] objStore = new Object[19];
 
     ClipboardManager clipboardManager;
     ClipData clipData;
@@ -158,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
+//        @SuppressLint("InlinedApi")
         @Override
         public void run() {
             // Delayed removal of status and navigation bar
@@ -191,72 +195,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     };
 
-    private final Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            L.d(TAG, "mShowPart2Runnable запущен.");
-            try {
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.show();
-                }
+    private final Runnable mShowPart2Runnable = () -> {
+        // Delayed display of UI elements
+        L.d(TAG, "mShowPart2Runnable запущен.");
+        try {
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.show();
+            }
 //            mControlsView.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                L.d(TAG, "Произошла ошибка в mShowPart2Runnable: " + e);
-                StackTraceElement[] stackTraceElements = e.getStackTrace();
-                for (int i = 0; i < stackTraceElements.length; i++) {
-                    L.d(TAG, i + ": " + stackTraceElements[i].toString());
-                }
+        } catch (Exception e) {
+            L.d(TAG, "Произошла ошибка в mShowPart2Runnable: " + e);
+            StackTraceElement[] stackTraceElements = e.getStackTrace();
+            for (int i = 0; i < stackTraceElements.length; i++) {
+                L.d(TAG, i + ": " + stackTraceElements[i].toString());
             }
         }
     };
-//    private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            L.d(TAG, "mHideRunnable запущен.");
-            try {
-                hide();
-            } catch (Exception e) {
-                L.d(TAG, "Произошла ошибка в mHideRunnable: " + e);
-                StackTraceElement[] stackTraceElements = e.getStackTrace();
-                for (int i = 0; i < stackTraceElements.length; i++) {
-                    L.d(TAG, i + ": " + stackTraceElements[i].toString());
-                }
+    private final Runnable mHideRunnable = () -> {
+        L.d(TAG, "mHideRunnable запущен.");
+        try {
+            hide();
+        } catch (Exception e) {
+            L.d(TAG, "Произошла ошибка в mHideRunnable: " + e);
+            StackTraceElement[] stackTraceElements = e.getStackTrace();
+            for (int i = 0; i < stackTraceElements.length; i++) {
+                L.d(TAG, i + ": " + stackTraceElements[i].toString());
             }
         }
     };
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-//    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View view, MotionEvent motionEvent) {
-//            L.d(TAG, "onTouch(View view, MotionEvent motionEvent) в mDelayHideTouchListener запущен.");
-//            try {
-//                if (AUTO_HIDE) {
-//                    delayedHide(AUTO_HIDE_DELAY_MILLIS);
-//                }
-//            } catch (Exception e) {
-//                L.d(TAG, "Произошла ошибка в onTouch(View view, MotionEvent motionEvent) в mDelayHideTouchListener: " + e);
-//                StackTraceElement[] stackTraceElements = e.getStackTrace();
-//                for (int i = 0; i < stackTraceElements.length; i++) {
-//                    L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//                }
-//            }
-//            return false;
-//        }
-//    };
-
-//    private View mDecorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
+
         super.onCreate(savedInstanceState);
         L.d(TAG, "onCreate() запущен.");
         if (BuildConfig.DEBUG) {
@@ -269,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setContentView(R.layout.drawable_layout);
 //            mVisible = true;
 //            mControlsView = findViewById(R.id.fullscreen_content_controls);
-            mContentView = findViewById(R.id.fullscreen_content);
+//            mContentView = findViewById(R.id.fullscreen_content);
             // Set up the user interaction to manually show or hide the system UI.
 //            mContentView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -306,11 +278,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             customToast = new CustomToast(activity, "В разработке");
         } catch (Exception e) {
             L.d(TAG, "При старте приложения произошла ошибка: " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
             L.printStackTrace(e);
             this.onDestroy();
         }
@@ -318,27 +285,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             objStore[TOAST] = customToast;
             L.d(TAG, "Создали свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html");
-
-
-
-            display = (TextViewPlus) findViewById(R.id.display);
+            display = findViewById(R.id.display);
             display.setOnCreateContextMenuListener(this);
 
 //        Находим метки статуса и режима работы
             L.d(TAG, "Находим метки статуса и режима работы");
-            shift = (TextViewPlus) findViewById(R.id.status_shift);
-            hyp = (TextViewPlus) findViewById(R.id.status_hyp);
-            deg = (TextViewPlus) findViewById(R.id.status_deg);
-            rad = (TextViewPlus) findViewById(R.id.status_rad);
-            grad = (TextViewPlus) findViewById(R.id.status_grad);
-            bracket = (TextViewPlus) findViewById(R.id.status_bracket);
-            bin = (TextViewPlus) findViewById(R.id.status_bin);
-            oct = (TextViewPlus) findViewById(R.id.status_oct);
-            hex = (TextViewPlus) findViewById(R.id.status_hex);
-            cplx = (TextViewPlus) findViewById(R.id.status_cplx);
-            sd = (TextViewPlus) findViewById(R.id.status_sd);
+            shift = findViewById(R.id.status_shift);
+            hyp = findViewById(R.id.status_hyp);
+            deg = findViewById(R.id.status_deg);
+            rad = findViewById(R.id.status_rad);
+            grad = findViewById(R.id.status_grad);
+            bracket = findViewById(R.id.status_bracket);
+            bin = findViewById(R.id.status_bin);
+            oct = findViewById(R.id.status_oct);
+            hex = findViewById(R.id.status_hex);
+            cplx = findViewById(R.id.status_cplx);
+            sd = findViewById(R.id.status_sd);
             memory = findViewById(R.id.memory);
-            error = (TextViewPlus) findViewById(R.id.error);
+            error = findViewById(R.id.error);
 
 //        Находим кнопки
             L.d(TAG, "Находим кнопки");
@@ -388,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             btn_calc = findViewById(R.id.ButtonCalc);
             btn_ce = findViewById(R.id.ButtonCE);
 
-            Button btnStore[] = {btn_shift, btn_hyp, btn_inv, btn_onc, btn_off, btn_onc,
+            Button[] btnStore = {btn_shift, btn_hyp, btn_inv, btn_onc, btn_off, btn_onc,
                     btn_del, btn_sci, btn_drg, btn_sin, btn_cos, btn_tan,
                     btn_exp, btn_x_pow_y, btn_sqr, btn_to_rad, btn_ln, btn_log,
                     btn_x2, btn_a, btn_b, btn_open_bracket, btn_close_bracket, btn_x_to_mem,
@@ -400,7 +364,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 //        Создаем объект statusDisplay, который будет управлять отображением меток статуса и режима работы на дисплее
-            TextView statusDisplayLabStore[] = {shift, hyp, deg, rad, grad, bracket, bin, oct, hex, cplx, sd, error};
+            TextView[] statusDisplayLabStore = {shift, hyp, deg, rad, grad, bracket, bin, oct, hex, cplx, sd, error};
             StatusDisplay statusDisplay = new StatusDisplay(this, statusDisplayLabStore, memory);
             objStore[STATUS_DISPLAY] = statusDisplay;
 
@@ -420,14 +384,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             L.d(TAG, "Создали объект mode, который будет менять режим работы на CPLX и SD");
             objStore[MODE] = mode;
 
-            tvProtocol = (TextViewPlus) findViewById(R.id.protocol);
+            tvProtocol = findViewById(R.id.protocol);
             tvProtocol.setSelected(true);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);//создаём объект класса AlertDialog.Builder, передав в качестве параметра контекст приложения
-//            builder.setTitle(R.string.protocol);//задаём для создаваемого диалога заголовок
-//            View adv = getLayoutInflater().inflate(R.layout.dialog, null);// создаем view из dialog.xml
-//            builder.setView(adv);// устанавливаем ее, как содержимое тела диалога
-//            TextView tvAlertDialogProtocol = adv.findViewById(R.id.tvAlertDialogProtocol);// находим TexView для отображения протокола
-//            Dialog alertDialog = builder.create();
 
 //        Создаем объект - FragmentManager
             FragmentManager manager = getSupportFragmentManager();
@@ -464,122 +422,84 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
             objStore[EDIT_X] = editX;
 
-
-
 //        Создаем объект - обработчик нажатия кнопок и вешаем его на кнопки
             inputDriver = new InputDriver(objStore); //инициализируем clickListener
             L.d(TAG, "Создали объект - обработчик нажатия кнопок и вешаем его на кнопки");
             objStore[INPUT_DRIVER] = inputDriver;
 
-            btn_shift.setOnClickListener(inputDriver); //
-            btn_hyp.setOnClickListener(inputDriver); //
-            btn_inv.setOnClickListener(inputDriver); //
-//            btn_4.setOnClickListener(inputDriver); //
-            btn_off.setOnClickListener(inputDriver);
-            btn_onc.setOnClickListener(inputDriver);
-            btn_del.setOnClickListener(inputDriver);
-            btn_sci.setOnClickListener(inputDriver);
-            btn_drg.setOnClickListener(inputDriver);
-            btn_sin.setOnClickListener(inputDriver);
-            btn_cos.setOnClickListener(inputDriver);
-            btn_tan.setOnClickListener(inputDriver);
-            btn_exp.setOnClickListener(inputDriver);
-            btn_x_pow_y.setOnClickListener(inputDriver);
-            btn_sqr.setOnClickListener(inputDriver);
-            btn_to_rad.setOnClickListener(inputDriver);
-            btn_ln.setOnClickListener(inputDriver);
-            btn_log.setOnClickListener(inputDriver);
-            btn_x2.setOnClickListener(inputDriver);
-            btn_a.setOnClickListener(inputDriver);
-            btn_b.setOnClickListener(inputDriver);
-            btn_open_bracket.setOnClickListener(inputDriver);
-            btn_close_bracket.setOnClickListener(inputDriver);
-            btn_x_to_mem.setOnClickListener(inputDriver);
-            btn_7.setOnClickListener(inputDriver);
-            btn_8.setOnClickListener(inputDriver);
-            btn_9.setOnClickListener(inputDriver);
-            btn_mem_plus.setOnClickListener(inputDriver);
-            btn_mem_read.setOnClickListener(inputDriver);
-            btn_4.setOnClickListener(inputDriver);
-            btn_5.setOnClickListener(inputDriver);
-            btn_6.setOnClickListener(inputDriver);
-            btn_mult.setOnClickListener(inputDriver);
-            btn_div.setOnClickListener(inputDriver);
-            btn_1.setOnClickListener(inputDriver);
-            btn_2.setOnClickListener(inputDriver);
-            btn_3.setOnClickListener(inputDriver);
-            btn_plus.setOnClickListener(inputDriver);
-            btn_minus.setOnClickListener(inputDriver);
-            btn_0.setOnClickListener(inputDriver);
-            btn_dot.setOnClickListener(inputDriver);
-            btn_sign.setOnClickListener(inputDriver);
-            btn_calc.setOnClickListener(inputDriver);
-            btn_ce.setOnClickListener(inputDriver);
+            for (Button button : btnStore) {
+                button.setOnClickListener(inputDriver);
+            }
 
             for (int i = 0; i < objStore.length; i++) {
-
                 L.d(TAG, "В objStore[" + i + "]: " + objStore[i]);
             }
 
-            // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-            // Sample AdMob app ID: ca-app-pub-9802856203007191~8964036984
 //            MobileAds.initialize(this, "ca-app-pub-9802856203007191~8964036984");
 
-            new Handler().postDelayed(new Runnable() {
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
                 @Override
-                public void run() {
-                    AdView mAdView = findViewById(R.id.adView);
-                    //AdRequest adRequest = new AdRequest.Builder().addTestDevice("C656855C66D6AB6FF2E42A97286F3B59").build(); //Genymotion Custom Phone - 8.0 API26
-                    //AdRequest adRequest = new AdRequest.Builder().addTestDevice("7AC37A42A3DEC77A354D9A0C0B1C4325").build();// Xiaomi Redmi 5A
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    mAdView.loadAd(adRequest);
-                    mAdView.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdLoaded() {
-                            // Code to be executed when an ad finishes loading.
-                            L.d(TAG, "onAdLoaded() запущен.");
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(int errorCode) {
-                            // Code to be executed when an ad request fails.
-                            L.d(TAG, "onAdFailedToLoad() запущен.");
-                        }
-
-                        @Override
-                        public void onAdOpened() {
-                            // Code to be executed when an ad opens an overlay that
-                            // covers the screen.
-                            L.d(TAG, "onAdOpened() запущен.");
-                        }
-
-                        @Override
-                        public void onAdLeftApplication() {
-                            // Code to be executed when the user has left the app.
-                            L.d(TAG, "onAdLeftApplication() запущен.");
-                        }
-
-                        @Override
-                        public void onAdClosed() {
-                            // Code to be executed when the user is about to return
-                            // to the app after tapping on an ad.
-                            L.d(TAG, "onAdClosed() запущен.");
-                        }
-
-                        @Override
-                        public void onAdClicked() {
-                            // Code to be executed when a click is recorded for an ad.
-                            L.d(TAG, "onAdClicked() запущен.");
-                        }
-
-                        @Override
-                        public void onAdImpression() {
-                            // Code to be executed when an impression is recorded for an ad.
-                            L.d(TAG, "onAdImpression() запущен.");
-                        }
-                    });
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
                 }
-            }, 10000);
+            });
+
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    // Code to be executed when an ad finishes loading.
+                    L.d("Ads", "onAdLoaded() запустился.");
+                    L.d("Ads", "mAdView responseInfo: " + mAdView.getResponseInfo());
+                }
+
+                @Override
+                public void onAdFailedToLoad(LoadAdError adError) {
+                    // Code to be executed when an ad request fails.
+                    L.d("Ads", "onAdFailedToLoad запустился.");
+                    // Gets the domain from which the error came.
+                    L.d("Ads", "errorDomain: " + adError.getDomain());
+                    // Gets the error code. See
+                    // https://developers.google.com/android/reference/com/google/android/gms/ads/AdRequest#constant-summary
+                    // for a list of possible codes.
+                    L.d("Ads", "errorCode: " + adError.getCode());
+                    // Gets an error message.
+                    // For example "Account not approved yet". See
+                    // https://support.google.com/admob/answer/9905175 for explanations of
+                    // common errors.
+                    L.d("Ads", "errorMessage: " + adError.getMessage());
+                    // Gets additional response information about the request. See
+                    // https://developers.google.com/admob/android/response-info for more
+                    // information.
+                    L.d("Ads", "adError responseInfo: " + adError.getResponseInfo());
+                    // Gets the cause of the error, if available.
+                    L.d("Ads", "cause: " + adError.getCause());
+                    // All of this information is available via the error's toString() method.
+                    //L.d("Ads", adError.toString());
+                }
+
+                @Override
+                public void onAdOpened() {
+                    // Code to be executed when an ad opens an overlay that
+                    // covers the screen.
+                    L.d("Ads", "onAdOpened() запустился.");
+                }
+
+                @Override
+                public void onAdClicked() {
+                    // Code to be executed when the user clicks on an ad.
+                    L.d("Ads", "onAdClicked() запустился.");
+                }
+
+                @Override
+                public void onAdClosed() {
+                    // Code to be executed when the user is about to return
+                    // to the app after tapping on an ad.
+                    L.d("Ads", "onAdClosed() запустился.");
+                }
+            });
+
         } catch (Exception e) {
             customToast.setToastText("Произошла неизвестная ошибка: " + e);
             customToast.show();
@@ -627,22 +547,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         L.d(TAG, "onPostCreate() запущен.");
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-//        try {
-//            delayedHide(100);
-//        } catch (Exception e) {
-//            customToast.setToastText("Произошла ошибка в onPostCreate(): " + e);
-//            customToast.show();
-//            L.d(TAG, "Произошла ошибка в onPostCreate(): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
-//            this.onDestroy();
-//        }
     }
 
     @Override
@@ -656,7 +560,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onRestart();
         L.d(TAG, "onRestart() запущен.");
     }
-
 
     @Override
     protected void onPause() {
@@ -679,7 +582,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getMenuInflater().inflate(R.menu.main, menu);
-//        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override
@@ -694,6 +596,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 contextPaste();
                 customToast.setToastText(getString(R.string.ok_paste_from_clipboard));
                 customToast.show();
+                break;
+            default:
                 break;
         }
         return super.onContextItemSelected(item);
@@ -722,14 +626,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Inflate the menu; this adds items to the action bar if it is present.
             getMenuInflater().inflate(R.menu.main, menu);
         } catch (Exception e) {
-//            customToast.setToastText("Произошла ошибка в onCreateOptionsMenu(Menu menu): " + e);
-//            customToast.show();
             L.d(TAG, "Произошла ошибка в onCreateOptionsMenu(Menu menu): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
             L.printStackTrace(e);
             this.onDestroy();
         }
@@ -742,24 +639,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         L.d(TAG, "onOptionsItemSelected(MenuItem item) запущен.");
-//        try {
-//            int id = item.getItemId();
-//
-////            //noinspection SimplifiableIfStatement
-////            if (id == R.id.action_settings) {
-////                return true;
-////            }
-//        } catch (Exception e) {
-//            customToast.setToastText("Произошла ошибка в onOptionsItemSelected(MenuItem item): " + e);
-//            customToast.show();
-//            L.d(TAG, "Произошла ошибка в onOptionsItemSelected(MenuItem item): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
-//            this.onDestroy();
-//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -788,11 +667,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mHideHandler.removeCallbacks(mShowPart2Runnable);
             mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
         } catch (Exception e) {
-//            customToast.setToastText("Произошла ошибка в hide(): " + e);
-//            customToast.show();
             L.d(TAG, "Произошла ошибка в hide(): " + e);
             StackTraceElement[] stackTraceElements = e.getStackTrace();
-
             for (int i = 0; i < stackTraceElements.length; i++) {
                 L.d(TAG, i + ": " + stackTraceElements[i].toString());
             }
@@ -800,30 +676,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-//    @SuppressLint("InlinedApi")
-//    private void show() {
-//        // Show the system bar
-//        L.d(TAG, "show() запущен.");
-//        try {
-//            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-//            mVisible = true;
-//
-//            // Schedule a runnable to display UI elements after a delay
-//            mHideHandler.removeCallbacks(mHidePart2Runnable);
-//            mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-//        } catch (Exception e) {
-////            customToast.setToastText("Произошла ошибка в show(): " + e);
-////            customToast.show();
-//            L.d(TAG, "Произошла ошибка в show(): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
-//            this.onDestroy();
-//        }
-//    }
 
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
@@ -835,19 +687,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mHideHandler.removeCallbacks(mHideRunnable);
             mHideHandler.postDelayed(mHideRunnable, 100);
         } catch (Exception e) {
-//            customToast.setToastText("Произошла ошибка в delayedHide(int delayMillis): " + e);
-//            customToast.show();
             L.d(TAG, "Произошла ошибка в delayedHide(int delayMillis): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
             L.printStackTrace(e);
             this.onDestroy();
         }
     }
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -856,32 +700,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             if (hasFocus) {
                 delayedHide();
-//                mContentView.setSystemUiVisibility(
-//                        View.SYSTEM_UI_FLAG_LOW_PROFILE                         //0x00000001
-//                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION           //0x00000002
-//                                | View.SYSTEM_UI_FLAG_FULLSCREEN                //0x00000004
-//                                //0x00000008
-//                                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE             //0x00000100
-//                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION    //0x00000200
-//                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN         //0x00000400
-//                                //                        | View.SYSTEM_UI_FLAG_IMMERSIVE                       //0x00000800
-//                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY          //0x00001000
-//                        //                        | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR                //0x00002000
-//                );
             }
         } catch (Exception e) {
             L.d(TAG, "Произошла ошибка в onWindowFocusChanged(boolean hasFocus): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
             L.printStackTrace(e);
             this.onDestroy();
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -919,37 +745,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         } catch (Exception e) {
-//            customToast.setToastText("onNavigationItemSelected(MenuItem item): " + e);
-//            customToast.show();
             L.d(TAG, "onNavigationItemSelected(MenuItem item): " + e);
-//            StackTraceElement[] stackTraceElements = e.getStackTrace();
-//
-//            for (int i = 0; i < stackTraceElements.length; i++) {
-//                L.d(TAG, i + ": " + stackTraceElements[i].toString());
-//            }
             L.printStackTrace(e);
             this.onDestroy();
         }
         return true;
     }
 
-    void currency_rate(String currency) {
+    void currencyRate(String currency) {
         L.d(TAG, "Запускаем дочернюю активность.");
         L.d(TAG, "Запрашиваем курс " + currency);
-//            CurrencyRateQueryDialog currencyRateQueryDialog = new CurrencyRateQueryDialog();
-//            currencyRateQueryDialog.show(manager, "dialog");
         Intent intent = CurrencyRateQueryActivity.newIntent(MainActivity.this, currency);
-//        Intent intent = new Intent(activity, CurrencyRateQueryActivity.class);
         startActivityForResult(intent, REQUEST_CODE_CURRENCY);
     }
 
-    void bitcoin_rate(String currency) {
+    void bitcoinRate(String currency) {
         L.d(TAG, "Запускаем дочернюю активность.");
         L.d(TAG, "Запрашиваем курс " + currency);
-//            CurrencyRateQueryDialog currencyRateQueryDialog = new CurrencyRateQueryDialog();
-//            currencyRateQueryDialog.show(manager, "dialog");
         Intent intent = CurrencyRateQueryActivity.newIntent(MainActivity.this, currency);
-//        Intent intent = new Intent(activity, CurrencyRateQueryActivity.class);
         startActivityForResult(intent, REQUEST_CODE_CURRENCY);
     }
 
@@ -962,7 +775,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 L.d(TAG, "requestCode == REQUEST_CODE_CURRENCY");
                 if (data == null) {
                     L.d(TAG, "data == null");
-//                    return;
                 }
                 switch (resultCode) {
                     case (Activity.RESULT_OK):
@@ -972,8 +784,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             currency_rate = CurrencyRateQueryActivity.getCurrencyRate(data);
                         }
                         L.d(TAG, "currency_rate = " + currency_rate);
-//                        customToast.setToastText(getString(R.string.download_ok));
-//                        customToast.show();
                         editX.dollar(currency_rate);
                         break;
                     case (Activity.RESULT_CANCELED):

@@ -1,12 +1,9 @@
 package ru.fmproject.android.calculator;
 
-//import ru.fmproject.android.calculator.L;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-
 
 /**
  * Created by User on 12.06.2017.
@@ -44,58 +41,6 @@ class ArgX  {
     }
 
     ArgX(double number) {
-//        mantissaIntegerPart = new StringBuilder("");
-//        mantissaFractionalPart = new StringBuilder("");
-//        exponent = new StringBuilder("");
-//        StringBuilder sb = new StringBuilder("");
-//        StringBuilder sb1 = new StringBuilder("");
-//        StringBuilder sb2 = new StringBuilder("");
-//        StringBuilder sb3 = new StringBuilder("");
-//        sb.append(number); //В sb у нас все число, начинаем его пилить
-//        L.d(TAG, "Начинаем пилить число " + sb);
-///*//        1. Отделяем мантиссу от экспоненты
-//*           2. Отделяем знак от экспоненты
-//*           3. Отделяем знак от мантиссы
-//*           4. Отделяем дробную часть от мантиссы
-//*           5. У нас должна остаться целая часть мантиссы*/
-//        sb1.append(getExponentSB(sb)); // В sb1 экспонента со знаком
-//        L.d(TAG, "Экспонента со знаком " + sb1);
-//        if (sb1.length() == 0) { // Если нет экспоненты
-//            isExponent = false;
-//            exponentSign = false;
-//        } else {
-//            isExponent = true;
-//            L.d(TAG, "isExponent " + true);
-//            exponentSign = getNumberSignSB(sb1);
-//            L.d(TAG, "exponentSign " + exponentSign);
-//            exponent.append(getUnSignNumberSB(sb1));
-//            L.d(TAG, "exponent " + exponent);
-//        }
-//        L.d(TAG, "Начинаем пилить мантиссу");
-//        sb2.append(getMantissaSB(sb)); // В sb2 вся мантисса со знаком
-//        L.d(TAG, "Вся мантисса со знаком " + sb2);
-//        mantissaSign = getNumberSignSB(sb2);
-//        sb3.append(getUnSignNumberSB(sb2)); //В sb3 вся мантисса без знака
-//        L.d(TAG, "Вся мантисса без знака " + sb3);
-//        mantissaFractionalPart.append(getMantissaFractionalPartSB(sb3));
-//        isMantissaFractionalPart = true;
-//        if (mantissaFractionalPart.length() == 0) {
-//            isMantissaFractionalPart = false;
-//            mantissaFractionalPart.append("0");
-//        }
-//        mantissaIntegerPart.append(getMantissaIntPartSB(sb3));
-//        if (getMantissaIntegerPart().length() == 0) {
-//            mantissaIntegerPart.append("0");
-//        }
-//        L.d(TAG, "Создали новый ArgX");
-//        L.d(TAG, "Мантисса со знаком: " + mantissaSign);
-//        L.d(TAG, "Целая часть мантиссы: " + mantissaIntegerPart);
-//        L.d(TAG, "Дробная часть мантиссы: " + mantissaFractionalPart);
-//
-//        L.d(TAG, "Экспонента со знаком: " + exponentSign);
-//        L.d(TAG, "Экспонента: " + exponent);
-//        L.d(TAG, "Есть экспонента: " + isExponent);
-//        L.d(TAG, "Есть дробная часть мантиссы: " + isMantissaFractionalPart);
         setDouble(number);
     }
 
@@ -240,15 +185,9 @@ class ArgX  {
         virginity = false;
     }
 
-
     boolean isEditable() {
         return this.editable;
     }
-
-
-//    void setEditable(boolean editable) {
-//        this.editable = editable;
-//    }
 
     double getMantissaIntegerPartinDouble() {
         L.d(TAG, "Целая часть мантиссы: " + mantissaIntegerPart);
@@ -268,59 +207,8 @@ class ArgX  {
         }
     }
 
-//    public long getMantissaFractionalPartinLong() {
-//        L.d(TAG, "Дробная часть мантиссы: " + mantissaFractionalPart);
-//        if (mantissaFractionalPart.length() == 0) {
-//            return 0;
-//        } else {
-//            return Long.parseLong(toDecimalFormat(mantissaFractionalPart));
-//        }
-//    }
-
-
-//    private double getUnsignExponent() {
-//        L.d(TAG, "Экспонента: " + exponent);
-//        if (exponent.length() == 0) {
-//            return 0.0;
-//        } else {
-//            return Double.parseDouble(exponent.toString());
-//        }
-//    }
-//
-//    private double getUnsignMantissa() {
-//        StringBuilder tmp1 = mantissaIntegerPart;
-//        StringBuilder tmp2 = mantissaFractionalPart;
-//        String tmp;
-//        if (tmp1.length() == 0) {
-//            tmp1.append('0');
-//        }
-//        if (tmp2.length() == 0) {
-//            tmp2.append('0');
-//        }
-//        tmp = tmp1 + "." + tmp2;
-//        L.d(TAG, "UnsignMantissa: " + tmp);
-//        return Double.parseDouble(tmp);
-//    }
-
-//    private double getSignExponent() {
-//        Double tmp = getUnsignExponent();
-//        if (exponentSign) {
-//            tmp = -tmp;
-//        }
-//        return tmp;
-//    }
-//
-//    private double getSignMantissa() {
-//        Double tmp = getUnsignMantissa();
-//        if (mantissaSign) {
-//            tmp = -tmp;
-//        }
-//        return tmp;
-//    }
-
-
     double getArgX() {
-        Double number = 0.0;
+        double number = 0.0;
         try {
             number = Double.parseDouble(getArgXSB().toString());
         } catch (NumberFormatException e) {
@@ -370,32 +258,6 @@ class ArgX  {
         getExponentSB(str);
         return str;
     }
-
-
-//    private int getIndexOfE(StringBuilder SBNumber) {
-//        L.d(TAG, "Ищем индекс буквы E " + SBNumber);
-//
-//        int index;
-//        int counter = 0;
-//
-//        index = SBNumber.lastIndexOf("e");
-//
-//        while (index != -1) { //Заменяем все e на E
-//            SBNumber.insert(index, 'E');
-//        }
-//        index = SBNumber.lastIndexOf("E"); // Определяем количество букв E
-//        while (index != -1) {
-//            counter++;
-//        }
-//        if (counter == 0) { //Если counter = 0, то экспоненты нет
-//            return 0;
-//        }
-//        if (counter > 1) { //Если counter > 1, то число плохое
-//            return -1;
-//        }
-//
-//        return index;
-//    }
 
     /**
      * Функция принимает строковую переменную, содержащую число в
@@ -478,7 +340,7 @@ class ArgX  {
         L.d(TAG, "Округляем дробную часть мантиссы");
         double num = getMantissaFractionalPartinDouble(); //Берем дробную часть мантиссы
         L.d(TAG, "Здесь дробная часть мантиссы : " + num);
-        BigDecimal newBigDecimal = new BigDecimal(num).setScale(scale, RoundingMode.HALF_UP);// Округляем ее
+        BigDecimal newBigDecimal = BigDecimal.valueOf(num).setScale(scale, RoundingMode.HALF_UP);// Округляем ее
         L.d(TAG, "newBigDecimal: " + newBigDecimal);
         num = newBigDecimal.doubleValue(); // num это наша округленная мантисса без нулей в конце
         L.d(TAG, "Дробная часть мантиссы после округления: " + num);

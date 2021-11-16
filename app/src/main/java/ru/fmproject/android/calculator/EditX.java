@@ -607,7 +607,7 @@ class EditX {
             argB = new ArgX(cplxResult.getImaginary());
             argX = new ArgX(argA.getArgX());
         } else {
-            argX = new ArgX(stackCalculator._10x(argX.getArgX()));
+            argX = new ArgX(stackCalculator.pow10x(argX.getArgX()));
         }
         calcpress = true;
         newInput = true;
@@ -649,7 +649,7 @@ class EditX {
             argB = new ArgX(cplxResult.getImaginary());
             argX = new ArgX(argA.getArgX());
         } else {
-            argX = new ArgX(stackCalculator._1_div_x(argX.getArgX()));
+            argX = new ArgX(stackCalculator.oneDivX(argX.getArgX()));
         }
         calcpress = true;
         newInput = true;
@@ -690,7 +690,7 @@ class EditX {
             argB.setDouble(0.0);
             L.d(TAG, "argB было пустым, заносим в argB 0.0");
         }
-        stackCalculator.r_to_p(argA, argB);
+        stackCalculator.rToP(argA, argB);
         argX = new ArgX(argA.getArgX());
         calcpress = true;
         newInput = true;
@@ -707,7 +707,7 @@ class EditX {
             argB.setDouble(0.0);
             L.d(TAG, "argB было пустым, заносим в argB 0.0");
         }
-        stackCalculator.p_to_r(argA, argB);
+        stackCalculator.pToR(argA, argB);
         argX = new ArgX(argA.getArgX());
         calcpress = true;
         newInput = true;
@@ -721,7 +721,7 @@ class EditX {
     }
 
     void x_to_y() throws MyExceptions {
-        argX = new ArgX(stackCalculator.x_to_y(argX.getArgX()));
+        argX = new ArgX(stackCalculator.xToY(argX.getArgX()));
         newInput = true;
         calcpress = true;
         makeArg();
@@ -756,14 +756,14 @@ class EditX {
     }
 
     void dbm_to_w() {
-        argX = new ArgX(stackCalculator.dbm_to_w(argX.getArgX()));
+        argX = new ArgX(stackCalculator.dbmToW(argX.getArgX()));
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
     void w_to_dbm() {
-        argX = new ArgX(stackCalculator.w_to_dbm(argX.getArgX()));
+        argX = new ArgX(stackCalculator.wToDbm(argX.getArgX()));
         calcpress = true;
         newInput = true;
         makeArg();

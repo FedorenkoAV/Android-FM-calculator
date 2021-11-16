@@ -1,7 +1,6 @@
 package ru.fmproject.android.calculator;
 
 import android.app.Activity;
-import ru.fmproject.android.calculator.L;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -169,7 +168,7 @@ public class EditXHex {
     }
 
     void x_to_y() throws MyExceptions {
-        argX = new ArgXHex(stackCalculator.x_to_y(argX.getDouble(mainDisplay.byteLengthHex)));
+        argX = new ArgXHex(stackCalculator.xToY(argX.getDouble(mainDisplay.byteLengthHex)));
         newInput = true;
         calcpress = true;
         makeArg();

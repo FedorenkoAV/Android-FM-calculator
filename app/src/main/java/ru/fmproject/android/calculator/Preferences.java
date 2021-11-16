@@ -2,7 +2,6 @@ package ru.fmproject.android.calculator;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import ru.fmproject.android.calculator.L;
 
 /**
  * Created by User on 01.07.2017.
@@ -67,19 +66,19 @@ class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getAngleUnit() {
-        int angleUnit = 0;
+    AngleUnit getAngleUnit() {
+        String angleUnit = AngleUnit.DEG.name();
         if (mSettings.contains(APP_PREFERENCES_ANGLE)) {
             // Получаем значения из настроек
-            angleUnit = mSettings.getInt(APP_PREFERENCES_ANGLE, 0);
+            angleUnit = mSettings.getString(APP_PREFERENCES_ANGLE, AngleUnit.DEG.name());
             L.d(TAG, "Получаем значение едениц измерения угла из настроек: " + angleUnit);
         }
-        return angleUnit;
+        return AngleUnit.valueOf(angleUnit);
     }
 
-    void setAngleUnit(int angleUnit) {
+    void setAngleUnit(AngleUnit angleUnit) {
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putInt(APP_PREFERENCES_ANGLE, angleUnit);
+        editor.putString(APP_PREFERENCES_ANGLE, angleUnit.name());
         L.d(TAG, "Занесли значение едениц измерения угла в настройки: " + angleUnit);
         editor.apply();
         L.d(TAG, "Зафиксировали изменения в файле настроек.");

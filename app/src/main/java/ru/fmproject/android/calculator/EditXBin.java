@@ -1,7 +1,6 @@
 package ru.fmproject.android.calculator;
 
 import android.app.Activity;
-import ru.fmproject.android.calculator.L;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -170,7 +169,7 @@ class EditXBin {
     }
 
     void x_to_y() throws MyExceptions {
-        argX = new ArgXBin(stackCalculator.x_to_y(argX.getDouble(mainDisplay.byteLengthBin)));
+        argX = new ArgXBin(stackCalculator.xToY(argX.getDouble(mainDisplay.byteLengthBin)));
         newInput = true;
         calcpress = true;
         makeArg();

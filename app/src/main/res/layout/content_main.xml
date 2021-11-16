@@ -50,7 +50,7 @@
                 <ru.fmproject.android.calculator.TextViewPlus
                     android:id="@+id/lab_evolvent"
                     style="@style/yellow_text"
-                    android:text="@string/evolvent" />
+                    android:text="" />
 
                 <ru.fmproject.android.calculator.TextViewPlus
                     style="@style/yellow_text"
@@ -91,7 +91,7 @@
                     android:id="@+id/FuncButtonGear"
                     style="@style/FuncButton"
                     android:text="@string/invalute"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
                 <ru.fmproject.android.calculator.ButtonPlus
                     android:id="@+id/FuncButton4"
@@ -761,6 +761,8 @@
         android:layout_above="@+id/keys"
         android:background="@color/lcd_background"
         android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:paddingTop="50dp">
 
         <RelativeLayout
@@ -896,7 +898,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <!--<ImageView-->
     <!--android:layout_width="match_parent"-->

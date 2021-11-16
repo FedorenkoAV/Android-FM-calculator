@@ -361,7 +361,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDrg() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  DRG
-            angle.switchAngle();
+            angle.switchAngleUnit();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -388,7 +388,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDrgBin() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  DRG
-            angle.switchAngle();
+            angle.switchAngleUnit();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -415,7 +415,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDrgOct() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  DRG
-            angle.switchAngle();
+            angle.switchAngleUnit();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -442,7 +442,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDrgHex() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  DRG
-            angle.switchAngle();
+            angle.switchAngleUnit();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1750,7 +1750,7 @@ class InputDriver implements View.OnClickListener {
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  pi
             status.offShift();
-            activity.currency_rate("USD");
+            activity.currencyRate("USD");
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
@@ -1828,7 +1828,7 @@ class InputDriver implements View.OnClickListener {
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
 
             status.offShift();
-            activity.currency_rate("EUR");
+            activity.currencyRate("EUR");
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
@@ -1906,7 +1906,7 @@ class InputDriver implements View.OnClickListener {
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // 
             status.offShift();
-            activity.bitcoin_rate("BTC_USD");
+            activity.bitcoinRate("BTC_USD");
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON

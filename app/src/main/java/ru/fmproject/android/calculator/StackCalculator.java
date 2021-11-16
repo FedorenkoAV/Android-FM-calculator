@@ -1,9 +1,7 @@
 package ru.fmproject.android.calculator;
 
-
-import ru.fmproject.android.calculator.L;
-
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import static java.lang.Double.compare;
 
@@ -17,92 +15,31 @@ class StackCalculator {
 
     private static final String TAG = "StackCalculator";
 
-    final int NOP = 0b000;
-    final int PLUS = 0b010;
-    final int MINUS = 0b011;
-    final int MULTIPLY = 0b100;
-    final int DIVIDE = 0b101;
-    final int POWER = 0b110;
-    final int X_SQR_Y = 0b111;
+    static final int NOP = 0b000;
+    static final int PLUS = 0b010;
+    static final int MINUS = 0b011;
+    static final int MULTIPLY = 0b100;
+    static final int DIVIDE = 0b101;
+    static final int POWER = 0b110;
+    static final int X_SQR_Y = 0b111;
 
-    //Приоритет 0
-    final int NOP0 = 0;//=
-    final int NOP1 = 1;//операция=
-
-    //Приоритет 1
-    final int NOP2 = 2;//->
-
-    //Приоритет 2
-    final int NOP3 = 3;//?:
-
-    //Приоритет 3
-    final int NOP4 = 4;//||
-
-    //Приоритет 4
-    final int NOP5 = 5;//&&
-
-    //Приоритет 5
-    final int OR = 6;//|
-
-    //Приоритет 6
-    final int XOR = 7;//^
-
-    //Приоритет 7
-    final int AND = 8;//&
-
-    //Приоритет 8
-    final int NOP9 = 9;//==
-    final int NOP10 = 10;//!=
-
-    //Приоритет 9
-    final int NOP11 = 11;//>
-    final int NOP12 = 12;//>=
-    final int NOP13 = 13;//<
-    final int NOP14 = 14;//<=
-    final int NOP15 = 15;//instanceof
-
-    //Приоритет 10
-    final int SHR = 16;//>> SHR
-    final int USHR = 17;//>>> USHR
-    final int SHL = 18;//<< SHL
-    final int RR = 18;//<< RR
-    final int RL = 18;//<< RL
-
-    //Приоритет 11
-    final int PLUS2 = 19;
-    final int MINUS2 = 20;
-
-    //Приоритет 12
-    final int MOD = 21;
-    final int DIV = 22;
-
-    //Приоритет 13
-    final int MULTIPLY2 = 23;
-    final int DIVIDE2 = 24;
-
-    //Приоритет 14
-    final int POWER2 = 6;
-    final int X_SQR_Y2 = 7;
-
-
-    private final char operations[] = {'=', ')', '+', '-', '×', '÷', '^', '√'};
+    private final char[] operations = {'=', ')', '+', '-', '×', '÷', '^', '√'};
 
     private double autoConstantNumber;
     private double secondOp;
     private int autoConstantOperation;
-    private Stack<Double> numberStack;
-    private Stack<Integer> operationStack;
-    private Stack<Stack<Double>> stackForNumberStack;
-    private Stack<Stack<Integer>> stackForOperationStack;
+    private Deque<Double> numberStack;
+    private Deque<Integer> operationStack;
+    private Deque<Deque<Double>> stackForNumberStack;
+    private Deque<Deque<Integer>> stackForOperationStack;
 
-    private Stack<Integer> autoConstantOperationStack;
-    private Stack<Double> autoConstantNumberStack;
+    private Deque<Integer> autoConstantOperationStack;
+    private Deque<Double> autoConstantNumberStack;
 
-    private Angle angle;
-    private Protocol protocol;
+    private final Angle angle;
+    private final Protocol protocol;
 
     private boolean result;
-
 
     StackCalculator(Angle angle, Protocol protocol) {
         this.angle = angle;
@@ -116,30 +53,14 @@ class StackCalculator {
         autoConstantOperation = NOP;
         secondOpToProtocol(0.0);
         autoConstant(0.0);
-        numberStack = new Stack<>();
-        operationStack = new Stack<>();
-        stackForNumberStack = new Stack<>();
-        stackForOperationStack = new Stack<>();
-        autoConstantNumberStack = new Stack<>();
-        autoConstantOperationStack = new Stack<>();
+        numberStack = new ArrayDeque<>();
+        operationStack = new ArrayDeque<>();
+        stackForNumberStack = new ArrayDeque<>();
+        stackForOperationStack = new ArrayDeque<>();
+        autoConstantNumberStack = new ArrayDeque<>();
+        autoConstantOperationStack = new ArrayDeque<>();
         result = false;
     }
-
-//    void toOCT() throws MyExceptions {
-//
-//    }
-//
-//    void toBIN() throws MyExceptions {
-//
-//    }
-//
-//    void toDEC() throws MyExceptions {
-//
-//    }
-//
-//    void toHEX() throws MyExceptions {
-//
-//    }
 
     /**
      * Функция перевода градусов в радианы
@@ -147,48 +68,48 @@ class StackCalculator {
      * @param deg число в градусах
      * @return число в радианах
      */
-    private double degToRad(double deg) throws MyExceptions {
-        return (deg * Math.PI / 180);
+    private double degToRad(double deg) {
+        return (deg * Math.PI / 180.0);
     }
 
     /**
      * Функция переводит радианы в грады
      *
-     * @param rad
-     * @return
+     * @param rad число в радианах
+     * @return число в градусах
      */
-    private double radToGrad(double rad) throws MyExceptions {
-        return (rad * 200 / Math.PI);
+    private double radToGrad(double rad) {
+        return (rad * 200.0 / Math.PI);
     }
 
     /**
      * Функция переводит грады в градусы
      *
-     * @param grad
-     * @return
+     * @param grad число в градах
+     * @return число в градусах
      */
-    private double gradToDeg(double grad) throws MyExceptions {
-        return (grad * 180 / 200);
+    private double gradToDeg(double grad) {
+        return (grad * 180.0 / 200.0);
     }
 
     /**
      * Функция переводит грады в радианы
      *
-     * @param grad
-     * @return
+     * @param grad число в градах
+     * @return число в радианах
      */
-    private double gradToRad(double grad) throws MyExceptions {
-        return (grad * Math.PI / 200);
+    private double gradToRad(double grad) {
+        return (grad * Math.PI / 200.0);
     }
 
     /**
      * Функция переводит радианы в градусы
      *
-     * @param rad
-     * @return
+     * @param rad число в радианах
+     * @return число в градусах
      */
-    private double radToDeg(double rad) throws MyExceptions {
-        return (rad * 180 / Math.PI);
+    private double radToDeg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
     /**
@@ -196,42 +117,42 @@ class StackCalculator {
      * грады), в радианы. Текущие еденицы измерения берутся из переменной
      * angleUnit
      *
-     * @param angle
-     * @return
+     * @param angle угол
+     * @return число в радианах
      */
-    private double toRad(double angle, int angleUnit) throws MyExceptions {
-        double rad = 0;
+    private double toRad(double angle, AngleUnit angleUnit) throws MyExceptions {
+        double rad = 0.0;
         switch (angleUnit) {
-            case Angle.RAD:
+            case RAD:
                 rad = angle;
                 break;
-            case Angle.DEG:
+            case DEG:
                 rad = degToRad(angle);
                 break;
-            case Angle.GRAD:
+            case GRAD:
                 rad = (gradToRad(angle));
                 break;
         }
         return rad;
     }
 
-    double dbm_to_w(double a1) {
+    double dbmToW(double a1) {
         double res;
-        res = 0.001 * (Math.pow(10, (a1 * 0.1)));
+        res = 0.001 * (Math.pow(10.0, (a1 * 0.1)));
         protocol.println(a1 + "dbm = " + res + "W");
         return res;
     }
 
-    double w_to_dbm(double a1) {
+    double wToDbm(double a1) {
         double res;
-        res = 10 * Math.log10(a1 / 0.001);
+        res = 10.0 * Math.log10(a1 / 0.001);
         protocol.println(a1 + "W = " + res + "dbm");
         return res;
     }
 
     double percent(double a1) throws MyExceptions {
         double currentNumber = a1;
-        if (!operationStack.empty()) {
+        if (!operationStack.isEmpty()) {
             int operation2 = operationStack.peek();
             if (operation2 == PLUS || operation2 == MINUS) {
                 L.d(TAG, currentNumber + "% от " + numberStack.peek() + " = ");
@@ -278,58 +199,57 @@ class StackCalculator {
         return a1;
     }
 
-    double random() throws MyExceptions {
+    double random() {
         result = true;
         return Math.random();
     }
 
-    double maxValue() throws MyExceptions {
+    double maxValue() {
         result = true;
         return Double.MAX_VALUE;
     }
 
-    double minValue() throws MyExceptions {
+    double minValue() {
         result = true;
         return Double.MIN_VALUE;
     }
 
-    double maxExponent() throws MyExceptions {
+    double maxExponent() {
         result = true;
         return Double.MAX_EXPONENT;
     }
 
-    double minExponent() throws MyExceptions {
+    double minExponent() {
         result = true;
         return Double.MIN_EXPONENT;
     }
 
-    double minNormal() throws MyExceptions {
+    double minNormal() {
         result = true;
         return Double.MIN_NORMAL;
     }
-
 
     /**
      * Функция переводит радианы в текущие еденицы измерения угла (градусы,
      * радианы, грады), текущие еденицы измерения берутся из переменной
      * angleUnit
      *
-     * @param rad
-     * @return
+     * @param rad число в радианах
+     * @return угол
      */
-    private double fromRad(double rad, int angleUnit) throws MyExceptions {
+    private double fromRad(double rad, AngleUnit angleUnit) {
         L.d(TAG, "Переводим угол из радиан в");
-        double angle = 0;
+        double angle = 0.0;
         switch (angleUnit) {
-            case Angle.RAD:
+            case RAD:
                 L.d(TAG, "радианы");
                 angle = rad;
                 break;
-            case Angle.DEG:
+            case DEG:
                 L.d(TAG, "градусы");
                 angle = radToDeg(rad);
                 break;
-            case Angle.GRAD:
+            case GRAD:
                 L.d(TAG, "грады");
                 angle = radToGrad(rad);
                 break;
@@ -339,9 +259,9 @@ class StackCalculator {
     }
 
 
-    double x_to_y(double firstNumber) throws MyExceptions {
+    double xToY(double firstNumber) {
         double secondNumber;
-        if (!numberStack.empty()) {
+        if (!numberStack.isEmpty()) {
             secondNumber = numberStack.pop();
             numberStack.push(firstNumber);
         } else {
@@ -352,54 +272,54 @@ class StackCalculator {
         return secondNumber;
     }
 
-    double changeAngleUnit(double a1) throws MyExceptions {
+    double changeAngleUnit(double a1) {
         double res = 0.0;
         L.d(TAG, "Переводим углы");
-        int angleUnit = angle.getAngle();
-        L.d(TAG, a1 + angle.toString(angleUnit) + " -> ");
-        protocol.print(a1 + angle.toString(angleUnit) + " -> ");
+        AngleUnit angleUnit = angle.getAngleUnit();
+        L.d(TAG, a1 + angleUnit.getName() + " -> ");
+        protocol.print(a1 + angleUnit.getName() + " -> ");
         switch (angleUnit) {
-            case Angle.DEG:
+            case DEG:
                 res = degToRad(a1);
                 break;
-            case Angle.RAD:
+            case RAD:
                 res = radToGrad(a1);
                 break;
-            case Angle.GRAD:
+            case GRAD:
                 res = gradToDeg(a1);
                 break;
         }
-        angle.switchAngle();
-        angleUnit = angle.getAngle();
-        L.d(TAG, res + angle.toString(angleUnit));
-        protocol.println(res + angle.toString(angleUnit));
+        angle.switchAngleUnit();
+        angleUnit = angle.getAngleUnit();
+        L.d(TAG, res + angleUnit.getName());
+        protocol.println(res + angleUnit.getName());
         result = true;
         return res;
     }
 
-    void r_to_p(ArgX argA, ArgX argB) throws MyExceptions {
+    void rToP(ArgX argA, ArgX argB) {
         double tmp;
         double keyA = argA.getArgX();
         double keyB = argB.getArgX();
         protocol.print("( " + keyA + " , " + keyB + " ) -> ");
         tmp = Math.sqrt(keyA * keyA + keyB * keyB);
-        keyB = fromRad(Math.atan(keyB / keyA), angle.getAngle());
+        keyB = fromRad(Math.atan(keyB / keyA), angle.getAngleUnit());
         keyA = tmp;
-        protocol.println("( " + keyA + " , " + keyB + angle.toString(angle.getAngle()) + ")");
+        protocol.println("( " + keyA + " , " + keyB + angle.getAngleUnit().getName() + ")");
         argA.setDouble(keyA);
         argB.setDouble(keyB);
         result = true;
     }
 
-    void p_to_r(ArgX argA, ArgX argB) throws MyExceptions {
+    void pToR(ArgX argA, ArgX argB) throws MyExceptions {
         double tmp;
         double keyA = argA.getArgX();
         L.d(TAG, "keyA: " + keyA);
         double keyB = argB.getArgX();
         L.d(TAG, "keyB: " + keyB);
-        protocol.print("( " + keyA + " , " + keyB + angle.toString(angle.getAngle()) + ") -> ");
-        tmp = keyA * Math.cos(toRad(keyB, angle.getAngle()));
-        keyB = keyA * Math.sin(toRad(keyB, angle.getAngle()));
+        protocol.print("( " + keyA + " , " + keyB + angle.getAngleUnit().getName() + ") -> ");
+        tmp = keyA * Math.cos(toRad(keyB, angle.getAngleUnit()));
+        keyB = keyA * Math.sin(toRad(keyB, angle.getAngleUnit()));
         keyA = tmp;
         L.d(TAG, "Результат вычислений:" + keyB);
         L.d(TAG, "keyA: " + keyA);
@@ -410,7 +330,7 @@ class StackCalculator {
         result = true;
     }
 
-    double x2(double a1) throws MyExceptions {
+    double x2(double a1) {
         double res;
         res = (a1 * a1);
         L.d(TAG, a1 + "^2 = " + res);
@@ -419,7 +339,7 @@ class StackCalculator {
         return res;
     }
 
-    double _1_div_x(double a1) throws MyExceptions {
+    double oneDivX(double a1) throws MyExceptions {
         if (compare(a1, 0.0) < 0) {
             throw new MyExceptions(MyExceptions.Companion.getDIVIDE_BY_ZERO());
         }
@@ -440,7 +360,7 @@ class StackCalculator {
         return res;
     }
 
-    double _10x(double a1) throws MyExceptions {
+    double pow10x(double a1) {
         double res;
         res = Math.pow(10, a1);
         L.d(TAG, "10^" + a1 + " = " + res);
@@ -449,7 +369,7 @@ class StackCalculator {
         return res;
     }
 
-    double ln(double a1) throws MyExceptions {
+    double ln(double a1) {
         double res;
         res = Math.log(a1);
         L.d(TAG, "ln(" + a1 + ") = " + res);
@@ -458,7 +378,7 @@ class StackCalculator {
         return res;
     }
 
-    double exp(double a1) throws MyExceptions {
+    double exp(double a1) {
         double res;
         res = Math.exp(a1);
         L.d(TAG, "e^" + a1 + ") = " + res);
@@ -468,14 +388,14 @@ class StackCalculator {
     }
 
     public double involute(double a1) throws MyExceptions {
-        int angleUnit = angle.getAngle();
-        protocol.print("inv(" + a1 + angle.toString(angleUnit) + ") = ");
+        AngleUnit angleUnit = angle.getAngleUnit();
+        protocol.print("inv(" + a1 + angleUnit.getName() + ") = ");
         a1 = toRad(a1, angleUnit);
         if (compare(a1, 0.0) < 0) {
             throw new MyExceptions(MyExceptions.Companion.getNEGATIVE());
         }
         if (compare(a1, Math.PI / 2.0) >= 0) {
-            throw new MyExceptions(MyExceptions.Companion.getTOO_BIG(), "Ожидается угол меньше " + fromRad(Math.PI / 2.0, angleUnit) + angle.toString(angleUnit));
+            throw new MyExceptions(MyExceptions.Companion.getTOO_BIG(), "Ожидается угол меньше " + fromRad(Math.PI / 2.0, angleUnit) + angleUnit.getName());
         }
         double res = Math.tan(a1) - a1;
         L.d(TAG, "inv(" + a1 + angleUnit + ") = " + res);
@@ -485,8 +405,8 @@ class StackCalculator {
     }
 
     double sin(double a1) throws MyExceptions {
-        int angleUnit = angle.getAngle();
-        protocol.print("sin(" + a1 + angle.toString(angleUnit) + ") = ");
+        AngleUnit angleUnit = angle.getAngleUnit();
+        protocol.print("sin(" + a1 + angleUnit.getName() + ") = ");
         a1 = toRad(a1, angleUnit);
         double res = sinradian(a1);
         L.d(TAG, "sin(" + a1 + angleUnit + ") = " + res);
@@ -495,7 +415,7 @@ class StackCalculator {
         return res;
     }
 
-    private double sinradian(double a1) throws MyExceptions {
+    private double sinradian(double a1) {
         a1 = a1 % (2.0 * Math.PI);
         if (compare(Math.abs(a1), 0.0) == 0 || compare(Math.abs(a1), Math.PI) == 0) {//0, 180, 360
             return 0.0;
@@ -571,10 +491,10 @@ class StackCalculator {
                     * f3
                     * f9;
         }
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         f = fromRad(f, angleUnit);
-        L.d(TAG, "evolvent(" + inv + ") = " + f + angle.getAngle());
-        protocol.println("evolvent(" + inv + ") = " + f + angle.toString(angleUnit));
+        L.d(TAG, "evolvent(" + inv + ") = " + f + angle.getAngleUnit());
+        protocol.println("evolvent(" + inv + ") = " + f + angleUnit.getName());
         result = true;
         return f;
     }
@@ -584,10 +504,10 @@ class StackCalculator {
             throw new MyExceptions(MyExceptions.Companion.getTOO_BIG(), "Ожидается число в диапазоне  [-1 .. 1]");
         }
         double res = Math.asin(a1);
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         res = fromRad(res, angleUnit);
-        L.d(TAG, "arcsin(" + a1 + ") = " + res + angle.getAngle());
-        protocol.println("arcsin(" + a1 + ") = " + res + angle.toString(angleUnit));
+        L.d(TAG, "arcsin(" + a1 + ") = " + res + angle.getAngleUnit());
+        protocol.println("arcsin(" + a1 + ") = " + res + angleUnit.getName());
         result = true;
         return res;
     }
@@ -601,9 +521,9 @@ class StackCalculator {
     }
 
     double cos(double a1) throws MyExceptions {
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         double res;
-        protocol.print("cos(" + a1 + angle.toString(angleUnit) + ") = ");
+        protocol.print("cos(" + a1 + angleUnit.getName() + ") = ");
         a1 = toRad(a1, angleUnit);
         res = cosradian(a1);
         L.d(TAG, "cos(" + a1 + angleUnit + ") = " + res);
@@ -645,10 +565,10 @@ class StackCalculator {
             throw new MyExceptions(MyExceptions.Companion.getTOO_BIG(), "Ожидается число в диапазоне  [-1 .. 1]");
         }
         double res = Math.acos(a1);
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         res = fromRad(res, angleUnit);
-        L.d(TAG, "arccos(" + a1 + ") = " + res + angle.getAngle());
-        protocol.println("arccos(" + a1 + ") = " + res + angle.toString(angleUnit));
+        L.d(TAG, "arccos(" + a1 + ") = " + res + angle.getAngleUnit());
+        protocol.println("arccos(" + a1 + ") = " + res + angleUnit.getName());
         result = true;
         return res;
     }
@@ -662,9 +582,9 @@ class StackCalculator {
     }
 
     double tan(double a1) throws MyExceptions {
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         double res;
-        protocol.print("tan(" + a1 + angle.toString(angleUnit) + ") = ");
+        protocol.print("tan(" + a1 + angleUnit.getName() + ") = ");
         a1 = toRad(a1, angleUnit);
         res = tanradian(a1);
         L.d(TAG, "tan(" + a1 + angleUnit + ") = " + res);
@@ -701,10 +621,10 @@ class StackCalculator {
 
     double atan(double a1) throws MyExceptions {
         double res = Math.atan(a1);
-        int angleUnit = angle.getAngle();
+        AngleUnit angleUnit = angle.getAngleUnit();
         res = fromRad(res, angleUnit);
-        L.d(TAG, "arctan(" + a1 + ") = " + res + angle.getAngle());
-        protocol.println("arctan(" + a1 + ") = " + res + angle.toString(angleUnit));
+        L.d(TAG, "arctan(" + a1 + ") = " + res + angle.getAngleUnit());
+        protocol.println("arctan(" + a1 + ") = " + res + angleUnit.getName());
         result = true;
         return res;
     }
@@ -955,7 +875,7 @@ class StackCalculator {
         operationStack = stackForOperationStack.pop();
         autoConstantNumber = autoConstantNumberStack.pop();
         autoConstantOperation = autoConstantOperationStack.pop();
-        if (!numberStack.empty()) {
+        if (!numberStack.isEmpty()) {
             secondOpToProtocol(numberStack.peek());
         } else {
             secondOpToProtocol(0.0);
@@ -964,19 +884,19 @@ class StackCalculator {
     }
 
     boolean isNumberStackEmpty() {
-        return numberStack.empty();
+        return numberStack.isEmpty();
     }
 
     boolean isOperationStackEmpty() {
-        return operationStack.empty();
+        return operationStack.isEmpty();
     }
 
     boolean isStackForNumberStackEmpty() {
-        return stackForNumberStack.empty();
+        return stackForNumberStack.isEmpty();
     }
 
     boolean isStackForOperationStackEmpty() {
-        return stackForOperationStack.empty();
+        return stackForOperationStack.isEmpty();
     }
 
     boolean isResult() {
@@ -993,8 +913,8 @@ class StackCalculator {
         stackForNumberStack.push(numberStack);          //и создаем новые
         autoConstantNumberStack.push(autoConstantNumber);
         autoConstantOperationStack.push(autoConstantOperation);
-        numberStack = new Stack<>();
-        operationStack = new Stack<>();
+        numberStack = new ArrayDeque<>();
+        operationStack = new ArrayDeque<>();
         L.d(TAG, "Созданы новые стеки операций и чисел");
     }
 
@@ -1003,7 +923,7 @@ class StackCalculator {
         operationStack = stackForOperationStack.pop();
         autoConstantNumber = autoConstantNumberStack.pop();
         autoConstantOperation = autoConstantOperationStack.pop();
-        if (!numberStack.empty()) {
+        if (!numberStack.isEmpty()) {
             secondOpToProtocol(numberStack.peek());
         } else {
             secondOpToProtocol(0.0);
@@ -1027,7 +947,7 @@ class StackCalculator {
     }
 
     public double setAutoConstant(double currentNumber) {
-        if (!numberStack.empty() && !operationStack.empty()) {
+        if (!numberStack.isEmpty() && !operationStack.isEmpty()) {
             autoConstantOperation = operationStack.pop();
             autoConstant(numberStack.pop());
             L.d(TAG, "После setAutoConstant размер стека операций = " + operationStack.size());
@@ -1120,9 +1040,9 @@ class StackCalculator {
             L.d(TAG, currentNumber + "");
             protocol.println(currentNumber + "");
         }
-        while (!operationStack.empty() && (operationStack.peek() >>> 1) >= currentPrioritet); // если в стеке операций еще что-то есть и оно более высокого приоритета, то повторить
+        while (!operationStack.isEmpty() && (operationStack.peek() >>> 1) >= currentPrioritet); // если в стеке операций еще что-то есть и оно более высокого приоритета, то повторить
 
-        if (!operationStack.empty()) { //Стек будет не пуст, если предыдущая операция оказалась более низкого приоритета
+        if (!operationStack.isEmpty()) { //Стек будет не пуст, если предыдущая операция оказалась более низкого приоритета
             prevOperation = operationStack.peek();
             prevPrioritet = prevOperation >>> 1;
             L.d(TAG, "Предыдущая операция была: " + operations[prevOperation]);

@@ -1,13 +1,11 @@
 package ru.fmproject.android.calculator;
 
-//import ru.fmproject.android.calculator.L;
-
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexFormat;
 
-//import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by User on 25.06.2017.
@@ -17,17 +15,10 @@ class ComplexStackCalculator {
 
     private static final String TAG = "ComplexStackCalculator";
 
-
-
-//    private final char operations[] = {'=', ')', '+', '-', '×', '÷', '^', '√'};
-
-    private Stack<Complex> complexStack;
-    private Stack<Integer> operationStack;
+    private Deque<Complex> complexStack;
+    private Deque<Integer> operationStack;
 
     private Protocol protocol;
-
-//    private boolean result;
-
 
     ComplexStackCalculator(Protocol protocol) {
         this.protocol = protocol;
@@ -38,19 +29,11 @@ class ComplexStackCalculator {
     private void restart() {
         protocol.cls();
         protocol.println("Complex mode.");
-//        autoConstantOperation = NOP;
-//        secondOpToProtocol(0.0);
-//        autoConstant(0.0);
 
-        complexStack = new Stack<>();
-        operationStack = new Stack<>();
+        complexStack = new ArrayDeque<>();
+        operationStack = new ArrayDeque<>();
 
         new ComplexFormat();
-//        stackForNumberStack = new Stack<>();
-//        stackForOperationStack = new Stack<>();
-//        autoConstantNumberStack = new Stack<>();
-//        autoConstantOperationStack = new Stack<>();
-//        result = false;
     }
 
     private Complex cplxPlus(Complex cplxNum1, Complex cplxNum2) {
@@ -103,7 +86,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    private List cplxSqr(Complex cplxNum1, int n) {
+    private List<Complex> cplxSqr(Complex cplxNum1, int n) {
         switch (n) {
             case 2:
                 protocol.print("√");
@@ -117,7 +100,7 @@ class ComplexStackCalculator {
         }
         protocol.print(cplxNum1);
         protocol.print(" = ");
-        List cplxNumList;
+        List<Complex> cplxNumList;
         cplxNumList = cplxNum1.nthRoot(n);
         protocol.println(cplxNumList);
         return cplxNumList;
@@ -319,16 +302,12 @@ class ComplexStackCalculator {
     Complex cplxCbrt(Complex cplxNum1) {
         L.d(TAG, "Вычисляем корень 3-ей степени из " + cplxNum1);
         L.d(TAG, "Будет 3 результата:");
-//        protocol.print("³√");
-//        protocol.print(cplxNum1);
-//        protocol.print(" = ");
-        List cplxNumList;
+        List<Complex> cplxNumList;
         cplxNumList = cplxSqr(cplxNum1, 3);
         for (int i = 0; i < cplxNumList.size(); i++) {
             L.d(TAG, (i + 1) + ": " + cplxNumList.get(i));
         }
-//        protocol.println(cplxNumList);
-        return (Complex) cplxNumList.get(0);
+        return cplxNumList.get(0);
     }
 
     Complex cplx10x(Complex cplxNum1) {
@@ -381,35 +360,21 @@ class ComplexStackCalculator {
         final int DIVIDE = 0b101;
         final int POWER = 0b110;
         final int X_SQR_Y = 0b111;
-        if (complexStack.empty()) { //Если стек чисел пуст
+        if (complexStack.isEmpty()) { //Если стек чисел пуст
             if (currentOperation != NOP) { //Если была любая операция кроме NOP
                 L.d(TAG, "Еще не было операций, заношу значения в новый стек чисел и в новый стек операций");
                 complexStack.push(curCplxNum);
-                //secondOp (currentNumber);                
                 L.d(TAG, "В стек чисел заношу: " + curCplxNum);
                 operationStack.push(currentOperation);
                 L.d(TAG, "В стек операций заношу: " + currentOperation);
-
             }
             if (currentOperation == NOP) { //Если была операция NOP
                 L.d(TAG, "Вычисления с использованием постоянных в режиме работы с комплексными числами нет");
-                //curCplxNum = autoConstantCalculator2 (curCplxNum);
-                //printCalc(currentNumber);
             }
             curCplxNum = Complex.ZERO;
             return curCplxNum;
         }
         // Здесь уже ясно, что в стеке чисел что-то есть
-//        if (curCplxNum.equals(Complex.ZERO) && !calcpress) { //В стеке чисел и операций уже что-то есть, новое число не вводили, а нажали на операцию, значит в стеке чисел - автоконстанта
-//            //L.d(TAG, "В стеке чисел и операций уже что-то есть, новое число не вводили, а нажали на операцию, значит в стеке чисел - автоконстанта");
-//            L.d(TAG, "Вычислений с использованием постоянных в режиме работы с комплексными числами нет");
-//            //autoConstantOperation2 = operationStack.pop();
-//            //cplxAautoConstant(complexStack.pop());
-//            //L.d(TAG, "Размер стека операций = "+operationStack.size());
-//            //L.d(TAG, "Размер стека чисел = "+numberStack2.size());
-//            curCplxNum = Complex.ZERO;
-//            return curCplxNum;
-//        }
 
         L.d(TAG, "Размер стека операций = " + operationStack.size());
         L.d(TAG, "Размер стека комплексных чисел = " + complexStack.size());
@@ -424,7 +389,6 @@ class ComplexStackCalculator {
         if (prevPrioritet < currentPrioritet) { // Пункт №2 если предыдущая операция более низкого приоритета - занести в стек число и операцию
             L.d(TAG, "У текущей операции приоритет выше, чем у предыдущей, заношу все в стек");
             complexStack.push(curCplxNum);
-            //secondOp (curCplxNum);            
             L.d(TAG, "В стек чисел заношу: " + curCplxNum);
             operationStack.push(currentOperation);
             L.d(TAG, "В стек операций заношу: " + currentOperation);
@@ -434,7 +398,6 @@ class ComplexStackCalculator {
         do {
             prevOperation = operationStack.pop();
             prevCplxNumber = complexStack.pop();
-            //secondOp (curCplxNum);            
             switch (prevOperation) {
                 case PLUS:
                     L.d(TAG, prevCplxNumber + " + " + curCplxNum + " = ");
@@ -459,12 +422,8 @@ class ComplexStackCalculator {
                 case X_SQR_Y:
                     L.d(TAG, "Вычисляем корень " + (int) curCplxNum.getReal() + " степени из " + prevCplxNumber);
                     L.d(TAG, "Будет " + (int) curCplxNum.getReal() + " результата(ов):");
-                    List cplxNumList;
-//                    protocol.print((int) curCplxNum.getReal() + "√");
-//                    protocol.print(prevCplxNumber);
-//                    protocol.print(" = ");
+                    List<Complex> cplxNumList;
                     cplxNumList = cplxSqr(prevCplxNumber, (int) curCplxNum.getReal());
-//                    protocol.println(cplxNumList);
                     curCplxNum = (Complex) cplxNumList.get(0);
                     for (int i = 0; i < cplxNumList.size(); i++) {
                         L.d(TAG, (i + 1) + ": " + cplxNumList.get(i));
@@ -476,10 +435,9 @@ class ComplexStackCalculator {
             }
             L.d(TAG, curCplxNum.toString());
         }
-        while (!operationStack.empty() && (operationStack.peek() >>> 1) >= currentPrioritet); // если в стеке операций еще что-то есть и оно более высокого приоритета, то повторить
+        while (!operationStack.isEmpty() && (operationStack.peek() >>> 1) >= currentPrioritet); // если в стеке операций еще что-то есть и оно более высокого приоритета, то повторить
 
-        //operationSwitcher2 (prevOperation, currentOperation); // Передаем в operationSwitcher предыдущую операцию и текущую операцию                                               
-        if (!operationStack.empty()) { //Стек будет не пуст, если предыдущая операция оказалась более низкого приоритета
+        if (!operationStack.isEmpty()) { //Стек будет не пуст, если предыдущая операция оказалась более низкого приоритета
             prevOperation = operationStack.peek();
             prevPrioritet = prevOperation >>> 1;
             L.d(TAG, "Предыдущая операция была: " + prevOperation);
@@ -487,20 +445,15 @@ class ComplexStackCalculator {
         }
         L.d(TAG, "Размер стека операций = " + operationStack.size());
         L.d(TAG, "Размер стека комплексных чисел = " + complexStack.size());
-        //L.d(TAG, currentNumber);
 
         if (currentOperation != NOP) { //Если была любая операция кроме NOP, то заносим значения в стек чисел и в стек операций
             L.d(TAG, "Вычисления еще не окончены. Заношу значения в стек чисел и в стек операций");
             complexStack.push(curCplxNum);
-            //secondOp (currentNumber);            
             L.d(TAG, "В стек чисел заношу: " + curCplxNum);
             operationStack.push(currentOperation);
             L.d(TAG, "В стек операций заношу: " + currentOperation);
-
         }
-        //printCalc(currentNumber);
         L.d(TAG, "------------------------------------------------");
         return curCplxNum;
     }
-
 }

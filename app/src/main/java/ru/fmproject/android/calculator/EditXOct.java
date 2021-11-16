@@ -1,7 +1,6 @@
 package ru.fmproject.android.calculator;
 
 import android.app.Activity;
-import ru.fmproject.android.calculator.L;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -164,7 +163,7 @@ public class EditXOct {
     }
 
     void x_to_y() throws MyExceptions {
-        argX = new ArgXOct(stackCalculator.x_to_y(argX.getDouble(0)));
+        argX = new ArgXOct(stackCalculator.xToY(argX.getDouble(0)));
         newInput = true;
         calcpress = true;
         makeArg();
