@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdError;
@@ -25,7 +27,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button btn_shift;
     Button btn_hyp;
     Button btn_inv;
-//    Button btn_4;
+    //    Button btn_4;
     Button btn_off;
     Button btn_onc;
 
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button btn_ce;
 
     TextView lab_pi;
-//    TextView lab_xy;
+    //    TextView lab_xy;
     TextView lab_cbt;
     TextView lab_todrg;
     TextView lab_ex;
@@ -162,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
-//        @SuppressLint("InlinedApi")
+        //        @SuppressLint("InlinedApi")
         @Override
         public void run() {
             // Delayed removal of status and navigation bar
@@ -228,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
-
         super.onCreate(savedInstanceState);
         L.d(TAG, "onCreate() запущен.");
         if (BuildConfig.DEBUG) {
@@ -239,22 +242,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         try {
             setContentView(R.layout.drawable_layout);
-//            mVisible = true;
-//            mControlsView = findViewById(R.id.fullscreen_content_controls);
-//            mContentView = findViewById(R.id.fullscreen_content);
-            // Set up the user interaction to manually show or hide the system UI.
-//            mContentView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    toggle();
-//                }
-//            });
-
-            // Upon interacting with UI controls, delay any scheduled hide()
-            // operations to prevent the jarring behavior of controls going away
-            // while interacting with the UI.
-//            findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -660,12 +647,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (actionBar != null) {
                 actionBar.hide();
             }
+            //            mVisible = true;
+//            mControlsView = findViewById(R.id.fullscreen_content_controls);
+            mContentView = findViewById(R.id.fullscreen_content);
+            // узнаем размеры экрана из класса Display
+            Display display = getWindowManager().getDefaultDisplay();
+            DisplayMetrics metricsB = new DisplayMetrics();
+            display.getMetrics(metricsB);
+            if (Float.compare(metricsB.ydpi, 320.0f) <= 0) {
+                // Schedule a runnable to remove the status and navigation bar after a delay
+                mHideHandler.removeCallbacks(mShowPart2Runnable);
+                mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+            }
+
+            // Set up the user interaction to manually show or hide the system UI.
+//            mContentView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+////                    toggle();
+//                }
+//            });
+
+            // Upon interacting with UI controls, delay any scheduled hide()
+            // operations to prevent the jarring behavior of controls going away
+            // while interacting with the UI.
+//            findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 //        mControlsView.setVisibility(View.GONE);
 //            mVisible = false;
 
-            // Schedule a runnable to remove the status and navigation bar after a delay
-            mHideHandler.removeCallbacks(mShowPart2Runnable);
-            mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+
         } catch (Exception e) {
             L.d(TAG, "Произошла ошибка в hide(): " + e);
             StackTraceElement[] stackTraceElements = e.getStackTrace();

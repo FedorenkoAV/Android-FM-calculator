@@ -17,7 +17,7 @@ android {
         applicationId "ru.fmproject.android.calculator"
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 1
+        versionCode 3
         versionName getDate()
         project.ext.set("archivesBaseName", "FM-Calculator-" + getDate())
         vectorDrawables.useSupportLibrary = false
@@ -40,14 +40,14 @@ static def getDate() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'com.google.firebase:firebase-ads:20.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'com.google.firebase:firebase-ads:20.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'com.google.android.gms:play-services-ads:20.4.0'
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
     // For apps targeting Android 12, add WorkManager dependency.
     constraints {
         implementation('androidx.work:work-runtime:2.7.0') {
