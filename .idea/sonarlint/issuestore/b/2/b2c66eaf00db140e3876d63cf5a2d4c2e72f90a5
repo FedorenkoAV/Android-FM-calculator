@@ -1,0 +1,67 @@
+
+j	java:S116"PRename this field "SHIFT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šÉÏüÿÿÿÿ
+h	java:S116"NRename this field "HYP" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïé›¿üÿÿÿÿ
+c	java:S116"NRename this field "DEG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö‡Ûµ
+c	java:S116"NRename this field "RAD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°ÛÉ
+i	java:S116"ORename this field "GRAD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Èçà¬ÿÿÿÿÿ
+k	java:S116"QRename this field "BRCKET" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨å…Ãøÿÿÿÿ
+h	java:S116"NRename this field "BIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Âƒƒüÿÿÿÿ
+h	java:S116"NRename this field "OCT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùøçµúÿÿÿÿ
+c	java:S116"NRename this field "HEX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚´Õİ
+d	java:S116"ORename this field "CPLX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şûô
+g	java:S116"MRename this field "SD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñŞìúøÿÿÿÿ
+e	java:S116"PRename this field "ERROR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Öè²²
+<
+java:S1170"!Make this final field static too.(šÉÏüÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(ïé›¿üÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(ö‡Ûµ
+7
+java:S1170"!Make this final field static too.(°ÛÉ
+<
+java:S1170"!Make this final field static too.(Èçà¬ÿÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(¨å…Ãøÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(Âƒƒüÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(ùøçµúÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(‚´Õİ
+7
+java:S1170"!Make this final field static too.(şûô
+<
+java:S1170"!Make this final field static too.(ñŞìúøÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(Öè²²
+d
+java:S1845!"NRename field "shift" to prevent any misunderstanding/clash with field "SHIFT".(–öî«
+`
+java:S1845""JRename field "hyp" to prevent any misunderstanding/clash with field "HYP".(·†·
+`
+java:S1845#"JRename field "deg" to prevent any misunderstanding/clash with field "DEG".(ÖŞàõ
+e
+java:S1845$"JRename field "rad" to prevent any misunderstanding/clash with field "RAD".( ¥•”øÿÿÿÿ
+g
+java:S1845%"LRename field "grad" to prevent any misunderstanding/clash with field "GRAD".(°Ù¸«ıÿÿÿÿ
+`
+java:S1845'"JRename field "bin" to prevent any misunderstanding/clash with field "BIN".(‡éÕı
+e
+java:S1845("JRename field "oct" to prevent any misunderstanding/clash with field "OCT".(Ìº„áøÿÿÿÿ
+e
+java:S1845)"JRename field "hex" to prevent any misunderstanding/clash with field "HEX".(ÙÛ¿Ëşÿÿÿÿ
+b
+java:S1845*"LRename field "cplx" to prevent any misunderstanding/clash with field "CPLX".(¶Óğ
+^
+java:S1845+"HRename field "sd" to prevent any misunderstanding/clash with field "SD".(âÎå
+i
+java:S1845-"NRename field "error" to prevent any misunderstanding/clash with field "ERROR".(ƒªéÿÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(Á§ÏÙúÿÿÿÿ
+L
+java:S11971"*Move the array designators [] to the type.(àøÖÕûÿÿÿÿ8‡İòÔ/
+X	java:S125>"<This block of commented-out lines of code should be removed.(½à•€8ˆİòÔ/
+Y	java:S125©"<This block of commented-out lines of code should be removed.(Ñó Ì8—İòÔ/
+^	java:S125«"<This block of commented-out lines of code should be removed.(²¥¡¡üÿÿÿÿ8—İòÔ/
+Y	java:S125¯"<This block of commented-out lines of code should be removed.(©øø¸8˜İòÔ/
+^	java:S125±"<This block of commented-out lines of code should be removed.(û‰¶©øÿÿÿÿ8˜İòÔ/

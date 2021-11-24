@@ -1,0 +1,35 @@
+
+e
+java:S1845"JRename field "bin" to prevent any misunderstanding/clash with field "BIN".(êÿ¡ğÿÿÿÿÿ
+e
+java:S1845"JRename field "oct" to prevent any misunderstanding/clash with field "OCT".(¤¢Ø øÿÿÿÿ
+`
+java:S1845"JRename field "hex" to prevent any misunderstanding/clash with field "HEX".(Ÿ¢ÈÜ
+e
+java:S1845"JRename field "dec" to prevent any misunderstanding/clash with field "DEC".(’¬Íâøÿÿÿÿ
+[
+java:S1124
+"EReorder the modifiers to comply with the Java Language Specification.(›ÃŠé
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¹›»
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Ó¤Ê—
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÕÏ¨ùÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(­»Á»
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(×ÇÜã
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Ñıõ’
+<	java:S131*""Add a default case to this switch.(ñÊ·ııÿÿÿÿ
+B
+java:S1068"'Remove this unused "bin" private field.(êÿ¡ğÿÿÿÿÿ
+B
+java:S1068"'Remove this unused "oct" private field.(¤¢Ø øÿÿÿÿ
+=
+java:S1068"'Remove this unused "hex" private field.(Ÿ¢ÈÜ
+B
+java:S1068"'Remove this unused "dec" private field.(’¬Íâøÿÿÿÿ
+)
+java:S1700"Rename field "mode"(ÒÅÕÀ

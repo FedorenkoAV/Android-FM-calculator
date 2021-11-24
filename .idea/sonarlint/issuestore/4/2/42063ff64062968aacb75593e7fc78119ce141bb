@@ -1,0 +1,87 @@
+
+E
+java:S1197-"*Move the array designators [] to the type.(ôÓ‚Âûÿÿÿÿ
+E
+java:S11973"*Move the array designators [] to the type.(ÆéÒÀıÿÿÿÿ
+Q	java:S125R"<This block of commented-out lines of code should be removed.(ÿÀã
+E
+java:S1197W"*Move the array designators [] to the type.(çÓŒÖùÿÿÿÿ
+E
+java:S1197_"*Move the array designators [] to the type.(ëª»Îúÿÿÿÿ
+@
+java:S1197g"*Move the array designators [] to the type.(şš·Ë
+i	java:S100«"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æÿ¡Ïÿÿÿÿÿ
+L
+java:S2209³"5Change this instance-reference to a static reference.(…Òˆ
+R	java:S125¶"<This block of commented-out lines of code should be removed.(¡Œïß
+Q
+java:S2209»"5Change this instance-reference to a static reference.(óá©‹ùÿÿÿÿ
+R	java:S125¾"<This block of commented-out lines of code should be removed.(¡Œïß
+L
+java:S2209Ã"5Change this instance-reference to a static reference.(ÈŒ¹™
+R	java:S125Æ"<This block of commented-out lines of code should be removed.(¡Œïß
+K
+java:S2209Ë"5Change this instance-reference to a static reference.(Â§ük
+R	java:S125Î"<This block of commented-out lines of code should be removed.(¡Œïß
+R	java:S125Ö"<This block of commented-out lines of code should be removed.(¡Œïß
+L
+java:S2209€"5Change this instance-reference to a static reference.(çıœß
+L
+java:S2209ˆ"5Change this instance-reference to a static reference.(çıœß
+L
+java:S2209”"5Change this instance-reference to a static reference.(æ¼‡½
+L
+java:S2209™"5Change this instance-reference to a static reference.(ˆƒ»Ç
+W	java:S125¢"<This block of commented-out lines of code should be removed.(Ù¼æƒıÿÿÿÿ
+W	java:S125¥"<This block of commented-out lines of code should be removed.(Ê„¥µúÿÿÿÿ
+R	java:S125±"<This block of commented-out lines of code should be removed.(ô„ê„
+d	java:S100º"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡“Åö
+o
+java:S3776É"SRefactor this method to reduce its Cognitive Complexity from 134 to the 15 allowed.(ÃŠì ÿÿÿÿÿ
+=
+java:S1905Í"&Remove this unnecessary cast to "int".(Ãã—
+W	java:S125Ô"<This block of commented-out lines of code should be removed.(ÜÁ¼úÿÿÿÿ
+8	java:S131ƒ""Add a default case to this switch.(¡¤‚İ
+=	java:S131Í""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=	java:S131ï""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=
+java:S1905´"&Remove this unnecessary cast to "int".(Ãã—
+i
+java:S3776Ç"RRefactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.(«›¬Œ
+R	java:S125Ö"<This block of commented-out lines of code should be removed.(¥çÏ
+L
+java:S1068"1Remove this unused "statusDisplay" private field.(ï»şıÿÿÿÿ
+=
+java:S1068"(Remove this unused "mode" private field.(ÕÒÒ
+D
+java:S1068")Remove this unused "angle" private field.(øôÂÿÿÿÿÿ
+U
+java:S1068":Remove this unused "complexStackCalculator" private field.(´çÀÇùÿÿÿÿ
+G
+java:S1068 "1Remove this unused "statisticMode" private field.(ë×Áç
+D
+java:S1068!"/Remove this unused "inputDriver" private field.(²¼óY
+J
+java:S1068$"5Remove this unused "fixModeNumberWait" private field.(œŒ»K
+G
+java:S1068(",Remove this unused "newInput" private field.(•÷Úüüÿÿÿÿ
+H
+java:S1068)"-Remove this unused "calcpress" private field.(¤·ëŒøÿÿÿÿ
+C
+java:S1068*"(Remove this unused "calc" private field.(šÿ­Öúÿÿÿÿ
+E
+java:S1068,"*Remove this unused "memory" private field.(£İôÓøÿÿÿÿ
+u
+java:S1192˜"^Define a constant instead of duplicating this literal "Ğ’ argXBin Ğ·Ğ°Ğ¿Ğ¸ÑĞ°Ğ»Ğ¸: " 3 times.(•¾ìØ
+‡
+java:S1192š"kDefine a constant instead of duplicating this literal "ĞÑ‚Ğ¾Ğ±Ñ€Ğ°Ğ·Ğ¸Ğ»Ğ¸ Ğ½Ğ° Ğ´Ğ¸ÑĞ¿Ğ»ĞµĞµ: " 3 times.(·ÍÚÕşÿÿÿÿ
+€
+java:S1192["jDefine a constant instead of duplicating this literal "ĞÑ‚Ğ¾Ğ±Ñ€Ğ°Ğ·Ğ¸Ğ»Ğ¸ Ğ½Ğ° Ğ´Ğ¸ÑĞ¿Ğ»ĞµĞµ." 3 times.(ûÂ²„
+|
+java:S1192T"fDefine a constant instead of duplicating this literal "EditXBin ÑƒÑĞ¿ĞµÑˆĞ½Ğ¾ ÑĞ¾Ğ·Ğ´Ğ°Ğ½!" 4 times.(ÛÁÕü
+g
+java:S1301Í"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+g
+java:S1301ï"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+2
+java:S1700"Rename field "editXBin"(•Öõ©ùÿÿÿÿ

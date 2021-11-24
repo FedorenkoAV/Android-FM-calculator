@@ -1,0 +1,93 @@
+
+E
+java:S1197-"*Move the array designators [] to the type.(ôÓ‚Âûÿÿÿÿ
+E
+java:S11972"*Move the array designators [] to the type.(ÏúÁ´øÿÿÿÿ
+Q	java:S125Q"<This block of commented-out lines of code should be removed.(ÿÀã
+E
+java:S1197V"*Move the array designators [] to the type.(®±¯›ıÿÿÿÿ
+E
+java:S1197^"*Move the array designators [] to the type.(ç³Ò—úÿÿÿÿ
+?
+java:S1197f"*Move the array designators [] to the type.(ÿ«û
+i	java:S100ª"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æÿ¡Ïÿÿÿÿÿ
+Q
+java:S2209²"5Change this instance-reference to a static reference.(‘úèÄùÿÿÿÿ
+R	java:S125µ"<This block of commented-out lines of code should be removed.(¡Œïß
+Q
+java:S2209º"5Change this instance-reference to a static reference.(Àîİ½şÿÿÿÿ
+R	java:S125½"<This block of commented-out lines of code should be removed.(¡Œïß
+L
+java:S2209Â"5Change this instance-reference to a static reference.(“èÔ
+R	java:S125Å"<This block of commented-out lines of code should be removed.(¡Œïß
+Q
+java:S2209Ê"5Change this instance-reference to a static reference.(‚ë¸Éúÿÿÿÿ
+R	java:S125Í"<This block of commented-out lines of code should be removed.(¡Œïß
+R	java:S125Õ"<This block of commented-out lines of code should be removed.(¡Œïß
+W	java:S125ú"<This block of commented-out lines of code should be removed.(ÎåÆ‹øÿÿÿÿ
+L
+java:S2209„"5Change this instance-reference to a static reference.(çıœß
+R	java:S125†"<This block of commented-out lines of code should be removed.(ö§ó
+R	java:S125"<This block of commented-out lines of code should be removed.(òë¸ğ
+L
+java:S2209"5Change this instance-reference to a static reference.(çıœß
+L
+java:S2209›"5Change this instance-reference to a static reference.(æ¼‡½
+L
+java:S2209 "5Change this instance-reference to a static reference.(ˆƒ»Ç
+W	java:S125©"<This block of commented-out lines of code should be removed.(Ù¼æƒıÿÿÿÿ
+W	java:S125¬"<This block of commented-out lines of code should be removed.(Ê„¥µúÿÿÿÿ
+R	java:S125¸"<This block of commented-out lines of code should be removed.(ô„ê„
+d	java:S100Á"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡“Åö
+R	java:S125É"<This block of commented-out lines of code should be removed.(€ïã
+o
+java:S3776Ğ"SRefactor this method to reduce its Cognitive Complexity from 134 to the 15 allowed.(ÃŠì ÿÿÿÿÿ
+=
+java:S1905Ô"&Remove this unnecessary cast to "int".(Ãã—
+W	java:S125Û"<This block of commented-out lines of code should be removed.(ÜÁ¼úÿÿÿÿ
+8	java:S131Š""Add a default case to this switch.(¡¤‚İ
+=	java:S131Ô""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=	java:S131ö""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=
+java:S1905»"&Remove this unnecessary cast to "int".(Ãã—
+i
+java:S3776Î"RRefactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.(«›¬Œ
+R	java:S125İ"<This block of commented-out lines of code should be removed.(¥çÏ
+L
+java:S1068"1Remove this unused "statusDisplay" private field.(ï»şıÿÿÿÿ
+=
+java:S1068"(Remove this unused "mode" private field.(ÕÒÒ
+D
+java:S1068")Remove this unused "angle" private field.(øôÂÿÿÿÿÿ
+U
+java:S1068":Remove this unused "complexStackCalculator" private field.(´çÀÇùÿÿÿÿ
+G
+java:S1068 "1Remove this unused "statisticMode" private field.(ë×Áç
+D
+java:S1068!"/Remove this unused "inputDriver" private field.(²¼óY
+J
+java:S1068$"5Remove this unused "fixModeNumberWait" private field.(œŒ»K
+G
+java:S1068(",Remove this unused "newInput" private field.(•÷Úüüÿÿÿÿ
+H
+java:S1068)"-Remove this unused "calcpress" private field.(¤·ëŒøÿÿÿÿ
+C
+java:S1068*"(Remove this unused "calc" private field.(šÿ­Öúÿÿÿÿ
+E
+java:S1068,"*Remove this unused "memory" private field.(ß–·ƒøÿÿÿÿ
+B
+java:S1144ş",Remove this unused private "makeArg" method.(Ğ½¼7
+
+java:S1192S"fDefine a constant instead of duplicating this literal "EditXHex ÑƒÑĞ¿ĞµÑˆĞ½Ğ¾ ÑĞ¾Ğ·Ğ´Ğ°Ğ½!" 4 times.(³‡îşÿÿÿÿ
+‡
+java:S1192™"kDefine a constant instead of duplicating this literal "ĞÑ‚Ğ¾Ğ±Ñ€Ğ°Ğ·Ğ¸Ğ»Ğ¸ Ğ½Ğ° Ğ´Ğ¸ÑĞ¿Ğ»ĞµĞµ: " 3 times.(·ÍÚÕşÿÿÿÿ
+€
+java:S1192Z"jDefine a constant instead of duplicating this literal "ĞÑ‚Ğ¾Ğ±Ñ€Ğ°Ğ·Ğ¸Ğ»Ğ¸ Ğ½Ğ° Ğ´Ğ¸ÑĞ¿Ğ»ĞµĞµ." 3 times.(ûÂ²„
+u
+java:S1192—"^Define a constant instead of duplicating this literal "Ğ’ argXHex Ğ·Ğ°Ğ¿Ğ¸ÑĞ°Ğ»Ğ¸: " 3 times.(›Æˆ³
+g
+java:S1301Ô"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+g
+java:S1301ö"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+-
+java:S1700"Rename field "editXHex"(§à×

@@ -1,0 +1,13 @@
+
+D	java:S131£""Add a default case to this switch.(Û™æèûÿÿÿÿ8‘ò‰õÔ/
+d
+java:S1126£"AReplace this if-then-else statement by a single return statement.(ÀŞÄÌøÿÿÿÿ8šò‰õÔ/
+D	java:S131Í""Add a default case to this switch.(Ã’×Óşÿÿÿÿ8¡ò‰õÔ/
+o
+java:S1192 "QDefine a constant instead of duplicating this literal "ĞĞ°Ğ±Ñ€Ğ°Ğ½Ğ¾: " 3 times.(Ù‡Õÿ8©ò‰õÔ/
+‰
+java:S1192ˆ"fDefine a constant instead of duplicating this literal "Ğ’ ÑÑ‚ĞµĞº Ñ‡Ğ¸ÑĞµĞ» Ğ·Ğ°Ğ½Ğ¾ÑˆÑƒ: " 3 times.(àÆÆ£üÿÿÿÿ8©ò‰õÔ/
+‰
+java:S1192Š"lDefine a constant instead of duplicating this literal "Ğ’ ÑÑ‚ĞµĞº Ğ¾Ğ¿ĞµÑ€Ğ°Ñ†Ğ¸Ğ¹ Ğ·Ğ°Ğ½Ğ¾ÑˆÑƒ: " 3 times.(¼Ë18ªò‰õÔ/
+¶
+java:S1192¥"’Define a constant instead of duplicating this literal "Ğ’Ñ‹Ñ‡Ğ¸ÑĞ»ĞµĞ½Ğ¸Ñ Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Ğ°Ğ²Ñ‚Ğ¾ĞºĞ¾Ğ½ÑÑ‚Ğ°Ğ½Ñ‚Ñ‹: " 6 times.(•Á°øÿÿÿÿ8ªò‰õÔ/

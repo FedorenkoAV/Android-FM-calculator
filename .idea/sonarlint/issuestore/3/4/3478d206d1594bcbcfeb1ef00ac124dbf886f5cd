@@ -1,0 +1,10 @@
+
+=	java:S131‘""Add a default case to this switch.(Ã’×Óşÿÿÿÿ
+M
+java:S1905«"*Remove this unnecessary cast to "Complex".(Æ¬–Âøÿÿÿÿ8¿ŠéÓÒ/
+g
+java:S1192Ç"KDefine a constant instead of duplicating this literal "cplxNum1: " 3 times.(¸‰ÉÂüÿÿÿÿ
+}
+java:S1192ï"fDefine a constant instead of duplicating this literal "Ğ’ ÑÑ‚ĞµĞº Ñ‡Ğ¸ÑĞµĞ» Ğ·Ğ°Ğ½Ğ¾ÑˆÑƒ: " 3 times.(áéÀ
+‚
+java:S1192ñ"lDefine a constant instead of duplicating this literal "Ğ’ ÑÑ‚ĞµĞº Ğ¾Ğ¿ĞµÑ€Ğ°Ñ†Ğ¸Ğ¹ Ğ·Ğ°Ğ½Ğ¾ÑˆÑƒ: " 3 times.(ÈåÓ

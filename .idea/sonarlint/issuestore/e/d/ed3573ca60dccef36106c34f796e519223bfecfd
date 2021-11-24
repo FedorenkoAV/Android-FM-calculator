@@ -1,0 +1,172 @@
+
+E
+java:S11975"*Move the array designators [] to the type.(ôÓ‚Âûÿÿÿÿ
+E
+java:S11977"*Move the array designators [] to the type.(ò´ÜËşÿÿÿÿ
+V	java:S125Q"<This block of commented-out lines of code should be removed.(«¬Òáıÿÿÿÿ
+m
+java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¥Ó¼ëúÿÿÿÿ
+V	java:S125~"<This block of commented-out lines of code should be removed.(ĞŠøÅûÿÿÿÿ
+R	java:S125"<This block of commented-out lines of code should be removed.(Æ°¿¡
+W	java:S125°"<This block of commented-out lines of code should be removed.(€ª¥Éûÿÿÿÿ
+L
+java:S2209é"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125ï"<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209ş"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125„"<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209š"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125 "<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209¯"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125µ"<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209Ä"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125Ê"<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209Ù"5Change this instance-reference to a static reference.(ùƒƒ
+W	java:S125ß"<This block of commented-out lines of code should be removed.(‰¡Şışÿÿÿÿ
+L
+java:S2209î"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209ƒ"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209˜"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209­"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209Â"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209×"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209ì"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209–"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209«"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209À"5Change this instance-reference to a static reference.(ùƒƒ
+d	java:S100Ô"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š¥ìÔ
+L
+java:S2209Õ"5Change this instance-reference to a static reference.(ùƒƒ
+L
+java:S2209ê"5Change this instance-reference to a static reference.(ùƒƒ
+i	java:S100ş"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò¶’ıûÿÿÿÿ
+L
+java:S2209ÿ"5Change this instance-reference to a static reference.(ùƒƒ
+d	java:S100«"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥êá
+d	java:S100¼"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ê•…
+i	java:S100Ó"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Æÿ¡Ïÿÿÿÿÿ
+d	java:S100ö"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜›Éü
+i	java:S100ı"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡Îı§úÿÿÿÿ
+R	java:S125š"<This block of commented-out lines of code should be removed.(«Ã‘Á
+X
+java:S2209¢"5Change this instance-reference to a static reference.(¢Ì¡Óÿÿÿÿÿ8ˆ…€ĞÒ/
+R	java:S125¥"<This block of commented-out lines of code should be removed.(¡Œïß
+X
+java:S2209ª"5Change this instance-reference to a static reference.(¶éúúÿÿÿÿ8…€ĞÒ/
+R	java:S125­"<This block of commented-out lines of code should be removed.(¡Œïß
+X
+java:S2209²"5Change this instance-reference to a static reference.(¹èûõùÿÿÿÿ8—…€ĞÒ/
+R	java:S125µ"<This block of commented-out lines of code should be removed.(¡Œïß
+S
+java:S2209º"5Change this instance-reference to a static reference.(¹ºñ­8š…€ĞÒ/
+R	java:S125½"<This block of commented-out lines of code should be removed.(¡Œïß
+R
+java:S2209Â"5Change this instance-reference to a static reference.(¾Å‰W8œ…€ĞÒ/
+R	java:S125Å"<This block of commented-out lines of code should be removed.(¡Œïß
+d	java:S100É"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÆ…Î
+X
+java:S2209Ê"5Change this instance-reference to a static reference.(áÅÄşÿÿÿÿ8¢…€ĞÒ/
+R	java:S125Í"<This block of commented-out lines of code should be removed.(¡Œïß
+R	java:S125Õ"<This block of commented-out lines of code should be removed.(¡Œïß
+i
+java:S3776Ú"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(°ß¸„
+W	java:S125÷"<This block of commented-out lines of code should be removed.(€ª¥Éûÿÿÿÿ
+5
+java:S2178ˆ"Correct this "&" to "&&".(Îû²³úÿÿÿÿ
+W	java:S125‹"<This block of commented-out lines of code should be removed.(®¤ï‰ÿÿÿÿÿ
+W	java:S125”"<This block of commented-out lines of code should be removed.(½Æ®ñÿÿÿÿÿ
+W	java:S125–"<This block of commented-out lines of code should be removed.(øØ•Çıÿÿÿÿ
+R
+java:S2209¤"5Change this instance-reference to a static reference.(‡Ôãb8»…€ĞÒ/
+R	java:S125¿"<This block of commented-out lines of code should be removed.(Æ°¿¡
+W	java:S125Ü"<This block of commented-out lines of code should be removed.(ªÒæ«ÿÿÿÿÿ
+R	java:S125—"<This block of commented-out lines of code should be removed.(Æ°¿¡
+W	java:S125¥"<This block of commented-out lines of code should be removed.(ÎåÆ‹øÿÿÿÿ
+S
+java:S2209°"5Change this instance-reference to a static reference.(çıœß8Ğ…€ĞÒ/
+R	java:S125²"<This block of commented-out lines of code should be removed.(ö§ó
+R	java:S125¹"<This block of commented-out lines of code should be removed.(òë¸ğ
+S
+java:S2209»"5Change this instance-reference to a static reference.(çıœß8Ø…€ĞÒ/
+L
+java:S2209À"5Change this instance-reference to a static reference.(ùƒƒ
+R	java:S125Á"<This block of commented-out lines of code should be removed.(Š Ä¼
+S
+java:S2209Ø"5Change this instance-reference to a static reference.(æ¼‡½8Ü…€ĞÒ/
+S
+java:S2209İ"5Change this instance-reference to a static reference.(ˆƒ»Ç8Ş…€ĞÒ/
+W	java:S125æ"<This block of commented-out lines of code should be removed.(Ù¼æƒıÿÿÿÿ
+W	java:S125é"<This block of commented-out lines of code should be removed.(Ê„¥µúÿÿÿÿ
+R	java:S125õ"<This block of commented-out lines of code should be removed.(ô„ê„
+d	java:S100ş"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡“Åö
+L
+java:S2209¯	"5Change this instance-reference to a static reference.(à“î‹
+Q
+java:S2209–
+"5Change this instance-reference to a static reference.(®¼õıÿÿÿÿ
+R	java:S125º
+"<This block of commented-out lines of code should be removed.(ïéÚ€
+o
+java:S3776Í
+"SRefactor this method to reduce its Cognitive Complexity from 134 to the 15 allowed.(ÃŠì ÿÿÿÿÿ
+=
+java:S1905Ñ
+"&Remove this unnecessary cast to "int".(Ãã—
+W	java:S125Ø
+"<This block of commented-out lines of code should be removed.(ÜÁ¼úÿÿÿÿ
+8	java:S131‡""Add a default case to this switch.(¡¤‚İ
+=	java:S131Ñ""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=	java:S131ó""Add a default case to this switch.(ˆŠïıÿÿÿÿ
+=
+java:S1905¸"&Remove this unnecessary cast to "int".(Ãã—
+i
+java:S3776Ë"RRefactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.(«›¬Œ
+R	java:S125Ú"<This block of commented-out lines of code should be removed.(¥çÏ
+T
+java:S1068"9Remove this unused "REQUEST_CODE_CURRENCY" private field.(Šøëãÿÿÿÿÿ
+L
+java:S1068"1Remove this unused "statusDisplay" private field.(ï»şıÿÿÿÿ
+D
+java:S1068")Remove this unused "angle" private field.(øôÂÿÿÿÿÿ
+D
+java:S1068$"/Remove this unused "inputDriver" private field.(²¼óY
+H
+java:S10680"-Remove this unused "calcpress" private field.(¤·ëŒøÿÿÿÿ
+C
+java:S10681"(Remove this unused "calc" private field.(šÿ­Öúÿÿÿÿ
+@
+java:S10683"*Remove this unused "memory" private field.(„¤Š®
+N
+java:S1144Ñ"2Remove this unused private "numberPartDel" method.(—ò¯Èüÿÿÿÿ
+B
+java:S1144ª",Remove this unused private "makeArg" method.(Ğ½¼7
+”
+java:S1192ì"xDefine a constant instead of duplicating this literal "argB Ğ±Ñ‹Ğ»Ğ¾ Ğ¿ÑƒÑÑ‚Ñ‹Ğ¼, Ğ·Ğ°Ğ½Ğ¾ÑĞ¸Ğ¼ Ğ² argB 0.0" 23 times.(Ë¸çüûÿÿÿÿ
+`
+java:S1192È	"IDefine a constant instead of duplicating this literal " Ñ€Ğ°Ğ·." 4 times.(¾£
+|
+java:S1192æ"eDefine a constant instead of duplicating this literal "Ğ£Ğ´Ğ°Ğ»ÑĞµĞ¼ Ğ¾Ğ´Ğ¸Ğ½ ÑĞ¸Ğ¼Ğ²Ğ¾Ğ»" 3 times.(òÄŠÄ
+F
+java:S1066Œ"/Merge this if statement with the enclosing one.(Ü­Û
+g	java:S117™"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·ßÇ¼
+g
+java:S1301Ñ"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+g
+java:S1301ó"KReplace this "switch" statement by "if" statements to increase readability.(ˆŠïıÿÿÿÿ
+*
+java:S1700"Rename field "editX"(çòòî
