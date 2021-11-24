@@ -46,65 +46,6 @@ class StatusDisplay {
     int backgroundColor;
     int fontColor;
 
-
-    StatusDisplay(Context context, TextView shift, TextView hyp, TextView deg, TextView rad, TextView grad, TextView bracket, TextView bin, TextView oct, TextView hex, TextView cplx, TextView sd) {
-
-        this.shift = shift;
-        this.hyp = hyp;
-        this.deg = deg;
-        this.rad = rad;
-        this.grad = grad;
-        this.bracket = bracket;
-        this.bin = bin;
-        this.oct = oct;
-        this.hex = hex;
-        this.cplx = cplx;
-        this.sd = sd;
-        backgroundColor = ContextCompat.getColor(context, R.color.colorLCDBackground);
-        fontColor = ContextCompat.getColor(context, R.color.colorLCDFont);
-        offShift();
-        offHyp();
-        offDeg();
-        offRad();
-        offGrad();
-        offBracket();
-        offBin();
-        offOct();
-        offHex();
-        offCplx();
-        offSd();
-    }
-
-//    StatusDisplay(Context context, TextView statusDisplayLabStore[]) {
-//
-//        this.shift = statusDisplayLabStore[SHIFT];
-//        this.hyp = statusDisplayLabStore[HYP];
-//        this.deg = statusDisplayLabStore[DEG];
-//        this.rad = statusDisplayLabStore[RAD];
-//        this.grad = statusDisplayLabStore[GRAD];
-//        this.bracket = statusDisplayLabStore[BRCKET];
-//        this.bin = statusDisplayLabStore[BIN];
-//        this.oct = statusDisplayLabStore[OCT];
-//        this.hex = statusDisplayLabStore[HEX];;
-//        this.cplx = statusDisplayLabStore[CPLX];
-//        this.sd = statusDisplayLabStore[SD];
-//        this.memory = statusDisplayLabStore[MEMORY];
-//        this.error = statusDisplayLabStore[ERROR];
-//        backgroundColor = ContextCompat.getColor(context, R.color.colorLCDBackground);
-//        fontColor = ContextCompat.getColor(context, R.color.colorLCDFont);
-//        offShift();
-//        offHyp();
-//        offDeg();
-//        offRad();
-//        offGrad();
-//        offBracket();
-//        offBin();
-//        offOct();
-//        offHex();
-//        offCplx();
-//        offSd();
-//    }
-
     StatusDisplay(Context context, TextView statusDisplayLabStore[], ImageView memoryStore) {
 
         this.shift = statusDisplayLabStore[SHIFT];

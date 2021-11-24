@@ -5,18 +5,13 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.ResponseInfo;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +35,9 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyDialogFragment.NoticeDialogListener {
 
@@ -69,79 +67,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int PROTOCOL = 17;
     public static final int FRAGMENT_MANAGER = 18;
 
-    Button btn_shift;
-    Button btn_hyp;
-    Button btn_inv;
-    //    Button btn_4;
-    Button btn_off;
-    Button btn_onc;
+    Button btnShift;
+    Button btnHyp;
+    Button btnInv;
+    Button btnOff;
+    Button btnOnC;
 
-    Button btn_del;
-    Button btn_sci;
-    Button btn_drg;
-    Button btn_sin;
-    Button btn_cos;
-    Button btn_tan;
+    Button btnDel;
+    Button btnSci;
+    Button btnDrg;
+    Button btnSin;
+    Button btnCos;
+    Button btnTan;
 
-    Button btn_exp;
-    Button btn_x_pow_y;
-    Button btn_sqr;
-    Button btn_to_rad;
-    Button btn_ln;
-    Button btn_log;
+    Button btnExp;
+    Button btnXPowY;
+    Button btnSqr;
+    Button btnToRad;
+    Button btnLn;
+    Button btnLog;
 
-    Button btn_x2;
-    Button btn_a;
-    Button btn_b;
-    Button btn_open_bracket;
-    Button btn_close_bracket;
-    Button btn_x_to_mem;
+    Button btnX2;
+    Button btnA;
+    Button btnB;
+    Button btnOpenBracket;
+    Button btnCloseBracket;
+    Button btnXToMem;
 
-    Button btn_7;
-    Button btn_8;
-    Button btn_9;
-    Button btn_mem_plus;
-    Button btn_mem_read;
+    Button btn7;
+    Button btn8;
+    Button btn9;
+    Button btnMemPlus;
+    Button btnMemRead;
 
-    Button btn_4;
-    Button btn_5;
-    Button btn_6;
-    Button btn_mult;
-    Button btn_div;
+    Button btn4;
+    Button btn5;
+    Button btn6;
+    Button btnMult;
+    Button btnDiv;
 
-    Button btn_1;
-    Button btn_2;
-    Button btn_3;
-    Button btn_plus;
-    Button btn_minus;
+    Button btn1;
+    Button btn2;
+    Button btn3;
+    Button btnPlus;
+    Button btnMinus;
 
-    Button btn_0;
-    Button btn_dot;
-    Button btn_sign;
-    Button btn_calc;
-    Button btn_ce;
+    Button btn0;
+    Button btnDot;
+    Button btnSign;
+    Button btnCalc;
+    Button btnCe;
 
-    TextView lab_pi;
-    //    TextView lab_xy;
-    TextView lab_cbt;
-    TextView lab_todrg;
-    TextView lab_ex;
-    TextView lab_10x;
-
-    TextView shift;
-    TextView hyp;
-    TextView deg;
-    TextView rad;
-    TextView grad;
-    TextView bracket;
-    TextView bin;
-    TextView oct;
-    TextView hex;
-    TextView cplx;
-    TextView sd;
-    ImageView memory;
-    TextView error;
-    TextView display;
+    TextView tvShift;
+    TextView tvHyp;
+    TextView tvDeg;
+    TextView tvRad;
+    TextView tvGrad;
+    TextView tvBracket;
+    TextView tvBin;
+    TextView tvOct;
+    TextView tvHex;
+    TextView tvCplx;
+    TextView tvSd;
+    ImageView tvMemory;
+    TextView tvError;
+    TextView tvDisplay;
     TextView tvProtocol;
 
     Bundle savedInstanceState;
@@ -158,64 +148,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     InputDriver inputDriver;
 
     Object[] objStore = new Object[19];
-
+    Map<String, Object> classesMap = new HashMap<>();
     ClipboardManager clipboardManager;
     ClipData clipData;
 
-    private static final int UI_ANIMATION_DELAY = 300;
+    private static final int UI_ANIMATION_DELAY = 100;
+    private static final int ADS_DELAY = 30000;
     private final Handler mHideHandler = new Handler();
+    private final Handler mAdsHandler = new Handler();
     private View mContentView;
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        //        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            // Delayed removal of status and navigation bar
+    private final Runnable mHidePart2Runnable = () -> {
+        // Delayed removal of status and navigation bar
 
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-            L.d(TAG, "mHidePart2Runnable запущен.");
-            try {
-                mContentView.setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LOW_PROFILE                         //0x00000001
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION           //0x00000002
-                                | View.SYSTEM_UI_FLAG_FULLSCREEN                //0x00000004
-                                //0x00000008
-                                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE             //0x00000100
-                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION    //0x00000200
-                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN         //0x00000400
-//                        | View.SYSTEM_UI_FLAG_IMMERSIVE                       //0x00000800
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY          //0x00001000
-//                        | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR                //0x00002000
-                );
-                L.d(TAG, "Полноэкранный режим действует!");
-            } catch (Exception e) {
-                L.d(TAG, "Произошла ошибка в mHidePart2Runnable: " + e);
-                StackTraceElement[] stackTraceElements = e.getStackTrace();
-                for (int i = 0; i < stackTraceElements.length; i++) {
-                    L.d(TAG, i + ": " + stackTraceElements[i].toString());
-                }
-            }
-        }
-    };
-
-    private final Runnable mShowPart2Runnable = () -> {
-        // Delayed display of UI elements
-        L.d(TAG, "mShowPart2Runnable запущен.");
+        // Note that some of these constants are new as of API 16 (Jelly Bean)
+        // and API 19 (KitKat). It is safe to use them, as they are inlined
+        // at compile-time and do nothing on earlier devices.
+        L.d(TAG, "mHidePart2Runnable запущен.");
         try {
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-//            mControlsView.setVisibility(View.VISIBLE);
+            mContentView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LOW_PROFILE                         //0x00000001
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION           //0x00000002
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN                //0x00000004
+                            //0x00000008
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE             //0x00000100
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION    //0x00000200
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN         //0x00000400
+//                        | View.SYSTEM_UI_FLAG_IMMERSIVE                       //0x00000800
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY          //0x00001000
+//                        | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR                //0x00002000
+            );
+            L.d(TAG, "Полноэкранный режим действует!");
         } catch (Exception e) {
-            L.d(TAG, "Произошла ошибка в mShowPart2Runnable: " + e);
+            L.d(TAG, "Произошла ошибка в mHidePart2Runnable: " + e);
             StackTraceElement[] stackTraceElements = e.getStackTrace();
             for (int i = 0; i < stackTraceElements.length; i++) {
                 L.d(TAG, i + ": " + stackTraceElements[i].toString());
             }
         }
     };
+
     private final Runnable mHideRunnable = () -> {
         L.d(TAG, "mHideRunnable запущен.");
         try {
@@ -228,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     };
+
+    private final Runnable mAdsRunnable = this::ads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             L.d(TAG, "Activity activity = MainActivity.this создана.");
 
             objStore[MAIN_ACTIVITY] = activity;
-
+            classesMap.put("mainActivity", activity);
 //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
             customToast = new CustomToast(activity, "В разработке");
         } catch (Exception e) {
@@ -271,89 +244,90 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
             objStore[TOAST] = customToast;
+            classesMap.put("customToast", customToast);
             L.d(TAG, "Создали свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html");
-            display = findViewById(R.id.display);
-            display.setOnCreateContextMenuListener(this);
+            tvDisplay = findViewById(R.id.display);
+            tvDisplay.setOnCreateContextMenuListener(this);
 
 //        Находим метки статуса и режима работы
             L.d(TAG, "Находим метки статуса и режима работы");
-            shift = findViewById(R.id.status_shift);
-            hyp = findViewById(R.id.status_hyp);
-            deg = findViewById(R.id.status_deg);
-            rad = findViewById(R.id.status_rad);
-            grad = findViewById(R.id.status_grad);
-            bracket = findViewById(R.id.status_bracket);
-            bin = findViewById(R.id.status_bin);
-            oct = findViewById(R.id.status_oct);
-            hex = findViewById(R.id.status_hex);
-            cplx = findViewById(R.id.status_cplx);
-            sd = findViewById(R.id.status_sd);
-            memory = findViewById(R.id.memory);
-            error = findViewById(R.id.error);
+            tvShift = findViewById(R.id.status_shift);
+            tvHyp = findViewById(R.id.status_hyp);
+            tvDeg = findViewById(R.id.status_deg);
+            tvRad = findViewById(R.id.status_rad);
+            tvGrad = findViewById(R.id.status_grad);
+            tvBracket = findViewById(R.id.status_bracket);
+            tvBin = findViewById(R.id.status_bin);
+            tvOct = findViewById(R.id.status_oct);
+            tvHex = findViewById(R.id.status_hex);
+            tvCplx = findViewById(R.id.status_cplx);
+            tvSd = findViewById(R.id.status_sd);
+            tvMemory = findViewById(R.id.memory);
+            tvError = findViewById(R.id.error);
 
 //        Находим кнопки
             L.d(TAG, "Находим кнопки");
-            btn_shift = findViewById(R.id.FuncButtonShift);
-            btn_hyp = findViewById(R.id.FuncButtonHyp);
-            btn_inv = findViewById(R.id.FuncButtonGear);
-//            btn_4 = findViewById(R.id.FuncButton4);
-            btn_off = findViewById(R.id.FuncButtonOff);
-            btn_onc = findViewById(R.id.FuncButtonOnC);
-            btn_del = findViewById(R.id.FuncButtonDel);
-            btn_sci = findViewById(R.id.FuncButtonSci);
-            btn_drg = findViewById(R.id.FuncButtonDrg);
-            btn_sin = findViewById(R.id.FuncButtonSin);
-            btn_cos = findViewById(R.id.FuncButtonCos);
-            btn_tan = findViewById(R.id.FuncButtonTan);
-            btn_exp = findViewById(R.id.FuncButtonExp);
-            btn_x_pow_y = findViewById(R.id.FuncButtonXpowY);
-            btn_sqr = findViewById(R.id.FuncButtonSqr);
-            btn_to_rad = findViewById(R.id.FuncButtonToRad);
-            btn_ln = findViewById(R.id.FuncButtonLn);
-            btn_log = findViewById(R.id.FuncButtonLog);
-            btn_x2 = findViewById(R.id.FuncButtonX2);
-            btn_a = findViewById(R.id.FuncButtonA);
-            btn_b = findViewById(R.id.FuncButtonB);
-            btn_open_bracket = findViewById(R.id.FuncButtonOpenBracket);
-            btn_close_bracket = findViewById(R.id.FuncButtonCloseBracket);
-            btn_x_to_mem = findViewById(R.id.FuncButtonXtoM);
+            btnShift = findViewById(R.id.FuncButtonShift);
+            btnHyp = findViewById(R.id.FuncButtonHyp);
+            btnInv = findViewById(R.id.FuncButtonGear);
+            btnOff = findViewById(R.id.FuncButtonOff);
+            btnOnC = findViewById(R.id.FuncButtonOnC);
+            btnDel = findViewById(R.id.FuncButtonDel);
+            btnSci = findViewById(R.id.FuncButtonSci);
+            btnDrg = findViewById(R.id.FuncButtonDrg);
+            btnSin = findViewById(R.id.FuncButtonSin);
+            btnCos = findViewById(R.id.FuncButtonCos);
+            btnTan = findViewById(R.id.FuncButtonTan);
+            btnExp = findViewById(R.id.FuncButtonExp);
+            btnXPowY = findViewById(R.id.FuncButtonXpowY);
+            btnSqr = findViewById(R.id.FuncButtonSqr);
+            btnToRad = findViewById(R.id.FuncButtonToRad);
+            btnLn = findViewById(R.id.FuncButtonLn);
+            btnLog = findViewById(R.id.FuncButtonLog);
+            btnX2 = findViewById(R.id.FuncButtonX2);
+            btnA = findViewById(R.id.FuncButtonA);
+            btnB = findViewById(R.id.FuncButtonB);
+            btnOpenBracket = findViewById(R.id.FuncButtonOpenBracket);
+            btnCloseBracket = findViewById(R.id.FuncButtonCloseBracket);
+            btnXToMem = findViewById(R.id.FuncButtonXtoM);
 
-            btn_7 = findViewById(R.id.Button07);
-            btn_8 = findViewById(R.id.Button08);
-            btn_9 = findViewById(R.id.Button09);
-            btn_mem_plus = findViewById(R.id.ButtonMem);
-            btn_mem_read = findViewById(R.id.ButtonMR);
-            btn_4 = findViewById(R.id.Button04);
-            btn_5 = findViewById(R.id.Button05);
-            btn_6 = findViewById(R.id.Button06);
-            btn_mult = findViewById(R.id.ButtonMult);
-            btn_div = findViewById(R.id.ButtonDiv);
-            btn_1 = findViewById(R.id.Button01);
-            btn_2 = findViewById(R.id.Button02);
-            btn_3 = findViewById(R.id.Button03);
-            btn_plus = findViewById(R.id.ButtonPlus);
-            btn_minus = findViewById(R.id.ButtonMinus);
-            btn_0 = findViewById(R.id.Button0);
-            btn_dot = findViewById(R.id.ButtonDot);
-            btn_sign = findViewById(R.id.ButtonSign);
-            btn_calc = findViewById(R.id.ButtonCalc);
-            btn_ce = findViewById(R.id.ButtonCE);
+            btn7 = findViewById(R.id.Button07);
+            btn8 = findViewById(R.id.Button08);
+            btn9 = findViewById(R.id.Button09);
+            btnMemPlus = findViewById(R.id.ButtonMem);
+            btnMemRead = findViewById(R.id.ButtonMR);
+            btn4 = findViewById(R.id.Button04);
+            btn5 = findViewById(R.id.Button05);
+            btn6 = findViewById(R.id.Button06);
+            btnMult = findViewById(R.id.ButtonMult);
+            btnDiv = findViewById(R.id.ButtonDiv);
+            btn1 = findViewById(R.id.Button01);
+            btn2 = findViewById(R.id.Button02);
+            btn3 = findViewById(R.id.Button03);
+            btnPlus = findViewById(R.id.ButtonPlus);
+            btnMinus = findViewById(R.id.ButtonMinus);
+            btn0 = findViewById(R.id.Button0);
+            btnDot = findViewById(R.id.ButtonDot);
+            btnSign = findViewById(R.id.ButtonSign);
+            btnCalc = findViewById(R.id.ButtonCalc);
+            btnCe = findViewById(R.id.ButtonCE);
 
-            Button[] btnStore = {btn_shift, btn_hyp, btn_inv, btn_onc, btn_off, btn_onc,
-                    btn_del, btn_sci, btn_drg, btn_sin, btn_cos, btn_tan,
-                    btn_exp, btn_x_pow_y, btn_sqr, btn_to_rad, btn_ln, btn_log,
-                    btn_x2, btn_a, btn_b, btn_open_bracket, btn_close_bracket, btn_x_to_mem,
+            Button[] btnStore = {btnShift, btnHyp, btnInv, btnOnC, btnOff, btnOnC,
+                    btnDel, btnSci, btnDrg, btnSin, btnCos, btnTan,
+                    btnExp, btnXPowY, btnSqr, btnToRad, btnLn, btnLog,
+                    btnX2, btnA, btnB, btnOpenBracket, btnCloseBracket, btnXToMem,
 
-                    btn_7, btn_8, btn_9, btn_mem_plus, btn_mem_read,
-                    btn_4, btn_5, btn_6, btn_mult, btn_div,
-                    btn_1, btn_2, btn_3, btn_plus, btn_minus,
-                    btn_0, btn_dot, btn_sign, btn_calc, btn_ce};
+                    btn7, btn8, btn9, btnMemPlus, btnMemRead,
+                    btn4, btn5, btn6, btnMult, btnDiv,
+                    btn1, btn2, btn3, btnPlus, btnMinus,
+                    btn0, btnDot, btnSign, btnCalc, btnCe};
 
 
 //        Создаем объект statusDisplay, который будет управлять отображением меток статуса и режима работы на дисплее
-            TextView[] statusDisplayLabStore = {shift, hyp, deg, rad, grad, bracket, bin, oct, hex, cplx, sd, error};
-            StatusDisplay statusDisplay = new StatusDisplay(this, statusDisplayLabStore, memory);
+            TextView[] statusDisplayLabStore = {tvShift, tvHyp, tvDeg, tvRad, tvGrad, tvBracket, tvBin, tvOct, tvHex, tvCplx, tvSd, tvError};
+            StatusDisplay statusDisplay = new StatusDisplay(this, statusDisplayLabStore, tvMemory);
             objStore[STATUS_DISPLAY] = statusDisplay;
+            classesMap.put("statusDisplay", statusDisplay);
 
             L.d(TAG, "Создали объект statusDisplay, который будет управлять отображением меток статуса и режима работы на дисплее");
 
@@ -361,59 +335,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Preferences preferences = new Preferences(this);
             L.d(TAG, "Создали объект preferences, который будет читать и записывать настройки в файл." + preferences);
             objStore[PREFERENCES] = preferences;
+            classesMap.put("preferences", preferences);
 
 //        Создаем объект status, который будет менять статусы и режимы работы, а так же текст в метках и кнопках
             status = new Status(statusDisplay, btnStore);
             L.d(TAG, "Создали объект status, который будет менять статусы и режимы работы" + status);
             objStore[STATUS] = status;
+            classesMap.put("status", status);
 //        Создаем объект mode, который будет менять режим работы на CPLX и SD
             Mode mode = new Mode(statusDisplay);
             L.d(TAG, "Создали объект mode, который будет менять режим работы на CPLX и SD");
             objStore[MODE] = mode;
-
+            classesMap.put("mode", mode);
             tvProtocol = findViewById(R.id.protocol);
             tvProtocol.setSelected(true);
 
 //        Создаем объект - FragmentManager
             FragmentManager manager = getSupportFragmentManager();
             objStore[FRAGMENT_MANAGER] = manager;
-
+            classesMap.put("manager", manager);
             MyDialogFragment myDialogFragment = new MyDialogFragment();
 
             protocol = new Protocol(tvProtocol, mode, myDialogFragment, manager);
             objStore[PROTOCOL] = protocol;
+            classesMap.put("protocol", protocol);
             L.d(TAG, "Создали объект protocol, который будет протоколировать вычисления");
 
 //        Создаем объект angle, который будет менять удуницы измерения углов
             angle = new Angle(preferences, statusDisplay);
             L.d(TAG, "Создали объект angle, который будет менять удуницы измерения углов");
             objStore[ANGLE] = angle;
-
+            classesMap.put("angle", angle);
 //        Создаем объект memoryStore, который будет работать с памятью
             memoryStore = new MemoryStore(preferences, status);
             L.d(TAG, "Создали объект memoryStore, который будет работать с памятью");
             objStore[MEMORY] = memoryStore;
-
+            classesMap.put("memoryStore", memoryStore);
 //        Создаем объект mainDisplay, который будет выводить цифровую информацию
-            mainDisplay = new MainDisplay(this, display, preferences);
+            mainDisplay = new MainDisplay(this, tvDisplay, preferences);
             L.d(TAG, "Создали объект mainDisplay, который будет выводить цифровую информацию");
             objStore[MAIN_DISPLAY] = mainDisplay;
-
+            classesMap.put("mainDisplay", mainDisplay);
 //        Создаем объект stackCalculator, который будет выполнять все вычисления
             stackCalculator = new StackCalculator(angle, protocol);
             L.d(TAG, "Создали объект stackCalculator, который будет выполнять все вычисления");
             objStore[STACK_CALCULATOR] = stackCalculator;
-
+            classesMap.put("stackCalculator", stackCalculator);
 //        Создаем объект editX, который будет отвечать за ввод всего
             editX = new EditX(objStore);
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
             objStore[EDIT_X] = editX;
-
+            classesMap.put("editX", editX);
 //        Создаем объект - обработчик нажатия кнопок и вешаем его на кнопки
             inputDriver = new InputDriver(objStore); //инициализируем clickListener
             L.d(TAG, "Создали объект - обработчик нажатия кнопок и вешаем его на кнопки");
             objStore[INPUT_DRIVER] = inputDriver;
-
+            classesMap.put("inputDriver", inputDriver);
             for (Button button : btnStore) {
                 button.setOnClickListener(inputDriver);
             }
@@ -421,71 +398,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int i = 0; i < objStore.length; i++) {
                 L.d(TAG, "В objStore[" + i + "]: " + objStore[i]);
             }
-
-//            MobileAds.initialize(this, "ca-app-pub-9802856203007191~8964036984");
-
-            MobileAds.initialize(this, new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
-                }
-            });
-
-            mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-            mAdView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    // Code to be executed when an ad finishes loading.
-                    L.d("Ads", "onAdLoaded() запустился.");
-                    L.d("Ads", "mAdView responseInfo: " + mAdView.getResponseInfo());
-                }
-
-                @Override
-                public void onAdFailedToLoad(LoadAdError adError) {
-                    // Code to be executed when an ad request fails.
-                    L.d("Ads", "onAdFailedToLoad запустился.");
-                    // Gets the domain from which the error came.
-                    L.d("Ads", "errorDomain: " + adError.getDomain());
-                    // Gets the error code. See
-                    // https://developers.google.com/android/reference/com/google/android/gms/ads/AdRequest#constant-summary
-                    // for a list of possible codes.
-                    L.d("Ads", "errorCode: " + adError.getCode());
-                    // Gets an error message.
-                    // For example "Account not approved yet". See
-                    // https://support.google.com/admob/answer/9905175 for explanations of
-                    // common errors.
-                    L.d("Ads", "errorMessage: " + adError.getMessage());
-                    // Gets additional response information about the request. See
-                    // https://developers.google.com/admob/android/response-info for more
-                    // information.
-                    L.d("Ads", "adError responseInfo: " + adError.getResponseInfo());
-                    // Gets the cause of the error, if available.
-                    L.d("Ads", "cause: " + adError.getCause());
-                    // All of this information is available via the error's toString() method.
-                    //L.d("Ads", adError.toString());
-                }
-
-                @Override
-                public void onAdOpened() {
-                    // Code to be executed when an ad opens an overlay that
-                    // covers the screen.
-                    L.d("Ads", "onAdOpened() запустился.");
-                }
-
-                @Override
-                public void onAdClicked() {
-                    // Code to be executed when the user clicks on an ad.
-                    L.d("Ads", "onAdClicked() запустился.");
-                }
-
-                @Override
-                public void onAdClosed() {
-                    // Code to be executed when the user is about to return
-                    // to the app after tapping on an ad.
-                    L.d("Ads", "onAdClosed() запустился.");
-                }
-            });
+            delayedAds(ADS_DELAY);
 
         } catch (Exception e) {
             customToast.setToastText("Произошла неизвестная ошибка: " + e);
@@ -629,52 +542,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
-//    private void toggle() {
-//        L.d(TAG, "toggle() запущен.");
-//        if (mVisible) {
-//            hide();
-//        } else {
-//            show();
-//        }
-//    }
-
     private void hide() {
         // Hide UI first
         L.d(TAG, "hide() запущен.");
         try {
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.hide();
-            }
-            //            mVisible = true;
-//            mControlsView = findViewById(R.id.fullscreen_content_controls);
-            mContentView = findViewById(R.id.fullscreen_content);
             // узнаем размеры экрана из класса Display
             Display display = getWindowManager().getDefaultDisplay();
             DisplayMetrics metricsB = new DisplayMetrics();
             display.getMetrics(metricsB);
-            if (Float.compare(metricsB.ydpi, 320.0f) <= 0) {
+            mContentView = findViewById(R.id.fullscreen_content);
+            if (Float.compare(metricsB.ydpi, 480.0f) < 0) {
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.hide();
+                }
+            }
+            if (Float.compare(metricsB.ydpi, 320.0f) <= 0) {//Если высота экрана 320 и меньше, то убираем с экрана все
                 // Schedule a runnable to remove the status and navigation bar after a delay
-                mHideHandler.removeCallbacks(mShowPart2Runnable);
+                mHideHandler.removeCallbacks(mHidePart2Runnable);
                 mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
             }
-
-            // Set up the user interaction to manually show or hide the system UI.
-//            mContentView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    toggle();
-//                }
-//            });
-
-            // Upon interacting with UI controls, delay any scheduled hide()
-            // operations to prevent the jarring behavior of controls going away
-            // while interacting with the UI.
-//            findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-//        mControlsView.setVisibility(View.GONE);
-//            mVisible = false;
-
 
         } catch (Exception e) {
             L.d(TAG, "Произошла ошибка в hide(): " + e);
@@ -686,6 +573,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void ads() {
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                L.d("Ads", "onAdLoaded() запустился.");
+                L.d("Ads", "mAdView responseInfo: " + mAdView.getResponseInfo());
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+                L.d("Ads", "onAdFailedToLoad запустился.");
+                // Gets the domain from which the error came.
+                L.d("Ads", "errorDomain: " + adError.getDomain());
+                // Gets the error code. See
+                // https://developers.google.com/android/reference/com/google/android/gms/ads/AdRequest#constant-summary
+                // for a list of possible codes.
+                L.d("Ads", "errorCode: " + adError.getCode());
+                // Gets an error message.
+                // For example "Account not approved yet". See
+                // https://support.google.com/admob/answer/9905175 for explanations of
+                // common errors.
+                L.d("Ads", "errorMessage: " + adError.getMessage());
+                // Gets additional response information about the request. See
+                // https://developers.google.com/admob/android/response-info for more
+                // information.
+                L.d("Ads", "adError responseInfo: " + adError.getResponseInfo());
+                // Gets the cause of the error, if available.
+                L.d("Ads", "cause: " + adError.getCause());
+                // All of this information is available via the error's toString() method.
+                //L.d("Ads", adError.toString());
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                L.d("Ads", "onAdOpened() запустился.");
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+                L.d("Ads", "onAdClicked() запустился.");
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+                L.d("Ads", "onAdClosed() запустился.");
+            }
+        });
+    }
+
+    private void delayedAds(int delayMillis) {
+        L.d(TAG, "delayedAds(int delayMillis) запущен.");
+        mAdsHandler.removeCallbacks(mAdsRunnable);
+        mAdsHandler.postDelayed(mAdsRunnable, delayMillis);
+    }
 
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
@@ -695,7 +649,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         L.d(TAG, "delayedHide(int delayMillis) запущен.");
         try {
             mHideHandler.removeCallbacks(mHideRunnable);
-            mHideHandler.postDelayed(mHideRunnable, 100);
+            mHideHandler.postDelayed(mHideRunnable, UI_ANIMATION_DELAY);
         } catch (Exception e) {
             L.d(TAG, "Произошла ошибка в delayedHide(int delayMillis): " + e);
             L.printStackTrace(e);
@@ -750,8 +704,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case (R.id.nav_exit):
                     this.finish();
                     break;
+                default:
+                    break;
             }
-
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         } catch (Exception e) {

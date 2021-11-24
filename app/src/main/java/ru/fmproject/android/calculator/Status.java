@@ -11,8 +11,6 @@ class Status {
     private boolean shift = false;
     private boolean hyp = false;
     private boolean bracket = false;
-    private boolean memory = false;
-    private boolean error = false;
     private StatusDisplay statusDisplay;
     Button[] btnStore;
 
@@ -87,17 +85,14 @@ class Status {
     }
 
     void onMemory() {
-        memory = true;
         statusDisplay.onMemory();
     }
 
     void offMemory() {
-        memory = false;
         statusDisplay.offMemory();
     }
 
     void onError() {
-        error = true;
         statusDisplay.onError();
         for (Button btn : btnStore) {
             btn.setEnabled(false);
@@ -107,7 +102,6 @@ class Status {
     }
 
     void offError() {
-        error = false;
         statusDisplay.offError();
         for (Button btn : btnStore) {
             btn.setEnabled(true);

@@ -896,6 +896,7 @@
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/main_display"
         android:layout_gravity="top"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id" />

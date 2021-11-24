@@ -2,6 +2,8 @@
 <resources>
 
     <color name="background">#37363b</color>
+    <color name="background_900">#17161b</color>
+    <color name="white">#FFFFFF</color>
     <color name="lcd_background">#1d1d1f</color>
     <color name="keys_background">#515465</color>
 
