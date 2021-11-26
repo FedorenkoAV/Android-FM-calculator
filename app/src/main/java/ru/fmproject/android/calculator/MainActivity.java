@@ -551,7 +551,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DisplayMetrics metricsB = new DisplayMetrics();
             display.getMetrics(metricsB);
             mContentView = findViewById(R.id.fullscreen_content);
-            if (Float.compare(metricsB.ydpi, 480.0f) < 0) {
+            if (Float.compare(metricsB.ydpi, 440.0f) < 0) {
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
                     actionBar.hide();
