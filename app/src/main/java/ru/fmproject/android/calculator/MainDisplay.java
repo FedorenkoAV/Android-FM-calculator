@@ -49,6 +49,7 @@ class MainDisplay {
 
     MainDisplay(Context context, TextView mainDisplay, Preferences preferences) {
         Resources res = context.getResources();
+        float scaledDensity = res.getDisplayMetrics().scaledDensity;
         S_TEXT_SIZE = res.getInteger(R.integer.s_text_size);
         M_TEXT_SIZE = res.getInteger(R.integer.m_text_size);
         L_TEXT_SIZE = res.getInteger(R.integer.l_text_size);
