@@ -14,7 +14,7 @@ import android.widget.TextView;
  * Этот класс нужно переписывать/редактировать заново для каждого нового устройства
  */
 
-class StatusDisplay {
+public class StatusDisplay {
 
     public final int SHIFT = 0;
     public final int HYP = 1;

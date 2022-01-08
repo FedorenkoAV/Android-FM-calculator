@@ -1,4 +1,4 @@
-package ru.fmproject.android.calculator;
+package ru.fmproject.android.calculator.editors;
 
 import android.app.Activity;
 
@@ -8,13 +8,30 @@ import org.apache.commons.lang3.SystemUtils;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+import ru.fmproject.android.calculator.Angle;
+import ru.fmproject.android.calculator.ArgX;
+import ru.fmproject.android.calculator.ArgXOct;
+import ru.fmproject.android.calculator.ComplexStackCalculator;
+import ru.fmproject.android.calculator.CustomToast;
+import ru.fmproject.android.calculator.InputDriver;
+import ru.fmproject.android.calculator.L;
+import ru.fmproject.android.calculator.MainActivity;
+import ru.fmproject.android.calculator.MainDisplay;
+import ru.fmproject.android.calculator.MemoryStore;
+import ru.fmproject.android.calculator.Mode;
+import ru.fmproject.android.calculator.MyExceptions;
+import ru.fmproject.android.calculator.StackCalculator;
+import ru.fmproject.android.calculator.StatisticMode;
+import ru.fmproject.android.calculator.Status;
+import ru.fmproject.android.calculator.StatusDisplay;
+
 /**
- * Created by User on 29.06.2017.
+ * Created by User on 20.07.2017.
  */
 
-class EditXBin {
+public class EditXOct implements EditX{
 
-    private static final String TAG = "EditXBin";
+    private static final String TAG = "EditXOct";
 
     private CustomToast customToast;
     private StatusDisplay statusDisplay;
@@ -24,31 +41,27 @@ class EditXBin {
     private MemoryStore memoryStore;
     private MainDisplay mainDisplay;
     private StackCalculator stackCalculator;
-    private EditX editX;
+    private EditXDec editXDec;
     private EditXBin editXBin;
     private EditXOct editXOct;
     private EditXHex editXHex;
     private ComplexStackCalculator complexStackCalculator;
     private StatisticMode statisticMode;
-    private InputDriver inputDriver;
+//    private InputDriver inputDriver;
     private Activity activity;
 
     private boolean fixModeNumberWait;
 
-    private ArgXBin argX;
+    private ArgXOct argX;
 
     private boolean newInput;
     private boolean calcpress;
     private boolean calc;
 
-    private ArgXBin memory;
+    private ArgXOct memory;
     Object objStore[];
 
-    int maxNum;
-    int minNum;
-
-
-    EditXBin(Object objStore[]) {
+    public EditXOct(Object objStore[]) {
         this.objStore = objStore;
         statusDisplay = (StatusDisplay) objStore[MainActivity.STATUS_DISPLAY];
         status = (Status) objStore[MainActivity.STATUS];
@@ -56,16 +69,14 @@ class EditXBin {
         angle = (Angle) objStore[MainActivity.ANGLE];
         memoryStore = (MemoryStore) objStore[MainActivity.MEMORY];
         mainDisplay = (MainDisplay) objStore[MainActivity.MAIN_DISPLAY];
-        maxNum = (1 << (mainDisplay.byteLengthBin * 8 - 1)) - 1;
-        minNum = -(1 << (mainDisplay.byteLengthBin * 8 - 1));
         stackCalculator = (StackCalculator) objStore[MainActivity.STACK_CALCULATOR];
-        editX = (EditX) objStore[MainActivity.EDIT_X];
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         complexStackCalculator = (ComplexStackCalculator) objStore[MainActivity.CPLX];
         statisticMode = (StatisticMode) objStore[MainActivity.SD];
-        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
+//        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
         activity = (Activity) objStore[MainActivity.MAIN_ACTIVITY];
         for (int i = 0; i < objStore.length; i++) {
 
@@ -78,37 +89,37 @@ class EditXBin {
         newInput = true;
         calcpress = false;
         newArg();
-        L.d(TAG, "Создали новый ArgXBin.");
+        L.d(TAG, "Создали новый ArgXOct.");
 //        makeArg();
 //        L.d(TAG, "Отобразили на дисплее.");
-        L.d(TAG, "EditXBin успешно создан!");
+        L.d(TAG, "EditXOct успешно создан!");
     }
 
-    EditXBin(Object objStore[], int intNumber) {
+    public EditXOct(Object objStore[], int intNumber) {
         this(objStore);
         argX.setNumber(intNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее.");
-        L.d(TAG, "EditXBin успешно создан!");
+        L.d(TAG, "EditXOct успешно создан!");
     }
 
-    EditXBin(Object objStore[], long longNumber) {
+    public EditXOct(Object objStore[], long longNumber) {
         this(objStore);
         argX.setNumber(longNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее.");
-        L.d(TAG, "EditXBin успешно создан!");
+        L.d(TAG, "EditXOct успешно создан!");
     }
 
-    EditXBin(Object objStore[], double doubleNumber) {
+    public EditXOct(Object objStore[], double doubleNumber) {
         this(objStore);
         argX.setNumber(doubleNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее.");
-        L.d(TAG, "EditXBin успешно создан!");
+        L.d(TAG, "EditXOct успешно создан!");
     }
 
-    void restart() {
+    public void restart() {
         status.offError();
         status.setBracket(false);
         stackCalculator.restart();
@@ -122,15 +133,15 @@ class EditXBin {
 
     private void newArg() {
         newInput = true;
-        argX = new ArgXBin();
+        argX = new ArgXOct();
     }
 
-    void add(char pressedKey) {
+    public void add(char pressedKey) {
         if (!argX.isEditable()) { // Если флаг Editable выключен, то нужно создать новое пустое число
             stackCalculator.setResult(false);
             newArg();
         }
-        if (((argX.getNumber().length()) >= (mainDisplay.byteLengthBin * 8))) {
+        if (((argX.getNumber().length()) >= (mainDisplay.byteLengthOct*2)) ) {
 
             customToast.setToastText("Превышено максимальное число цифр");
             customToast.setToastImage(CustomToast.IC_WARNING_AMBER);
@@ -147,68 +158,74 @@ class EditXBin {
         makeArg();
     }
 
-    void setNumber(int intNumber) {
+    public void setNumber(int intNumber) {
         argX.setNumber(intNumber);
-        L.d(TAG, "В argXBin записали: " + intNumber);
+        L.d(TAG, "В argXOct записали: " + intNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void setNumber(long longNumber) {
+    public void setNumber(long longNumber) {
         argX.setNumber(longNumber);
-        L.d(TAG, "В argXBin записали: " + longNumber);
+        L.d(TAG, "В argXOct записали: " + longNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void setNumber(double doubleNumber) {
+    @Override
+    public void setNumber(double doubleNumber) {
         argX.setNumber(doubleNumber);
-        L.d(TAG, "В argXBin записали: " + doubleNumber);
+        L.d(TAG, "В argXOct записали: " + doubleNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void x_to_y() throws MyExceptions {
-        argX = new ArgXBin(stackCalculator.xToY(argX.getDouble(mainDisplay.byteLengthBin)));
+    @Override
+    public double getNumber() {
+        return argX.getDouble(0);
+    }
+
+    public void x_to_y() throws MyExceptions {
+        argX = new ArgXOct(stackCalculator.xToY(argX.getDouble(0)));
         newInput = true;
         calcpress = true;
         makeArg();
     }
 
-    void plus() throws MyExceptions {
-        argX = new ArgXBin(calculatorSelector(argX.getDouble(mainDisplay.byteLengthBin), stackCalculator.PLUS));
+    public void plus() throws MyExceptions {
+        argX = new ArgXOct(calculatorSelector(argX.getDouble(0), stackCalculator.PLUS));
         newInput = true;
         calcpress = false;
 //        L.d(TAG, "Флаг Result: " + stackCalculator.isResult());
         makeArg();
     }
 
-    void minus() throws MyExceptions {
-        argX = new ArgXBin(calculatorSelector(argX.getDouble(mainDisplay.byteLengthBin), stackCalculator.MINUS));
+    public void minus() throws MyExceptions {
+        argX = new ArgXOct(calculatorSelector(argX.getDouble(0), stackCalculator.MINUS));
         newInput = true;
         calcpress = false;
 //        L.d(TAG, "Флаг Result: " + stackCalculator.isResult());
         makeArg();
     }
 
-    void mult() throws MyExceptions {
-        argX = new ArgXBin(calculatorSelector(argX.getDouble(mainDisplay.byteLengthBin), stackCalculator.MULTIPLY));
+    public void mult() throws MyExceptions {
+        argX = new ArgXOct(calculatorSelector(argX.getDouble(0), stackCalculator.MULTIPLY));
         newInput = true;
         calcpress = false;
 //        L.d(TAG, "Флаг Result: " + stackCalculator.isResult());
         makeArg();
     }
 
-    void div() throws MyExceptions {
-        argX = new ArgXBin(calculatorSelector(argX.getDouble(mainDisplay.byteLengthBin), stackCalculator.DIVIDE));
+    public void div() throws MyExceptions {
+        argX = new ArgXOct(calculatorSelector(argX.getDouble(0), stackCalculator.DIVIDE));
         newInput = true;
         calcpress = false;
 //        L.d(TAG, "Флаг Result: " + stackCalculator.isResult());
         makeArg();
     }
 
-    void calc() throws MyExceptions {
-        argX = new ArgXBin(calcAll(argX.getDouble(mainDisplay.byteLengthBin)));
+    public void calc() throws MyExceptions {
+        argX = new ArgXOct(calcAll(argX.getDouble(0)));
         newInput = true;
         calcpress = true;
 //        L.d(TAG, "Флаг Result: " + stackCalculator.isResult());
@@ -216,7 +233,7 @@ class EditXBin {
 
     }
 
-    void del() {
+    public void del() {
         if (!argX.isEditable()) {
             return;
         }
@@ -231,13 +248,13 @@ class EditXBin {
         makeArg();
     }
 
-    void sign() {
+    public void sign() {
         argX.setSign(!argX.isSign());
         makeArg();
     }
 
 
-    void ce() {
+    public void ce() {
         newArg();
         newInput = true;
         calcpress = false;
@@ -248,19 +265,27 @@ class EditXBin {
 
 
     private void makeArg() {
+//        if (argX.getArgX())
         mainDisplay.printArgX(argX);
+    }
+
+    private void makeArg(ArgX argN) {
+        mainDisplay.printArgX(argN);
     }
 
     private double calcAll(double number) throws MyExceptions {
         while (!stackCalculator.isStackForNumberStackEmpty() && !stackCalculator.isOperationStackEmpty()) { // Пока стеки стеков не опустеют, продолжаем вычислять
             number = calculatorSelector(number, stackCalculator.NOP);
             L.d(TAG, "Посчитано: " + number);
+            //printCalc (tmp+"");
             stackCalculator.oldStacksRestore();
         }
         if (stackCalculator.isStackForNumberStackEmpty() && stackCalculator.isStackForOperationStackEmpty()) {
             status.setBracket(false);
             L.d(TAG, "Скобка закрыта");
         }
+        //operation = NOP;
+
         number = calculatorSelector(number, stackCalculator.NOP);
         return number;
     }
@@ -300,51 +325,38 @@ class EditXBin {
         currentNumber = stackCalculator.calc(currentNumber, currentOperation); //Считаем
         calc = true;
         if (Double.isInfinite(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getTOO_BIG());
+            throw new MyExceptions(MyExceptions.TOO_BIG);
         }
 //        if (currentNumber < 0 && Double.isInfinite(currentNumber)) {
 //            throw new MyExceptions(MyExceptions.TOO_SMALL);
 //        }
         if (Double.isNaN(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getNOT_NUMBER());
+            throw new MyExceptions(MyExceptions.NOT_NUMBER);
         }
         return currentNumber;
     }
 
-    void x_to_m() {
-        setMemory(argX.getDouble(mainDisplay.byteLengthBin));
+    public void x_to_m() {
+        setMemory(argX.getDouble(0));
         newInput = true;
         calcpress = true;
     }
 
-    void readMemory() {
-        int memNum = (int) getMemory();
-        if (memNum > maxNum) {
-            customToast.setToastText("В памяти число больше чем " + maxNum);
-            customToast.setToastImage(R.drawable.ic_warning_amber_24dp);
-            customToast.show();
-            return;
-        }
-        if (memNum < minNum) {
-            customToast.setToastText("В памяти число меньше чем " + minNum);
-            customToast.setToastImage(R.drawable.ic_warning_amber_24dp);
-            customToast.show();
-            return;
-        }
-        argX.setNumber(memNum);
+    public void readMemory() {
+        argX.setNumber(getMemory());
         makeArg();
         newInput = true;
         calcpress = true;
     }
 
-    void clearMemory() {
+    public void clearMemory() {
         setMemory(0);
         newInput = true;
         calcpress = true;
     }
 
-    void memoryPlus() throws MyExceptions {
-        double tmp1 = argX.getDouble(mainDisplay.byteLengthBin);
+    public void memoryPlus() throws MyExceptions {
+        double tmp1 = argX.getDouble(0);
         L.d(TAG, "Набрано: " + tmp1 + " M+");
         if (!stackCalculator.isOperationStackEmpty()) {
             tmp1 = calcAll(tmp1);
@@ -372,20 +384,20 @@ class EditXBin {
         return mem;
     }
 
-    void toDec() {
-        editX = (EditX) objStore[MainActivity.EDIT_X];
-        if (editX == null) {
-            editX = new EditX(objStore);
+    public void toDec() {
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
+        if (editXDec == null) {
+            editXDec = new EditXDec(objStore);
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
-            objStore[MainActivity.EDIT_X] = editX;
+            objStore[MainActivity.EDIT_X_DEC] = editXDec;
         }
         L.d(TAG, "Переключаемся в DEC режим.");
-        double doubleNumber = argX.getDouble(mainDisplay.byteLengthBin);
+        double doubleNumber = argX.getDouble(0);
         L.d(TAG, "В DEC режим передаем число: " + doubleNumber);
-        editX.setNumber(doubleNumber);
+        editXDec.setNumber(doubleNumber);
     }
 
-    void toBin() {
+    public void toBin() {
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         if (editXBin == null) {
             editXBin = new EditXBin(objStore);
@@ -393,12 +405,12 @@ class EditXBin {
             objStore[MainActivity.EDIT_X_BIN] = editXBin;
         }
         L.d(TAG, "Переключаемся в BIN режим.");
-        double doubleNumber = argX.getDouble(mainDisplay.byteLengthBin);
+        double doubleNumber = argX.getDouble(0);
         L.d(TAG, "В BIN режим передаем число: " + doubleNumber);
         editXBin.setNumber(doubleNumber);
     }
 
-    void toOct() {
+    public void toOct() {
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         if (editXOct == null) {
             editXOct = new EditXOct(objStore);
@@ -406,12 +418,12 @@ class EditXBin {
             objStore[MainActivity.EDIT_X_OCT] = editXOct;
         }
         L.d(TAG, "Переключаемся в OCT режим.");
-        double doubleNumber = argX.getDouble(mainDisplay.byteLengthBin);
+        double doubleNumber = argX.getDouble(0);
         L.d(TAG, "В OCT режим передаем число: " + doubleNumber);
         editXOct.setNumber(doubleNumber);
     }
 
-    void toHex() {
+    public void toHex() {
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         if (editXHex == null) {
             editXHex = new EditXHex(objStore);
@@ -419,18 +431,18 @@ class EditXBin {
             objStore[MainActivity.EDIT_X_HEX] = editXHex;
         }
         L.d(TAG, "Переключаемся в HEX режим.");
-        double doubleNumber = argX.getDouble(mainDisplay.byteLengthBin);
+        double doubleNumber = argX.getDouble(0);
         L.d(TAG, "В HEX режим передаем число: " + doubleNumber);
         editXHex.setNumber(doubleNumber);
     }
 
 
-    StringBuilder copyToClipboard() {
+    public StringBuilder copyToClipboard() {
         StringBuilder sb = new StringBuilder("");
 
         if (argX.isSign()) { // Если есть минус, то меняем отображаемое число
             L.d(TAG, "Есть минус, меняем отображаемое число.");
-            sb.append(Long.toBinaryString(argX.getLong(mainDisplay.byteLengthBin)));
+            sb.append(Long.toBinaryString(argX.getLong(0)));
         } else {
             sb.append(argX.getNumber());// Иначе просто добавляем число
             L.d(TAG, "Добавили число.");
@@ -441,12 +453,12 @@ class EditXBin {
     }
 
 
-    void pasteFromClipboard(String str) {
+    public void pasteFromClipboard(String str) {
         L.d(TAG, "Из буфера обмена получено: " + str);
         StringBuilder sb = (createDouble(str));
         if (sb.length() == 0) {
             customToast.setToastText("Попытка вставки из буфера обмена закончилась неудачей.");
-            customToast.setToastImage(R.drawable.ic_warning_amber_24dp);
+            customToast.setToastImage(CustomToast.IC_WARNING_AMBER);
             customToast.show();
             return;
         }
@@ -994,5 +1006,4 @@ class EditXBin {
         }
         return !allowSigns && foundDigit;
     }
-
 }

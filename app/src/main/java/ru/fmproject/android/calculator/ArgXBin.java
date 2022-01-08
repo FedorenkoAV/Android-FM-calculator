@@ -8,15 +8,15 @@ package ru.fmproject.android.calculator;
  * (число отдельно, знак отдельно)
  */
 
-class ArgXBin extends ArgXParent {
+public class ArgXBin extends ArgXParent {
 
     private static final String TAG = "ArgXClass";
 
-    ArgXBin() {
+    public ArgXBin() {
         super();
     }
 
-    ArgXBin(double doubleNumber) {
+    public ArgXBin(double doubleNumber) {
         super(doubleNumber);
     }
 
@@ -45,7 +45,7 @@ class ArgXBin extends ArgXParent {
     }
 
     @Override
-    long getLong(int byteLength) {
+    public long getLong(int byteLength) {
         long longNumber = 0;
         L.d(TAG, "В ArgXBin лежит: " + getNumber());
         if (getNumber().length() == 0) {

@@ -5,7 +5,7 @@ package ru.fmproject.android.calculator;
  */
 
 
-class Mode {
+public class Mode {
 
     public final static int NORMAL = 0;
     public final static int SD = 1;
@@ -23,7 +23,7 @@ class Mode {
     private int mode;
     private StatusDisplay statusDisplay;
 
-    Mode(StatusDisplay statusDisplay) {
+    public Mode(StatusDisplay statusDisplay) {
         this.statusDisplay = statusDisplay;
         mode = NORMAL;
     }
@@ -32,7 +32,7 @@ class Mode {
         return mode;
     }
 
-    void setMode(int mode) {
+    public void setMode(int mode) {
         this.mode = mode;
         statusDisplay.offCplx();
         statusDisplay.offSd();
@@ -60,7 +60,7 @@ class Mode {
         }
     }
 
-    void switchSD() {
+    public void switchSD() {
         if (mode != SD) {
             setMode(SD);
         } else {
@@ -68,7 +68,7 @@ class Mode {
         }
     }
 
-    void switchCplx() {
+    public void switchCplx() {
         if (mode != COMPLEX) {
            setMode(COMPLEX);
         } else {
@@ -76,19 +76,19 @@ class Mode {
         }
     }
 
-    void setDEC() {
+    public void setDEC() {
         setMode(DEC);
     }
 
-    void setBIN() {
+    public void setBIN() {
         setMode(BIN);
     }
 
-    void setOCT() {
+    public void setOCT() {
         setMode(OCT);
     }
 
-    void setHEX() {
+    public void setHEX() {
         setMode(HEX);
     }
 }

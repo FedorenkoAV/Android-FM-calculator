@@ -16,7 +16,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  * Этот класс нужно переписывать/редактировать заново для каждого нового устройства
  */
 
-class MainDisplay {
+public class MainDisplay {
 
     private static final String TAG = "MainDisplay";
 
@@ -30,12 +30,12 @@ class MainDisplay {
 
 
     private TextView mainDisplay;
-    int exponentLength; // Эту переменную нужно перенести в файл настроек
-    int numberLength;// Эту переменную нужно перенести в файл настроек
+    public int exponentLength; // Эту переменную нужно перенести в файл настроек
+    public int numberLength;// Эту переменную нужно перенести в файл настроек
 //    int byteLength = 5;// Эту переменную нужно перенести в файл настроек
-    int byteLengthBin;
-    int byteLengthOct;
-    int byteLengthHex;
+    public int byteLengthBin;
+    public int byteLengthOct;
+    public int byteLengthHex;
     private StringBuilder mainDisplayTmp;
     private float mainTextSize;
 
@@ -47,7 +47,7 @@ class MainDisplay {
 
     private Preferences preferences;
 
-    MainDisplay(Context context, TextView mainDisplay, Preferences preferences) {
+    public MainDisplay(Context context, TextView mainDisplay, Preferences preferences) {
         Resources res = context.getResources();
         float scaledDensity = res.getDisplayMetrics().scaledDensity;
         S_TEXT_SIZE = res.getInteger(R.integer.s_text_size);
@@ -91,13 +91,13 @@ class MainDisplay {
     }
 
 
-    void setFixModeScale(int fixModeScale) {
+    public void setFixModeScale(int fixModeScale) {
         preferences.setFixMode(fixModeScale);
         L.d(TAG, "Занесли значение режима округления в настройки: " + fixModeScale);
         setFixModeFlags(fixModeScale);
     }
 
-    int getFixModeScale() {
+    public int getFixModeScale() {
         int fixModeScale = preferences.getFixMode();
         L.d(TAG, "Получаем значение режима округления из настроек: " + fixModeScale);
         setFixModeFlags(fixModeScale);
@@ -113,11 +113,11 @@ class MainDisplay {
         }
     }
 
-    void switchSciMode() {
+    public void switchSciMode() {
         sciMode = !sciMode;
     }
 
-    void offSciMode() {
+    public void offSciMode() {
         sciMode = false;
     }
 
@@ -125,7 +125,7 @@ class MainDisplay {
         sciMode = true;
     }
 
-    void printArgX(ArgX argXOriginal) {
+    public void printArgX(ArgX argXOriginal) {
         L.d(TAG, "Начинаем собирать строку для отображения на экране.");
         if (argXOriginal.isVirgin()) {
             printVirginArgX(argXOriginal);
@@ -413,7 +413,7 @@ class MainDisplay {
 
     }
 
-    void printArgX(ArgXBin argX) {
+    public void printArgX(ArgXBin argX) {
         L.d(TAG, "Начинаем собирать ArgXBin строку для отображения на экране.");
         L.d(TAG, "В ArgXBin строка: " + argX.getNumber());
         L.d(TAG, "Знак: " + argX.isSign());
@@ -562,7 +562,7 @@ class MainDisplay {
 
     }
 
-    void printArgX(ArgXOct argX) {
+    public void printArgX(ArgXOct argX) {
         L.d(TAG, "Начинаем собирать ArgXOct строку для отображения на экране.");
         L.d(TAG, "В ArgXOct строка: " + argX.getNumber());
         L.d(TAG, "Знак: " + argX.isSign());
@@ -730,7 +730,7 @@ class MainDisplay {
 
     }
 
-    void printArgX(ArgXHex argX) {
+    public void printArgX(ArgXHex argX) {
         L.d(TAG, "Начинаем собирать ArgXHex строку для отображения на экране.");
         L.d(TAG, "В ArgXHex строка: " + argX.getNumber());
         L.d(TAG, "Знак: " + argX.isSign());

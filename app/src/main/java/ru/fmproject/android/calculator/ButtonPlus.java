@@ -4,15 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-//import ru.fmproject.android.calculator.L;
-
 
 /**
  * Created by User on 05.06.2017.
  * ButtonPlus - класс, объекты которого это кнопки позволяющие менять шрифт
  */
 
-class ButtonPlus extends androidx.appcompat.widget.AppCompatButton {
+public class ButtonPlus extends androidx.appcompat.widget.AppCompatButton {
     private static final String TAG = "ButtonPlus";
 
     public ButtonPlus(Context context) {

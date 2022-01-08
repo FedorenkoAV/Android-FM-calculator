@@ -8,20 +8,20 @@ package ru.fmproject.android.calculator;
  * (число отдельно, знак отдельно)
  */
 
-class ArgXHex  extends ArgXParent{
+public class ArgXHex  extends ArgXParent{
 
     private static final String TAG = "ArgXClass";
 
-    ArgXHex() {
+    public ArgXHex() {
         super();
     }
 
-    ArgXHex(double doubleNumber) {
+    public ArgXHex(double doubleNumber) {
         super(doubleNumber);
     }
 
     @Override
-    void setNumber(int intNumber) {
+    public void setNumber(int intNumber) {
         setSign(false);
         if (intNumber < 0) {
             setSign(true);
@@ -33,7 +33,7 @@ class ArgXHex  extends ArgXParent{
     }
 
     @Override
-    void setNumber(long longNumber) {
+    public void setNumber(long longNumber) {
         setSign(false);
         if (longNumber < 0) {
             setSign(true);
@@ -45,7 +45,7 @@ class ArgXHex  extends ArgXParent{
     }
 
     @Override
-    long getLong(int byteLength) {
+    public long getLong(int byteLength) {
         long longNumber = 0;
         L.d(TAG, "В ArgXHex лежит: " + getNumber());
         if (getNumber().length() == 0) {

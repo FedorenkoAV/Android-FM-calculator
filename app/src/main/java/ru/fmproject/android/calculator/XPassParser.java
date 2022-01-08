@@ -23,7 +23,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-class XPassParser extends AsyncTask<String, Void, String> {
+public class XPassParser extends AsyncTask<String, Void, String> {
 
     private static final String TAG = "XPassParser";
     TextView contentView;

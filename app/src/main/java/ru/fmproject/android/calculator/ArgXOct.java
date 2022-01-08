@@ -8,20 +8,20 @@ package ru.fmproject.android.calculator;
  * (число отдельно, знак отдельно)
  */
 
-class ArgXOct extends ArgXParent {
+public class ArgXOct extends ArgXParent {
 
     private static final String TAG = "ArgXClass";
 
-    ArgXOct() {
+    public ArgXOct() {
         super();
     }
 
-    ArgXOct(double doubleNumber) {
+    public ArgXOct(double doubleNumber) {
         super(doubleNumber);
     }
 
     @Override
-    void setNumber(int intNumber) {
+    public void setNumber(int intNumber) {
         setSign(false);
         if (intNumber < 0) {
             setSign(true);
@@ -33,7 +33,7 @@ class ArgXOct extends ArgXParent {
     }
 
     @Override
-    void setNumber(long longNumber) {
+    public void setNumber(long longNumber) {
         setSign(false);
         if (longNumber < 0) {
             setSign(true);
@@ -45,7 +45,7 @@ class ArgXOct extends ArgXParent {
     }
 
     @Override
-    long getLong(int byteLength) {
+    public long getLong(int byteLength) {
         long longNumber = 0;
         L.d(TAG, "В ArgXOct лежит: " + getNumber());
         try {

@@ -1,4 +1,4 @@
-package ru.fmproject.android.calculator;
+package ru.fmproject.android.calculator.editors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -7,13 +7,30 @@ import org.apache.commons.math3.complex.Complex;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+import ru.fmproject.android.calculator.Angle;
+import ru.fmproject.android.calculator.ArgX;
+import ru.fmproject.android.calculator.ComplexStackCalculator;
+import ru.fmproject.android.calculator.CustomToast;
+import ru.fmproject.android.calculator.InputDriver;
+import ru.fmproject.android.calculator.L;
+import ru.fmproject.android.calculator.MainActivity;
+import ru.fmproject.android.calculator.MainDisplay;
+import ru.fmproject.android.calculator.MemoryStore;
+import ru.fmproject.android.calculator.Mode;
+import ru.fmproject.android.calculator.MyExceptions;
+import ru.fmproject.android.calculator.Protocol;
+import ru.fmproject.android.calculator.StackCalculator;
+import ru.fmproject.android.calculator.StatisticMode;
+import ru.fmproject.android.calculator.Status;
+import ru.fmproject.android.calculator.StatusDisplay;
+
 
 /**
  * Created by User on 11.06.2017.
  * Объект этого класс редактирует поля переменной типа ArgX и передает результат на драйвер вывода
  */
 
-class EditX {
+public class EditXDec implements EditX{
 
     private static final String TAG = "EditX";
 
@@ -27,13 +44,13 @@ class EditX {
     private MemoryStore memoryStore;
     private MainDisplay mainDisplay;
     private StackCalculator stackCalculator;
-    private EditX editX;
+    private EditXDec editXDec;
     private EditXBin editXBin;
     private EditXOct editXOct;
     private EditXHex editXHex;
     private ComplexStackCalculator complexStackCalculator;
     private StatisticMode statisticMode;
-    private InputDriver inputDriver;
+//    private InputDriver inputDriver;
     private Protocol protocol;
     private MainActivity activity;
 
@@ -52,7 +69,7 @@ class EditX {
 
     Object objStore[];
 
-    EditX(Object objStore[]) {
+    public EditXDec(Object objStore[]) {
         this.objStore = objStore;
         statusDisplay = (StatusDisplay) objStore[MainActivity.STATUS_DISPLAY];
         status = (Status) objStore[MainActivity.STATUS];
@@ -61,13 +78,13 @@ class EditX {
         memoryStore = (MemoryStore) objStore[MainActivity.MEMORY];
         mainDisplay = (MainDisplay) objStore[MainActivity.MAIN_DISPLAY];
         stackCalculator = (StackCalculator) objStore[MainActivity.STACK_CALCULATOR];
-        editX = (EditX) objStore[MainActivity.EDIT_X];
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         complexStackCalculator = (ComplexStackCalculator) objStore[MainActivity.CPLX];
         statisticMode = (StatisticMode) objStore[MainActivity.SD];
-        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
+//        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
         protocol = (Protocol) objStore[MainActivity.PROTOCOL];
         activity = (MainActivity) objStore[MainActivity.MAIN_ACTIVITY];
         for (int i = 0; i < objStore.length; i++) {
@@ -94,7 +111,7 @@ class EditX {
         L.d(TAG, "EditX успешно создан!");
     }
 
-    void restart() {
+    public void restart() {
         status.offError();
         status.setBracket(false);
         stackCalculator.restart();
@@ -114,7 +131,7 @@ class EditX {
         argX = new ArgX();
     }
 
-    void add(char pressedKey) {
+    public void add(char pressedKey) {
         mainDisplay.offSciMode();
         if (fixModeNumberWait) { //Если нажали на кнопку FIX
             L.d(TAG, "Устанавливаем режим округления");
@@ -187,24 +204,30 @@ class EditX {
         makeArg();
     }
 
-    void setNumber(double doubleNumber) {
+    @Override
+    public void setNumber(double doubleNumber) {
         argX.setDouble(doubleNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее.");
     }
 
-    void setFixMode() {
+    @Override
+    public double getNumber() {
+        return argX.getArgX();
+    }
+
+    public void setFixMode() {
         fixModeNumberWait = true;
     }
 
-    void switchSciMode() {
+    public void switchSciMode() {
         if (!argX.isEditable() || argX.isVirgin()) {
             mainDisplay.switchSciMode();
             makeArg();
         }
     }
 
-    void fromDeg() throws MyExceptions {
+    public void fromDeg() {
         int fixModeSave = mainDisplay.getFixModeScale();
         mainDisplay.setFixModeScale(6);
         argX = new ArgX(stackCalculator.fromDeg(argX));
@@ -214,7 +237,7 @@ class EditX {
         mainDisplay.setFixModeScale(fixModeSave);
     }
 
-    void toDeg() throws MyExceptions {
+    public void toDeg() {
         argX = new ArgX(stackCalculator.toDeg(argX));
         calcpress = true;
         newInput = true;
@@ -229,7 +252,7 @@ class EditX {
 
     }
 
-    void sin() throws MyExceptions {
+    public void sin() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -250,7 +273,7 @@ class EditX {
         makeArg();
     }
 
-    void arsh() throws MyExceptions {
+    public void arsh() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -278,7 +301,7 @@ class EditX {
         makeArg();
     }
 
-    void asin() throws MyExceptions {
+    public void asin() throws MyExceptions {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -299,7 +322,7 @@ class EditX {
         makeArg();
     }
 
-    void sinh() throws MyExceptions {
+    public void sinh() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -320,7 +343,7 @@ class EditX {
         makeArg();
     }
 
-    void cos() throws MyExceptions {
+    public void cos() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -341,7 +364,7 @@ class EditX {
         makeArg();
     }
 
-    void arch() throws MyExceptions {
+    public void arch() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -362,7 +385,7 @@ class EditX {
         makeArg();
     }
 
-    void acos() throws MyExceptions {
+    public void acos() throws MyExceptions {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -383,7 +406,7 @@ class EditX {
         makeArg();
     }
 
-    void cosh() throws MyExceptions {
+    public void cosh() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -404,7 +427,7 @@ class EditX {
         makeArg();
     }
 
-    void tan() throws MyExceptions {
+    public void tan() throws MyExceptions {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -425,7 +448,7 @@ class EditX {
         makeArg();
     }
 
-    void arth() throws MyExceptions {
+    public void arth() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -446,7 +469,7 @@ class EditX {
         makeArg();
     }
 
-    void atan() throws MyExceptions {
+    public void atan() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -467,7 +490,7 @@ class EditX {
         makeArg();
     }
 
-    void tanh() throws MyExceptions {
+    public void tanh() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -488,7 +511,7 @@ class EditX {
         makeArg();
     }
 
-    void sqrt() throws MyExceptions {
+    public void sqrt() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -509,7 +532,7 @@ class EditX {
         makeArg();
     }
 
-    void cbrt() throws MyExceptions {
+    public void cbrt() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -530,7 +553,7 @@ class EditX {
         makeArg();
     }
 
-    void ln() throws MyExceptions {
+    public void ln() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -551,7 +574,7 @@ class EditX {
         makeArg();
     }
 
-    void exponent() throws MyExceptions {
+    public void exponent() throws MyExceptions {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -572,7 +595,7 @@ class EditX {
         makeArg();
     }
 
-    void log() throws MyExceptions {
+    public void log() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -593,7 +616,7 @@ class EditX {
         makeArg();
     }
 
-    void _10x() throws MyExceptions {
+    public void _10x() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -614,7 +637,7 @@ class EditX {
         makeArg();
     }
 
-    void x2() throws MyExceptions {
+    public void x2() {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -635,7 +658,7 @@ class EditX {
         makeArg();
     }
 
-    void _1_div_x() throws MyExceptions {
+    public void _1_div_x() throws MyExceptions {
         if (mode.getMode() == mode.COMPLEX && !argA.isVirgin()) {  //Если работаем с комплексными числами и уже что-то введено, то вызываем complexStackCalculator
             if (argB.isVirgin()) {
                 argB.setDouble(0.0);
@@ -656,7 +679,7 @@ class EditX {
         makeArg();
     }
 
-    void toA() {
+    public void toA() {
         if (argX.isEditable() || argB.isVirgin()) {//Если вводили число и нажали "A", то заносим введенное число в argA
             argA = new ArgX(argX.getArgX());
             L.d(TAG, "заносим введенное число в argA.");
@@ -668,7 +691,7 @@ class EditX {
         makeArg();
     }
 
-    void toB() {
+    public void toB() {
         if (argX.isEditable() || argB.isVirgin()) {//Если вводили число и нажали "B", то заносим введенное число в argA
             argB = new ArgX(argX.getArgX());
             L.d(TAG, "заносим введенное число в argB.");
@@ -680,7 +703,7 @@ class EditX {
         makeArg();
     }
 
-    void r_to_p() throws MyExceptions {
+    public void r_to_p() {
         L.d(TAG, "Будем переводить радиальные координаты в полярные.");
         if (argA.isVirgin()) {
             argA.setDouble(0.0);
@@ -697,7 +720,7 @@ class EditX {
         makeArg();
     }
 
-    void p_to_r() throws MyExceptions {
+    public void p_to_r() {
         L.d(TAG, "Будем переводить полярные координаты в радиальные.");
         if (argA.isVirgin()) {
             argA.setDouble(0.0);
@@ -714,83 +737,83 @@ class EditX {
         makeArg();
     }
 
-    void changeAngleUnit() throws MyExceptions {
+    public void changeAngleUnit() {
         argX = new ArgX(stackCalculator.changeAngleUnit(argX.getArgX()));
         newInput = true;
         makeArg();
     }
 
-    void x_to_y() throws MyExceptions {
+    public void x_to_y() {
         argX = new ArgX(stackCalculator.xToY(argX.getArgX()));
         newInput = true;
         calcpress = true;
         makeArg();
     }
 
-    void random() throws MyExceptions {
+    public void random() {
         argX = new ArgX(stackCalculator.random());
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void maxValue() throws MyExceptions {
+    public void maxValue() {
         argX = new ArgX(stackCalculator.maxValue());
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void minValue() throws MyExceptions {
+    public void minValue() {
         argX = new ArgX(stackCalculator.minValue());
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void minNormal() throws MyExceptions {
+    public void minNormal() {
         argX = new ArgX(stackCalculator.minNormal());
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void dbm_to_w() {
+    public void dbm_to_w() {
         argX = new ArgX(stackCalculator.dbmToW(argX.getArgX()));
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void w_to_dbm() {
+    public void w_to_dbm() {
         argX = new ArgX(stackCalculator.wToDbm(argX.getArgX()));
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void factorial() throws MyExceptions {
+    public void factorial() throws MyExceptions {
         argX = new ArgX(stackCalculator.factorial(argX));
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void percent() throws MyExceptions {
+    public void percent() throws MyExceptions {
         argX = new ArgX(stackCalculator.percent(argX.getArgX()));
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void pi() throws MyExceptions {
+    public void pi() {
         argX = new ArgX(stackCalculator.pi());
         calcpress = true;
         newInput = true;
         makeArg();
     }
 
-    void dollar(String currency_rate) {
+    public void dollar(String currency_rate) {
 //        argX = new ArgX(currency_rate);
         argX.setFromString(currency_rate);
         calcpress = true;
@@ -798,7 +821,7 @@ class EditX {
         makeArg();
     }
 
-    void plus() throws MyExceptions {
+    public void plus() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.PLUS));
         newInput = true;
         calcpress = false;
@@ -806,7 +829,7 @@ class EditX {
         makeArg();
     }
 
-    void minus() throws MyExceptions {
+    public void minus() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.MINUS));
         newInput = true;
         calcpress = false;
@@ -814,7 +837,7 @@ class EditX {
         makeArg();
     }
 
-    void mult() throws MyExceptions {
+    public void mult() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.MULTIPLY));
         newInput = true;
         calcpress = false;
@@ -822,7 +845,7 @@ class EditX {
         makeArg();
     }
 
-    void div() throws MyExceptions {
+    public void div() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.DIVIDE));
         newInput = true;
         calcpress = false;
@@ -830,7 +853,7 @@ class EditX {
         makeArg();
     }
 
-    void power() throws MyExceptions {
+    public void power() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.POWER));
         newInput = true;
         calcpress = false;
@@ -838,7 +861,7 @@ class EditX {
         makeArg();
     }
 
-    void x_sqr_y() throws MyExceptions {
+    public void x_sqr_y() throws MyExceptions {
         argX = new ArgX(calculatorSelector(argX.getArgX(), stackCalculator.X_SQR_Y));
         newInput = true;
         calcpress = false;
@@ -846,7 +869,7 @@ class EditX {
         makeArg();
     }
 
-    void calc() throws MyExceptions {
+    public void calc() throws MyExceptions {
         argX = new ArgX(calcAll(argX.getArgX()));
         newInput = true;
         calcpress = true;
@@ -855,7 +878,7 @@ class EditX {
 
     }
 
-    void del() {
+    public void del() {
         if (!argX.isEditable()) {
             return;
         }
@@ -900,7 +923,7 @@ class EditX {
         makeArg();
     }
 
-    void openBracket() {
+    public void openBracket() {
         if (!stackCalculator.isOperationStackEmpty() || (stackCalculator.isNumberStackEmpty()) & newInput) {      // Открываем скобку только в случае, если в стеке операций что-то есть (+,-,*,/,корень, степень) или если стек чисел пуст
             L.d(TAG, "Скобка открыта");
             status.setBracket(true);
@@ -924,7 +947,7 @@ class EditX {
         }
     }
 
-    void closeBracket() throws MyExceptions {
+    public void closeBracket() throws MyExceptions {
         //operation = NOP;        // При закрытии скобки, вычисляем все в пределах одного стека, и восстанавливаем старые стеки
         double tmp = argX.getArgX();
         L.d(TAG, "Набрано: " + tmp + ")");
@@ -984,7 +1007,7 @@ class EditX {
         }
     }
 
-    void sign() {
+    public void sign() {
 //        if (!argX.editable) {
 //            argX.setSign(!argX.isSign()); //Если число нередактируемое (результат предыдущих вычислений, то меняем знак мантиссы
 //        }
@@ -998,7 +1021,7 @@ class EditX {
         makeArg();
     }
 
-    void dot() {
+    public void dot() {
         if (fixModeNumberWait) { //Если нажали на кнопку FIX
             fixModeNumberWait = false; // выключаем режим ожидания
             if (argX.isVirgin() || !argX.isEditable()) { // И если еще ничего не вводили или выведен ответ
@@ -1017,7 +1040,7 @@ class EditX {
         makeArg();
     }
 
-    void ce() {
+    public void ce() {
         newArg();
         newInput = true;
         calcpress = false;
@@ -1027,7 +1050,7 @@ class EditX {
     }
 
 
-    void exp() {
+    public void exp() {
         if (!argX.isEditable()) {
             return;
         }
@@ -1136,37 +1159,37 @@ class EditX {
         currentNumber = stackCalculator.calc(currentNumber, currentOperation); //Считаем
         calc = true;
         if (Double.isInfinite(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getTOO_BIG());
+            throw new MyExceptions(MyExceptions.TOO_BIG);
         }
 //        if (currentNumber < 0 && Double.isInfinite(currentNumber)) {
 //            throw new MyExceptions(MyExceptions.TOO_SMALL);
 //        }
         if (Double.isNaN(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getNOT_NUMBER());
+            throw new MyExceptions(MyExceptions.NOT_NUMBER);
         }
         return currentNumber;
     }
 
-    void x_to_m() {
+    public void x_to_m() {
         setMemory(argX.getArgX());
         newInput = true;
         calcpress = true;
     }
 
-    void readMemory() {
+    public void readMemory() {
         argX.setDouble(getMemory());
         makeArg();
         newInput = true;
         calcpress = true;
     }
 
-    void clearMemory() {
+    public void clearMemory() {
         setMemory(0.0);
         newInput = true;
         calcpress = true;
     }
 
-    void memoryPlus() throws MyExceptions {
+    public void memoryPlus() throws MyExceptions {
         double tmp1 = argX.getArgX();
         L.d(TAG, "Набрано: " + tmp1 + " M+");
         if (!stackCalculator.isOperationStackEmpty()) {
@@ -1194,8 +1217,8 @@ class EditX {
         return mem;
     }
 
-    void startSDMode() {
-        mode.switchSD();
+    public void startSDMode() {
+//        mode.switchSD();
         if (mode.getMode() == mode.SD) {
             statisticMode = new StatisticMode(protocol);
             argX.setDouble(statisticMode.getStackSize());
@@ -1208,7 +1231,7 @@ class EditX {
         calcpress = true;
     }
 
-    void putDataToStack() throws MyExceptions {
+    public void putDataToStack() throws MyExceptions {
         L.d(TAG, "argX.isVirgin(): " + argX.isVirgin());
         L.d(TAG, "argX.isEditable(): " + argX.isEditable());
         if (!argX.isEditable() && !stackCalculator.isResult()) { //Если argX не редактируемое, значит ничего не ввели, значит ничего не делаем.
@@ -1231,21 +1254,13 @@ class EditX {
         makeArg();
     }
 
-    void deleteDataFromStack() throws MyExceptions {
+    public void deleteDataFromStack() throws MyExceptions {
         //Если SD стек пуст
         if (statisticMode.isStackEmpty()) {
             L.d(TAG, "Стек пуст, ничего не делаем.");
             return;
         }
 
-        //Если ничего не вводили, то удаляем одно последнее значение
-        if (!argX.isEditable() && !stackCalculator.isResult()) {
-            argX.setDouble(statisticMode.deleteTopNumber());
-            L.d(TAG, "Ничего не вводили, удаляем одно последнее значение.");
-            newInput = true;
-            makeArg();
-            return;
-        }
         // если что-то введено,  то
         double currentNum = argX.getArgX();
         if (stackCalculator.isMultiply()) {//Если было нажато УМНОЖИТЬ
@@ -1261,44 +1276,44 @@ class EditX {
         makeArg();
     }
 
-    void average() {
+    public void average() {
         argX.setDouble(statisticMode.average());
         newInput = true;
         makeArg();
     }
 
-    void stackSize() {
+    public void stackSize() {
         argX.setDouble(statisticMode.getStackSize());
         newInput = true;
         makeArg();
     }
 
-    void total() {
+    public void total() {
         argX.setDouble(statisticMode.totalOfAllData());
         newInput = true;
         makeArg();
     }
 
-    void totalSquare() {
+    public void totalSquare() {
         argX.setDouble(statisticMode.totalOfSquareOfAllData());
         newInput = true;
         makeArg();
     }
 
-    void sampleStandartDeviation() {
+    public void sampleStandartDeviation() {
         argX.setDouble(statisticMode.sampleStandartDeviation());
         newInput = true;
         makeArg();
     }
 
-    void populationStandartDeviation() {
+    public void populationStandartDeviation() {
         argX.setDouble(statisticMode.populationStandartDeviation());
         newInput = true;
         makeArg();
     }
 
-    void startCplxMode() {
-        mode.switchCplx();
+    public void startCplxMode() {
+//        mode.switchCplx();
         if (mode.getMode() == mode.COMPLEX) {
             complexStackCalculator = new ComplexStackCalculator(protocol);
         }
@@ -1308,7 +1323,7 @@ class EditX {
         calcpress = true;
     }
 
-    StringBuilder copyToClipboard() {
+    public StringBuilder copyToClipboard() {
         StringBuilder sb = new StringBuilder("");
         DecimalFormatSymbols dfs;
         Locale defLocale = Locale.getDefault();
@@ -1341,7 +1356,7 @@ class EditX {
     }
 
 
-    void pasteFromClipboard(String str) {
+    public void pasteFromClipboard(String str) {
         L.d(TAG, "Из буфера обмена получено: " + str);
         StringBuilder sb = (createDouble(str));
         if (sb.length() == 0) {
@@ -1895,20 +1910,20 @@ class EditX {
         return !allowSigns && foundDigit;
     }
 
-    void toDec() {
-        editX = (EditX) objStore[MainActivity.EDIT_X];
-        if (editX == null) {
-            editX = new EditX(objStore);
+    public void toDec() {
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
+        if (editXDec == null) {
+            editXDec = new EditXDec(objStore);
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
-            objStore[MainActivity.EDIT_X] = editX;
+            objStore[MainActivity.EDIT_X_DEC] = editXDec;
         }
         L.d(TAG, "Переключаемся в DEC режим.");
         double doubleNumber = argX.getArgX();
         L.d(TAG, "В DEC режим передаем число: " + doubleNumber);
-        editX.setNumber(doubleNumber);
+        editXDec.setNumber(doubleNumber);
     }
 
-    void toBin() {
+    public void toBin() {
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         if (editXBin == null) {
             editXBin = new EditXBin(objStore);
@@ -1921,7 +1936,7 @@ class EditX {
         editXBin.setNumber(doubleNumber);
     }
 
-    void toOct() {
+    public void toOct() {
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         if (editXOct == null) {
             editXOct = new EditXOct(objStore);
@@ -1934,7 +1949,7 @@ class EditX {
         editXOct.setNumber(doubleNumber);
     }
 
-    void toHex() {
+    public void toHex() {
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         if (editXHex == null) {
             editXHex = new EditXHex(objStore);
@@ -1946,7 +1961,4 @@ class EditX {
         L.d(TAG, "В HEX режим передаем число: " + doubleNumber);
         editXHex.setNumber(doubleNumber);
     }
-
-
-
 }

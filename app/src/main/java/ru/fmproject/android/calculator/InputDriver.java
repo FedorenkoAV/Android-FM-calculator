@@ -4,6 +4,11 @@ import androidx.fragment.app.FragmentManager;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 
+import ru.fmproject.android.calculator.editors.EditXBin;
+import ru.fmproject.android.calculator.editors.EditXDec;
+import ru.fmproject.android.calculator.editors.EditXHex;
+import ru.fmproject.android.calculator.editors.EditXOct;
+
 
 /**
  * Класс InputDriver это связующее звено между внешним миром и внутренним устройством.
@@ -11,7 +16,7 @@ import android.view.View;
  * Этот класс нужно переписывать/редактировать заново для каждого нового устройства
  */
 
-class InputDriver implements View.OnClickListener {
+public class InputDriver implements View.OnClickListener {
 
     private static final String TAG = "InputDriver";
 
@@ -27,7 +32,7 @@ class InputDriver implements View.OnClickListener {
     private MainDisplay mainDisplay;
     private StackCalculator stackCalculator;
 
-    private EditX editX;
+    private EditXDec editXDec;
     private EditXBin editXBin;
     private EditXOct editXOct;
     private EditXHex editXHex;
@@ -50,7 +55,7 @@ class InputDriver implements View.OnClickListener {
 
         mainDisplay = (MainDisplay) objStore[MainActivity.MAIN_DISPLAY];
         stackCalculator = (StackCalculator) objStore[MainActivity.STACK_CALCULATOR];
-        editX = (EditX) objStore[MainActivity.EDIT_X];
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
@@ -109,7 +114,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonOnC() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  ON_C
-            editX.restart();
+            editXDec.restart();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -120,7 +125,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  switchSD
-            editX.startSDMode();
+            editXDec.startSDMode();
             status.offShift();
             return;
         }
@@ -149,7 +154,7 @@ class InputDriver implements View.OnClickListener {
             //  switchSD
             editXBin.toDec();
             mode.setDEC();
-            editX.startSDMode();
+            editXDec.startSDMode();
             status.offShift();
             return;
         }
@@ -178,7 +183,7 @@ class InputDriver implements View.OnClickListener {
             //  switchSD
             editXOct.toDec();
             mode.setDEC();
-            editX.startSDMode();
+            editXDec.startSDMode();
             status.offShift();
             return;
         }
@@ -207,7 +212,7 @@ class InputDriver implements View.OnClickListener {
             //  switchSD
             editXHex.toDec();
             mode.setDEC();
-            editX.startSDMode();
+            editXDec.startSDMode();
             status.offShift();
             return;
         }
@@ -223,7 +228,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDel() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // del
-            editX.del();
+            editXDec.del();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -236,7 +241,7 @@ class InputDriver implements View.OnClickListener {
             // CPLX
 //            editXBin.toDec();
 //            mode.setDEC();
-            editX.startCplxMode();
+            editXDec.startCplxMode();
             status.offShift();
             return;
         }
@@ -263,7 +268,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // CPLX
-            editX.startCplxMode();
+            editXDec.startCplxMode();
             status.offShift();
             return;
         }
@@ -290,7 +295,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // CPLX
-            editX.startCplxMode();
+            editXDec.startCplxMode();
             status.offShift();
             return;
         }
@@ -317,7 +322,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // CPLX
-            editX.startCplxMode();
+            editXDec.startCplxMode();
             status.offShift();
             return;
         }
@@ -333,7 +338,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonSci() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // SCI
-            editX.switchSciMode();
+            editXDec.switchSciMode();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -344,7 +349,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // FIX
-            editX.setFixMode();
+            editXDec.setFixMode();
             status.offShift();
 
             return;
@@ -372,7 +377,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // translate angle
-            editX.changeAngleUnit();
+            editXDec.changeAngleUnit();
             status.offShift();
             return;
         }
@@ -469,7 +474,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonGear() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //involute
-            editX.invalute();
+            editXDec.invalute();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -479,7 +484,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //evolvent
-            editX.evolvent();
+            editXDec.evolvent();
             status.offShift();
             return;
         }
@@ -493,24 +498,24 @@ class InputDriver implements View.OnClickListener {
     private void buttonSin() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //sin
-            editX.sin();
+            editXDec.sin();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
             //sinh
-            editX.sinh();
+            editXDec.sinh();
             status.offHyp();
             return;
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // asin
-            editX.asin();
+            editXDec.asin();
             status.offShift();
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
             // Гиперболический арксинус
-            editX.arsh();
+            editXDec.arsh();
             status.offHyp();
             status.offShift();
 
@@ -520,24 +525,24 @@ class InputDriver implements View.OnClickListener {
     private void buttonCos() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // cos
-            editX.cos();
+            editXDec.cos();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
             // cosh
-            editX.cosh();
+            editXDec.cosh();
             status.offHyp();
             return;
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // acos
-            editX.acos();
+            editXDec.acos();
             status.offShift();
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
             // Гиперболический арккосинус
-            editX.arch();
+            editXDec.arch();
             status.offHyp();
             status.offShift();
 
@@ -547,24 +552,24 @@ class InputDriver implements View.OnClickListener {
     private void buttonTan() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // tan
-            editX.tan();
+            editXDec.tan();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
             // tanh
-            editX.tanh();
+            editXDec.tanh();
             status.offHyp();
             return;
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // atan
-            editX.atan();
+            editXDec.atan();
             status.offShift();
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
             // Гиперболический арктангенс
-            editX.arth();
+            editXDec.arth();
             status.offHyp();
             status.offShift();
 
@@ -574,7 +579,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonExp() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  EXP
-            editX.exp();
+            editXDec.exp();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -585,7 +590,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  pi
-            editX.pi();
+            editXDec.pi();
             status.offShift();
             return;
         }
@@ -627,7 +632,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonXpowY() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  XpowY
-            editX.power();
+            editXDec.power();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -638,7 +643,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // x_sqr_y
-            editX.x_sqr_y();
+            editXDec.x_sqr_y();
             status.offShift();
             return;
         }
@@ -679,7 +684,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonSqr() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // sqrt
-            editX.sqrt();
+            editXDec.sqrt();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -690,7 +695,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // cbrt
-            editX.cbrt();
+            editXDec.cbrt();
             status.offShift();
             return;
         }
@@ -731,7 +736,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonToRad() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //toDeg
-            editX.toDeg();
+            editXDec.toDeg();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -742,7 +747,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // fromDeg
-            editX.fromDeg();
+            editXDec.fromDeg();
             status.offShift();
             return;
         }
@@ -783,7 +788,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonLn() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // ln
-            editX.ln();
+            editXDec.ln();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -794,7 +799,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // e pow x
-            editX.exponent();
+            editXDec.exponent();
             status.offShift();
             return;
         }
@@ -835,7 +840,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonLog() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // L
-            editX.log();
+            editXDec.log();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -846,7 +851,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // 10^x
-            editX._10x();
+            editXDec._10x();
             status.offShift();
             return;
         }
@@ -887,7 +892,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonX2() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // x^2
-            editX.x2();
+            editXDec.x2();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -898,7 +903,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // 1 div x
-            editX._1_div_x();
+            editXDec._1_div_x();
             status.offShift();
             return;
         }
@@ -913,7 +918,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonA() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // toA
-            editX.toA();
+            editXDec.toA();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -924,7 +929,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // R to P
-            editX.r_to_p();
+            editXDec.r_to_p();
             status.offShift();
             return;
         }
@@ -939,7 +944,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonB() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // toB
-            editX.toB();
+            editXDec.toB();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -950,7 +955,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // P to R
-            editX.p_to_r();
+            editXDec.p_to_r();
             status.offShift();
             return;
         }
@@ -990,7 +995,7 @@ class InputDriver implements View.OnClickListener {
         } else {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 // (
-                editX.openBracket();
+                editXDec.openBracket();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1001,7 +1006,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 // x_to_y
-                editX.x_to_y();
+                editXDec.x_to_y();
                 status.offShift();
                 return;
             }
@@ -1102,7 +1107,7 @@ class InputDriver implements View.OnClickListener {
         if (mode.getMode() == mode.SD) {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 //stackSize
-                editX.stackSize();
+                editXDec.stackSize();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1113,7 +1118,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 // total
-                editX.total();
+                editXDec.total();
                 status.offShift();
                 return;
             }
@@ -1127,7 +1132,7 @@ class InputDriver implements View.OnClickListener {
         } else {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 // )
-                editX.closeBracket();
+                editXDec.closeBracket();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1155,7 +1160,7 @@ class InputDriver implements View.OnClickListener {
         if (mode.getMode() == mode.SD) {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 // average
-                editX.average();
+                editXDec.average();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1166,7 +1171,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 //totalSquare
-                editX.totalSquare();
+                editXDec.totalSquare();
                 status.offShift();
                 return;
             }
@@ -1180,7 +1185,7 @@ class InputDriver implements View.OnClickListener {
         } else {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 // X to memoryStore
-                editX.x_to_m();
+                editXDec.x_to_m();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1289,7 +1294,7 @@ class InputDriver implements View.OnClickListener {
     private void button07() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  7
-            editX.add('7');
+            editXDec.add('7');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1367,7 +1372,7 @@ class InputDriver implements View.OnClickListener {
     private void button08() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  8
-            editX.add('8');
+            editXDec.add('8');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1419,7 +1424,7 @@ class InputDriver implements View.OnClickListener {
     private void button09() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  9
-            editX.add('9');
+            editXDec.add('9');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1430,7 +1435,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //
-            editX.maxValue();
+            editXDec.maxValue();
             status.offShift();
 //            inDevelopToast.show();
             return;
@@ -1472,7 +1477,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonMem() throws MyExceptions {
         if (mode.getMode() == mode.SD) {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
-                editX.putDataToStack();
+                editXDec.putDataToStack();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1483,7 +1488,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 //  16.06.2017
-                editX.deleteDataFromStack();
+                editXDec.deleteDataFromStack();
                 status.offShift();
                 return;
             }
@@ -1497,7 +1502,7 @@ class InputDriver implements View.OnClickListener {
         } else {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 //  M+
-                editX.memoryPlus();
+                editXDec.memoryPlus();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1607,7 +1612,7 @@ class InputDriver implements View.OnClickListener {
         if (mode.getMode() == mode.SD) {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 //sampleStandartDeviation
-                editX.sampleStandartDeviation();
+                editXDec.sampleStandartDeviation();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1618,7 +1623,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 // populationStandartDeviation
-                editX.populationStandartDeviation();
+                editXDec.populationStandartDeviation();
                 status.offShift();
                 return;
             }
@@ -1632,7 +1637,7 @@ class InputDriver implements View.OnClickListener {
         } else {
             if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
                 //  MR
-                editX.readMemory();
+                editXDec.readMemory();
                 return;
             }
             if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1643,7 +1648,7 @@ class InputDriver implements View.OnClickListener {
             }
             if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
                 // MC
-                editX.clearMemory();
+                editXDec.clearMemory();
                 status.offShift();
                 return;
             }
@@ -1738,7 +1743,7 @@ class InputDriver implements View.OnClickListener {
     private void button04() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  4
-            editX.add('4');
+            editXDec.add('4');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1816,7 +1821,7 @@ class InputDriver implements View.OnClickListener {
     private void button05() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // 5
-            editX.add('5');
+            editXDec.add('5');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1894,7 +1899,7 @@ class InputDriver implements View.OnClickListener {
     private void button06() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  6
-            editX.add('6');
+            editXDec.add('6');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1972,7 +1977,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonMult() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  Mult
-            editX.mult();
+            editXDec.mult();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -1983,7 +1988,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  OCT
-            editX.toOct();
+            editXDec.toOct();
             mode.setOCT();
             editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
             status.offShift();
@@ -2081,7 +2086,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDiv() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  Div
-            editX.div();
+            editXDec.div();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2092,7 +2097,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  BIN
-            editX.toBin();
+            editXDec.toBin();
             mode.setBIN();
             editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
             status.offShift();
@@ -2191,7 +2196,7 @@ class InputDriver implements View.OnClickListener {
     private void button01() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // 1
-            editX.add('1');
+            editXDec.add('1');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2203,7 +2208,7 @@ class InputDriver implements View.OnClickListener {
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //
 //            editX.random();
-            editX.dbm_to_w();
+            editXDec.dbm_to_w();
             status.offShift();
             return;
         }
@@ -2296,7 +2301,7 @@ class InputDriver implements View.OnClickListener {
     private void button02() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  2
-            editX.add('2');
+            editXDec.add('2');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2308,7 +2313,7 @@ class InputDriver implements View.OnClickListener {
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // 
             status.offShift();
-            editX.w_to_dbm();
+            editXDec.w_to_dbm();
             return;
         }
         if (status.isShift() & status.isHyp()) { // SHIFT ON & HYP ON
@@ -2374,7 +2379,7 @@ class InputDriver implements View.OnClickListener {
     private void button03() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  3
-            editX.add('3');
+            editXDec.add('3');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2452,7 +2457,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonPlus() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  Plus
-            editX.plus();
+            editXDec.plus();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2559,7 +2564,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonMinus() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //Minus
-            editX.minus();
+            editXDec.minus();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2570,7 +2575,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //  HEX
-            editX.toHex();
+            editXDec.toHex();
             mode.setHEX();
             editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
             status.offShift();
@@ -2668,7 +2673,7 @@ class InputDriver implements View.OnClickListener {
     private void button00() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //
-            editX.add('0');
+            editXDec.add('0');
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2679,7 +2684,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // 
-            editX.minValue();
+            editXDec.minValue();
             status.offShift();
 //            inDevelopToast.show();
             return;
@@ -2773,7 +2778,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonDot() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //  dot
-            editX.dot();
+            editXDec.dot();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2784,7 +2789,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // rnd
-            editX.random();
+            editXDec.random();
             status.offShift();
             return;
         }
@@ -2799,7 +2804,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonSign() {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // 
-            editX.sign();
+            editXDec.sign();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2903,7 +2908,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonCalc() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             //=
-            editX.calc();
+            editXDec.calc();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -2914,7 +2919,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             // %
-            editX.percent();
+            editXDec.percent();
             status.offShift();
             return;
         }
@@ -3004,7 +3009,7 @@ class InputDriver implements View.OnClickListener {
     private void buttonCE() throws MyExceptions {
         if (!status.isShift() & !status.isHyp()) { // SHIFT OFF & HYP OFF
             // CE
-            editX.ce();
+            editXDec.ce();
             return;
         }
         if (!status.isShift() & status.isHyp()) { // SHIFT OFF & HYP ON
@@ -3015,7 +3020,7 @@ class InputDriver implements View.OnClickListener {
         }
         if (status.isShift() & !status.isHyp()) { // SHIFT ON & HYP OFF
             //x!
-            editX.factorial();
+            editXDec.factorial();
             status.offShift();
             return;
         }
@@ -3108,7 +3113,7 @@ class InputDriver implements View.OnClickListener {
             case (Mode.DEC):
             case (Mode.SD):
             case (Mode.COMPLEX):
-                sb.append(editX.copyToClipboard());
+                sb.append(editXDec.copyToClipboard());
                 break;
             case (Mode.BIN):
                 sb.append(editXBin.copyToClipboard());
@@ -3128,7 +3133,7 @@ class InputDriver implements View.OnClickListener {
             case (Mode.DEC):
             case (Mode.SD):
             case (Mode.COMPLEX):
-                editX.pasteFromClipboard(str);
+                editXDec.pasteFromClipboard(str);
                 break;
             case (Mode.BIN):
                 editXBin.pasteFromClipboard(str);

@@ -140,9 +140,6 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append("\n");
     }
 
-
-
-
     void println(Object someObj) {
         if (doCls) {
             cls();

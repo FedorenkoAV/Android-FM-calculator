@@ -18,7 +18,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-class XMLPullParser extends AsyncTask<String, String, String[]> { //AsyncTask<[Input_Parameter Type], [Progress_Report Type], [Result Type]>
+public class XMLPullParser extends AsyncTask<String, String, String[]> { //AsyncTask<[Input_Parameter Type], [Progress_Report Type], [Result Type]>
     //XML Pull Parser - рекомендуемый парсер для Android-приложений
 
     private MyCustomCallBack callback;

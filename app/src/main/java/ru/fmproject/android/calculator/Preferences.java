@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * Объект этого класса взаимодействует с файлом настроек (чтение и запись). Этот класс - платформозависимый
  */
 
-class Preferences {
+public class Preferences {
 
     private static final String TAG = "Preferences";
 

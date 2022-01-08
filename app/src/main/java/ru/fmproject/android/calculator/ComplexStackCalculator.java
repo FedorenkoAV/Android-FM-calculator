@@ -11,7 +11,7 @@ import java.util.List;
  * Created by User on 25.06.2017.
  */
 
-class ComplexStackCalculator {
+public class ComplexStackCalculator {
 
     private static final String TAG = "ComplexStackCalculator";
 
@@ -20,7 +20,7 @@ class ComplexStackCalculator {
 
     private Protocol protocol;
 
-    ComplexStackCalculator(Protocol protocol) {
+    public ComplexStackCalculator(Protocol protocol) {
         this.protocol = protocol;
         restart();
         L.d(TAG, "Создали новый ComplexStackCalculator.");
@@ -106,7 +106,7 @@ class ComplexStackCalculator {
         return cplxNumList;
     }
 
-    Complex cplxSin(Complex cplxNum1) {
+    public Complex cplxSin(Complex cplxNum1) {
         protocol.print("sin");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -115,7 +115,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxCos(Complex cplxNum1) {
+    public Complex cplxCos(Complex cplxNum1) {
         protocol.print("cos");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -124,7 +124,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxTan(Complex cplxNum1) {
+    public Complex cplxTan(Complex cplxNum1) {
         protocol.print("tan");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -133,7 +133,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxAsin(Complex cplxNum1) {
+    public Complex cplxAsin(Complex cplxNum1) {
         protocol.print("arcsin");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -142,7 +142,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxAcos(Complex cplxNum1) {
+    public Complex cplxAcos(Complex cplxNum1) {
         protocol.print("arccos");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -151,7 +151,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxAtan(Complex cplxNum1) {
+    public Complex cplxAtan(Complex cplxNum1) {
         protocol.print("arctan");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -160,7 +160,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxSinh(Complex cplxNum1) {
+    public Complex cplxSinh(Complex cplxNum1) {
         protocol.print("sh");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -169,7 +169,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxCosh(Complex cplxNum1) {
+    public Complex cplxCosh(Complex cplxNum1) {
         protocol.print("ch");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -178,7 +178,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxTanh(Complex cplxNum1) {
+    public Complex cplxTanh(Complex cplxNum1) {
         protocol.print("tanh");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -187,7 +187,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxArsh(Complex cplxNum) {
+    public Complex cplxArsh(Complex cplxNum) {
         protocol.print("Arsh");
         protocol.print(cplxNum);
         protocol.print(" = ");
@@ -211,7 +211,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxArch(Complex cplxNum) {
+    public Complex cplxArch(Complex cplxNum) {
         protocol.print("Arch");
         protocol.print(cplxNum);
         protocol.print(" = ");
@@ -235,7 +235,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxArth(Complex cplxNum) {
+    public Complex cplxArth(Complex cplxNum) {
         protocol.print("Arth");
         protocol.print(cplxNum);
         protocol.print(" = ");
@@ -263,7 +263,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxExp(Complex cplxNum1) {
+    public Complex cplxExp(Complex cplxNum1) {
         protocol.print("e^");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -272,7 +272,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxLog(Complex cplxNum1) {
+    public Complex cplxLog(Complex cplxNum1) {
         protocol.print("Ln");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -281,7 +281,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxLog10(Complex cplxNum1) {
+    public Complex cplxLog10(Complex cplxNum1) {
         protocol.print("Log");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -290,7 +290,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxSqrt(Complex cplxNum1) {
+    public Complex cplxSqrt(Complex cplxNum1) {
         protocol.print("√");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -299,7 +299,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxCbrt(Complex cplxNum1) {
+    public Complex cplxCbrt(Complex cplxNum1) {
         L.d(TAG, "Вычисляем корень 3-ей степени из " + cplxNum1);
         L.d(TAG, "Будет 3 результата:");
         List<Complex> cplxNumList;
@@ -310,7 +310,7 @@ class ComplexStackCalculator {
         return cplxNumList.get(0);
     }
 
-    Complex cplx10x(Complex cplxNum1) {
+    public Complex cplx10x(Complex cplxNum1) {
         protocol.print("10^");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -320,7 +320,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxPower2(Complex cplxNum1) {
+    public Complex cplxPower2(Complex cplxNum1) {
         protocol.print(cplxNum1);
         protocol.print("^2 = ");
         cplxNum1 = cplxNum1.pow(2.0);
@@ -328,7 +328,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxReciprocal(Complex cplxNum1) {
+    public Complex cplxReciprocal(Complex cplxNum1) {
         protocol.print("1/");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -337,7 +337,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex cplxNegate(Complex cplxNum1) {
+    public Complex cplxNegate(Complex cplxNum1) {
         protocol.print("-");
         protocol.print(cplxNum1);
         protocol.print(" = ");
@@ -346,7 +346,7 @@ class ComplexStackCalculator {
         return cplxNum1;
     }
 
-    Complex complexStackCalculator(Complex curCplxNum, int currentOperation) {
+    public Complex complexStackCalculator(Complex curCplxNum, int currentOperation) {
         L.d(TAG, "complexStackCalculator запущен");
         int prevOperation;
         Complex prevCplxNumber;

@@ -6,7 +6,7 @@ import android.widget.Button;
  * Created by User on 06.06.2017.
  */
 
-class Status {
+public class Status {
 
     private boolean shift = false;
     private boolean hyp = false;
@@ -15,16 +15,16 @@ class Status {
     Button[] btnStore;
 
 
-    Status(StatusDisplay statusDisplay, Button[] btnStore) {
+    public Status(StatusDisplay statusDisplay, Button[] btnStore) {
         this.statusDisplay = statusDisplay;
         this.btnStore = btnStore;
     }
 
-    boolean isShift() {
+    public boolean isShift() {
         return shift;
     }
 
-    void switchShift() {
+    public void switchShift() {
         shift = !shift;
         if (shift) {
             statusDisplay.onShift();
@@ -41,17 +41,17 @@ class Status {
         btnStore[28].setText("MC");
     }
 
-    void offShift() {
+    public void offShift() {
         shift = false;
         statusDisplay.offShift();
         btnStore[28].setText("MR");
     }
 
-    boolean isHyp() {
+    public boolean isHyp() {
         return hyp;
     }
 
-    void switchHyp() {
+    public void switchHyp() {
         hyp = !hyp;
         if (hyp) {
             statusDisplay.onHyp();
@@ -60,12 +60,12 @@ class Status {
         }
     }
 
-    void onHyp() {
+    public void onHyp() {
         hyp = true;
         statusDisplay.onHyp();
     }
 
-    void offHyp() {
+    public void offHyp() {
         hyp = false;
         statusDisplay.offHyp();
     }
@@ -84,15 +84,15 @@ class Status {
         }
     }
 
-    void onMemory() {
+    public void onMemory() {
         statusDisplay.onMemory();
     }
 
-    void offMemory() {
+    public void offMemory() {
         statusDisplay.offMemory();
     }
 
-    void onError() {
+    public void onError() {
         statusDisplay.onError();
         for (Button btn : btnStore) {
             btn.setEnabled(false);
@@ -101,7 +101,7 @@ class Status {
         btnStore[5].setEnabled(true);
     }
 
-    void offError() {
+    public void offError() {
         statusDisplay.offError();
         for (Button btn : btnStore) {
             btn.setEnabled(true);

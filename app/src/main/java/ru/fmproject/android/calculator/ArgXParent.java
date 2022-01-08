@@ -8,7 +8,7 @@ public abstract class ArgXParent {
     private boolean editable;// Число можно редактировать
     private boolean virginity;// Число еще не редактировали
 
-    ArgXParent() {
+    public ArgXParent() {
         reset();
 //        number = new StringBuilder();
 //        sign = false;
@@ -27,19 +27,19 @@ public abstract class ArgXParent {
 //        L.d(TAG, "Создали новый НЕпустой ArgXParent");
 //    }
 
-    ArgXParent(double doubleNumber) {
+    public ArgXParent(double doubleNumber) {
         setNumber(doubleNumber);
         L.d(TAG, "Создали новый НЕпустой ArgXParent");
     }
 
-    void reset () {
+    public void reset () {
         number = new StringBuilder();
         sign = false;
         editable = true;
         virginity = true;
     }
 
-    void setNumber(StringBuilder sbNumber) {
+    public void setNumber(StringBuilder sbNumber) {
         number = new StringBuilder(sbNumber);
         editable = false;
         virginity = false;
@@ -49,16 +49,16 @@ public abstract class ArgXParent {
 
     abstract void setNumber(long longNumber);
 
-    void setNumber(double doubleNumber) {
+    public void setNumber(double doubleNumber) {
         long longNumber = (long) doubleNumber;
         setNumber(longNumber);
     }
 
-    StringBuilder getNumber() {
+    public StringBuilder getNumber() {
         return number;
     }
 
-    double getDouble(int byteLength) {
+    public double getDouble(int byteLength) {
         double doubleNumber;
         doubleNumber = (double) getLong(byteLength);
         L.d(TAG, "После преобразования в double получили: " + doubleNumber);
@@ -67,7 +67,7 @@ public abstract class ArgXParent {
 
     abstract long getLong(int byteLength);
 
-    void setFromStringBuilder(StringBuilder num) {
+    public void setFromStringBuilder(StringBuilder num) {
         number = num;
     }
 
@@ -80,19 +80,19 @@ public abstract class ArgXParent {
         L.d(TAG, "sign: " + this.sign);
     }
 
-    boolean isEditable() {
+    public boolean isEditable() {
         return editable;
     }
 
-    void setEditable(boolean editable) {
+    public void setEditable(boolean editable) {
         this.editable = editable;
     }
 
-    boolean isVirgin() {
+    public boolean isVirgin() {
         return virginity;
     }
 
-    void setNotVirgin() {
+    public void setNotVirgin() {
         virginity = false;
     }
 }

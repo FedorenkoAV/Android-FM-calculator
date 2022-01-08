@@ -6,38 +6,38 @@ import java.util.Stack;
  * Created by User on 20.06.2017.
  * Класс StatisticMode содержит методы для работы со статистическими данными
  */
-class StatisticMode {
+public class StatisticMode {
     private static final String TAG = "StatisticMode";
 
     private Stack<Double> sdStack;
 
     private Protocol protocol;
 
-    StatisticMode(Protocol protocol) {
+    public StatisticMode(Protocol protocol) {
         this.protocol = protocol;
         sdStack = new Stack<>();
         protocol.println("Statistic mode.");
         L.d(TAG, "Создан стек для статистических вычислений.");
     }
 
-    int getStackSize() {
+    public int getStackSize() {
         int n = sdStack.size();
         protocol.println("n = " + n);
         return n;
     }
 
-    boolean isStackEmpty() {
+    public boolean isStackEmpty() {
         return sdStack.empty();
     }
 
-    int singleNumberToStack(double currentNum) {
+    public int singleNumberToStack(double currentNum) {
         sdStack.push(currentNum);             // здесь кладем значение в SD стек
         protocol.println(sdStack.size() + ": " + currentNum);
         L.d(TAG, "В стек положено число " + currentNum);
         return sdStack.size();
     }
 
-    int pushMultipleNumberToStack(double currentNum, int count) throws MyExceptions {
+    public int pushMultipleNumberToStack(double currentNum, int count) throws MyExceptions {
         for (int n = 0; n < count; n++) {
             sdStack.push(currentNum);
             protocol.println(sdStack.size() + ": " + currentNum);
@@ -46,7 +46,7 @@ class StatisticMode {
         return sdStack.size();
     }
 
-    int deleteTopNumber() throws MyExceptions { //Удаляем значение с вершины стека
+    public int deleteTopNumber() throws MyExceptions { //Удаляем значение с вершины стека
         if (isStackEmpty()) {
             return 0;
         }
@@ -55,7 +55,7 @@ class StatisticMode {
         return sdStack.size();
     }
 
-    int deleteSingleNumber(double currentNum) { //Удаляем конкретное число из стека
+    public int deleteSingleNumber(double currentNum) { //Удаляем конкретное число из стека
         if (sdStack.removeElement(currentNum)) {
             L.d(TAG, "Значение " + currentNum + " успешно удалено из стека");
         } else {
@@ -65,7 +65,7 @@ class StatisticMode {
         return sdStack.size();
     }
 
-    int deleteMultipleNumberFromStack(double dataValue, int i) {
+    public int deleteMultipleNumberFromStack(double dataValue, int i) {
         int count = 0;
         for (int n = 0; n < i; n++) {
             if (sdStack.removeElement(dataValue)) {
@@ -77,23 +77,23 @@ class StatisticMode {
         return sdStack.size();
     }
 
-    double totalOfAllData() {
+    public double totalOfAllData() {
         return totalOfDatum(sdStack);
     }
 
-    double totalOfSquareOfAllData() {
+    public double totalOfSquareOfAllData() {
         return totalOfSquare(sdStack);
     }
 
-    double average() {
+    public double average() {
         return averageOfDatum(sdStack);
     }
 
-    double sampleStandartDeviation() {
+    public double sampleStandartDeviation() {
         return sampleStdDevi(sdStack); //Стандартное отклонение выборки
     }
 
-    double populationStandartDeviation() {
+    public double populationStandartDeviation() {
         return stdDeviOfPopu(sdStack); //Стандартное отклонение популяции
     }
 

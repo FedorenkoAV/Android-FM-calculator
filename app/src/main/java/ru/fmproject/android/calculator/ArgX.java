@@ -10,7 +10,7 @@ import java.text.NumberFormat;
  * ArgX это переменная, в которой в текстовом виде хранятся мантисса и экспонента
  */
 
-class ArgX  {
+public class ArgX  {
 
 
     private StringBuilder mantissaIntegerPart; //Целая часть мантиссы
@@ -27,7 +27,7 @@ class ArgX  {
     private static final String TAG = "ArgX";
 
 
-    ArgX() {
+    public ArgX() {
         mantissaIntegerPart = new StringBuilder();
         mantissaFractionalPart = new StringBuilder();
         exponent = new StringBuilder();
@@ -40,25 +40,25 @@ class ArgX  {
         L.d(TAG, "Создали новый пустой ArgX");
     }
 
-    ArgX(double number) {
+    public ArgX(double number) {
         setDouble(number);
     }
 
 
-    void setDouble(double number) {
+    public void setDouble(double number) {
         StringBuilder sb = new StringBuilder();
         sb.append(number); //В sb у нас все число, начинаем его пилить
         setFromStringBuilder(sb);
     }
 
 
-    void setFromString(String numberStr) {
+    public void setFromString(String numberStr) {
         StringBuilder sb = new StringBuilder(numberStr);
         setFromStringBuilder(sb);
     }
 
 
-    void setFromStringBuilder(StringBuilder sb) {  //В sb у нас все число, начинаем его пилить
+    public void setFromStringBuilder(StringBuilder sb) {  //В sb у нас все число, начинаем его пилить
         mantissaIntegerPart = new StringBuilder();
         mantissaFractionalPart = new StringBuilder();
         exponent = new StringBuilder();
@@ -121,75 +121,75 @@ class ArgX  {
     }
 
 
-    void setMantissaIntegerPart(StringBuilder mantissaIntegerPart) {
+    public void setMantissaIntegerPart(StringBuilder mantissaIntegerPart) {
         this.mantissaIntegerPart = mantissaIntegerPart;
         virginity = false;
     }
 
-    StringBuilder getMantissaIntegerPart() {
+    public StringBuilder getMantissaIntegerPart() {
         return mantissaIntegerPart;
     }
 
 
-    void setMantissaFractionalPart(StringBuilder mantissaFractionalPart) {
+    public void setMantissaFractionalPart(StringBuilder mantissaFractionalPart) {
         this.mantissaFractionalPart = mantissaFractionalPart;
     }
 
-    StringBuilder getMantissaFractionalPart() {
+    public StringBuilder getMantissaFractionalPart() {
         return mantissaFractionalPart;
     }
 
 
-    void setSign(boolean sign) {
+    public void setSign(boolean sign) {
         this.mantissaSign = sign;
     }
 
 
-    boolean isSign() {
+    public boolean isSign() {
         return mantissaSign;
     }
 
-    void setExponent(StringBuilder exponent) {
+    public void setExponent(StringBuilder exponent) {
         this.exponent = exponent;
     }
 
-    StringBuilder getExponent() {
+    public StringBuilder getExponent() {
         if (isExponent()) {
             return exponent;
         }
         return new StringBuilder("0");
     }
 
-    void setExponentSign(boolean exponentSign) {
+    public void setExponentSign(boolean exponentSign) {
         this.exponentSign = exponentSign;
     }
 
-    boolean isExponentSign() {
+    public boolean isExponentSign() {
         return exponentSign;
     }
 
-    void setIsExponent(boolean exponent) {
+    public void setIsExponent(boolean exponent) {
         isExponent = exponent;
     }
 
-    boolean isExponent() {
+    public boolean isExponent() {
         return isExponent;
     }
 
-    boolean isMantissaFractionalPart() {
+    public boolean isMantissaFractionalPart() {
         return isMantissaFractionalPart;
     }
 
-    void setIsMantissaFractionalPart(boolean mantissaFractionalPart) {
+    public void setIsMantissaFractionalPart(boolean mantissaFractionalPart) {
         isMantissaFractionalPart = mantissaFractionalPart;
         virginity = false;
     }
 
-    boolean isEditable() {
+    public boolean isEditable() {
         return this.editable;
     }
 
-    double getMantissaIntegerPartinDouble() {
+    public double getMantissaIntegerPartinDouble() {
         L.d(TAG, "Целая часть мантиссы: " + mantissaIntegerPart);
         if (mantissaIntegerPart.length() == 0) {
             return 0.0;
@@ -198,7 +198,7 @@ class ArgX  {
         }
     }
 
-    double getMantissaFractionalPartinDouble() {
+    public double getMantissaFractionalPartinDouble() {
         L.d(TAG, "Дробная часть мантиссы: " + mantissaFractionalPart);
         if (mantissaFractionalPart.length() == 0) {
             return 0.0;
@@ -207,7 +207,7 @@ class ArgX  {
         }
     }
 
-    double getArgX() {
+    public double getArgX() {
         double number = 0.0;
         try {
             number = Double.parseDouble(getArgXSB().toString());
@@ -218,7 +218,7 @@ class ArgX  {
         return number;
     }
 
-    StringBuilder getArgXSB() {
+    public StringBuilder getArgXSB() {
         StringBuilder str = new StringBuilder();  //Создаем пустую строку
         if (mantissaSign) { //Если мантисса с минусом, то добавляем сначала его
             str.append('-');
@@ -336,7 +336,7 @@ class ArgX  {
         return number;
     }
 
-    StringBuilder getRoundedMantissaFracPart(int scale, boolean withZeros) {
+    public StringBuilder getRoundedMantissaFracPart(int scale, boolean withZeros) {
         L.d(TAG, "Округляем дробную часть мантиссы");
         double num = getMantissaFractionalPartinDouble(); //Берем дробную часть мантиссы
         L.d(TAG, "Здесь дробная часть мантиссы : " + num);
@@ -379,13 +379,13 @@ class ArgX  {
     }
 
 
-    boolean isVirgin() {
+    public boolean isVirgin() {
         return virginity;
 
     }
 
 
-    void setNotVirgin() {
+    public void setNotVirgin() {
         virginity = false;
     }
 }

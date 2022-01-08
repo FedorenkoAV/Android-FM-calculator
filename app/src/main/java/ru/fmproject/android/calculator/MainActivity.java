@@ -39,6 +39,9 @@ import com.google.android.gms.ads.AdView;
 import java.util.HashMap;
 import java.util.Map;
 
+import ru.fmproject.android.calculator.editors.EditXDec;
+import ru.fmproject.android.calculator.input.InputControl;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyDialogFragment.NoticeDialogListener {
 
     private AdView mAdView;
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int MEMORY = 5;
     public static final int MAIN_DISPLAY = 6;
     public static final int STACK_CALCULATOR = 7;
-    public static final int EDIT_X = 8;
+    public static final int EDIT_X_DEC = 8;
     public static final int CPLX = 9;
     public static final int SD = 10;
     public static final int INPUT_DRIVER = 11;
@@ -141,11 +144,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Angle angle;
     StackCalculator stackCalculator;
     MainDisplay mainDisplay;
-    EditX editX;
+    EditXDec editXDec;
 
     Status status;
     MemoryStore memoryStore;
-    InputDriver inputDriver;
+//    InputDriver inputDriver;
+    InputControl inputControl;
 
     Object[] objStore = new Object[19];
     Map<String, Object> classesMap = new HashMap<>();
@@ -382,17 +386,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             objStore[STACK_CALCULATOR] = stackCalculator;
             classesMap.put("stackCalculator", stackCalculator);
 //        Создаем объект editX, который будет отвечать за ввод всего
-            editX = new EditX(objStore);
+            editXDec = new EditXDec(objStore);
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
-            objStore[EDIT_X] = editX;
-            classesMap.put("editX", editX);
+            objStore[EDIT_X_DEC] = editXDec;
+            classesMap.put("editX", editXDec);
 //        Создаем объект - обработчик нажатия кнопок и вешаем его на кнопки
-            inputDriver = new InputDriver(objStore); //инициализируем clickListener
+//            inputDriver = new InputDriver(objStore); //инициализируем clickListener
+            inputControl = new InputControl(objStore); //инициализируем clickListener
             L.d(TAG, "Создали объект - обработчик нажатия кнопок и вешаем его на кнопки");
-            objStore[INPUT_DRIVER] = inputDriver;
-            classesMap.put("inputDriver", inputDriver);
+//            objStore[INPUT_DRIVER] = inputDriver;
+            objStore[INPUT_DRIVER] = inputControl;
+//            classesMap.put("inputDriver", inputDriver);
+            classesMap.put("inputDriver", inputControl);
             for (Button button : btnStore) {
-                button.setOnClickListener(inputDriver);
+//                button.setOnClickListener(inputDriver);
+                button.setOnClickListener(inputControl);
             }
 
             for (int i = 0; i < objStore.length; i++) {
@@ -504,7 +512,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void contextCopy() {
-        clipData = ClipData.newPlainText("Text", inputDriver.copyToClipboard());
+//        clipData = ClipData.newPlainText("Text", inputDriver.copyToClipboard());
+        clipData = ClipData.newPlainText("Text", inputControl.copyToClipboard());
         clipboardManager.setPrimaryClip(clipData);
     }
 
@@ -515,7 +524,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             clipDataItem = data.getItemAt(0);
         }
         if (clipDataItem != null) {
-            inputDriver.pasteFromClipboard(clipDataItem.getText().toString());
+//            inputDriver.pasteFromClipboard(clipDataItem.getText().toString());
+            inputControl.pasteFromClipboard(clipDataItem.getText().toString());
         }
     }
 
@@ -551,7 +561,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DisplayMetrics metricsB = new DisplayMetrics();
             display.getMetrics(metricsB);
             mContentView = findViewById(R.id.fullscreen_content);
-            if (Float.compare(metricsB.ydpi, 440.0f) < 0) {
+            if (Float.compare(metricsB.ydpi, 409.0f) < 0) {
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
                     actionBar.hide();
@@ -717,14 +727,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    void currencyRate(String currency) {
+    public void currencyRate(String currency) {
         L.d(TAG, "Запускаем дочернюю активность.");
         L.d(TAG, "Запрашиваем курс " + currency);
         Intent intent = CurrencyRateQueryActivity.newIntent(MainActivity.this, currency);
         startActivityForResult(intent, REQUEST_CODE_CURRENCY);
     }
 
-    void bitcoinRate(String currency) {
+    public void bitcoinRate(String currency) {
         L.d(TAG, "Запускаем дочернюю активность.");
         L.d(TAG, "Запрашиваем курс " + currency);
         Intent intent = CurrencyRateQueryActivity.newIntent(MainActivity.this, currency);
@@ -749,7 +759,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             currency_rate = CurrencyRateQueryActivity.getCurrencyRate(data);
                         }
                         L.d(TAG, "currency_rate = " + currency_rate);
-                        editX.dollar(currency_rate);
+                        editXDec.dollar(currency_rate);
                         break;
                     case (Activity.RESULT_CANCELED):
                         L.d(TAG, "Выход из дочерней активности RESULT_CANCELED.");

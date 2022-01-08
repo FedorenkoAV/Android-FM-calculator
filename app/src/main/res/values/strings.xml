@@ -1,131 +1,132 @@
 <resources>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">FM Calculator</string>
-    <string name="nav_header_subtitle">fedorenko@mail.ru</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">FM Calculator</string>
+    <string name="nav_header_subtitle" translatable="false">fedorenko@mail.ru</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
 
-    <string name="font_liberation_serif_bold">LiberationSerif-Bold.ttf</string>
-    <string name="font_lin_libertine_riah">LinLibertine_RIah.ttf</string>
-    <string name="font_liberation_serif_regular">LiberationSerif-Regular.ttf</string>
-    <string name="font_7segment">7segment.ttf</string>
+    <string name="font_liberation_serif_bold" translatable="false">LiberationSerif-Bold.ttf</string>
+    <string name="font_lin_libertine_riah" translatable="false">LinLibertine_RIah.ttf</string>
+    <string name="font_liberation_serif_regular" translatable="false">LiberationSerif-Regular.ttf</string>
+    <string name="font_7segment" translatable="false">7segment.ttf</string>
 
-    <string name="texasLED2">TexasLED2.ttf</string>
-    <string name="_888888888888">-888888888888</string>
+    <string name="texasLED2" translatable="false">TexasLED2.ttf</string>
+    <string name="_888888888888" translatable="false">-888888888888</string>
 
-    <string name="lab_arc_hyp">arc HYP</string>
-    <string name="lab_sd">SD</string>
+    <string name="lab_arc_hyp" translatable="false">arc HYP</string>
+    <string name="lab_sd" translatable="false">SD</string>
 
-    <string name="shift">SHIFT</string>
-    <string name="hyp">HYP</string>
-    <string name="off">OFF</string>
-    <string name="on_c"><sup>ON</sup>/<sub>C</sub></string>
+    <string name="shift" translatable="false">SHIFT</string>
+    <string name="hyp" translatable="false">HYP</string>
+    <string name="off" translatable="false">OFF</string>
+    <string name="on_c" translatable="false"><sup>ON</sup>/<sub>C</sub></string>
 
-    <string name="lab_cplx">CPLX</string>
-    <string name="lab_fix">FIX</string>
-    <string name="lab_drg">DRG►</string>
-    <string name="lab_arcsin">sinˉ¹</string>
-    <string name="lab_arccos">cosˉ¹</string>
-    <string name="lab_arctan">tanˉ¹</string>
+    <string name="lab_cplx" translatable="false">CPLX</string>
+    <string name="lab_fix" translatable="false">FIX</string>
+    <string name="lab_drg" translatable="false">DRG►</string>
+    <string name="lab_arcsin" translatable="false">sinˉ¹</string>
+    <string name="lab_arccos" translatable="false">cosˉ¹</string>
+    <string name="lab_arctan" translatable="false">tanˉ¹</string>
 
-    <string name="del">►</string>
-    <string name="sci">SCI</string>
-    <string name="drg">DRG</string>
-    <string name="sin">sin</string>
-    <string name="cos">cos</string>
-    <string name="tan">tan</string>
+    <string name="del" translatable="false">►</string>
+    <string name="sci" translatable="false">SCI</string>
+    <string name="drg" translatable="false">DRG</string>
+    <string name="sin" translatable="false">sin</string>
+    <string name="cos" translatable="false">cos</string>
+    <string name="tan" translatable="false">tan</string>
 
-    <string name="lab_pi">π</string>
-    <string name="lab_y_sqr_x">ʸ√x</string>
-    <string name="lab_cbt">³√‾‾</string>
-    <string name="lab_todrg">►°ʹʺ</string>
-    <string name="lab_ex">eˣ</string>
-    <string name="lab_10x">10ˣ</string>
+    <string name="lab_pi" translatable="false">π</string>
+    <string name="lab_y_sqr_x" translatable="false">ʸ√x</string>
+    <string name="lab_cbt" translatable="false">³√‾‾</string>
+    <string name="lab_todrg" translatable="false">►°ʹʺ</string>
+    <string name="lab_ex" translatable="false">eˣ</string>
+    <string name="lab_10x" translatable="false">10ˣ</string>
 
-    <string name="exp">EXP</string>
-    <string name="x_pow_y">xʸ</string>
-    <string name="sqr">√‾‾</string>
-    <string name="from_drg">°ʹʺ►</string>
-    <string name="ln">ln</string>
-    <string name="log">Log</string>
+    <string name="exp" translatable="false">EXP</string>
+    <string name="x_pow_y" translatable="false">xʸ</string>
+    <string name="sqr" translatable="false">√‾‾</string>
+    <string name="from_drg" translatable="false">°ʹʺ►</string>
+    <string name="ln" translatable="false">ln</string>
+    <string name="log" translatable="false">Log</string>
 
-    <string name="lab_1_x">1/x</string>
-    <string name="lab_r_to_p">R►P</string>
-    <string name="lab_p_to_r">P►R</string>
-    <string name="lab_x_y">X↔Y</string>
-    <string name="lab_n">n</string>
-    <string name="lab_summ_x">∑x</string>
-    <string name="lab_x">x</string>
-    <string name="lab_summ_x2">∑x²</string>
+    <string name="lab_1_x" translatable="false">1/x</string>
+    <string name="lab_r_to_p" translatable="false">R►P</string>
+    <string name="lab_p_to_r" translatable="false">P►R</string>
+    <string name="lab_x_y" translatable="false">X↔Y</string>
+    <string name="lab_n" translatable="false">n</string>
+    <string name="lab_summ_x" translatable="false">∑x</string>
+    <string name="lab_x" translatable="false">x</string>
+    <string name="lab_summ_x2" translatable="false">∑x²</string>
 
-    <string name="x2">x²</string>
-    <string name="a">a</string>
-    <string name="b">b</string>
-    <string name="open_bracket">(</string>
-    <string name="close_bracket">)</string>
-    <string name="x_to_memory">X→M</string>
+    <string name="x2" translatable="false">x²</string>
+    <string name="a" translatable="false">a</string>
+    <string name="b" translatable="false">b</string>
+    <string name="open_bracket" translatable="false">(</string>
+    <string name="close_bracket" translatable="false">)</string>
+    <string name="x_to_memory" translatable="false">X→M</string>
 
-    <string name="lab_deviation">σ<sub>n-1</sub>/σ<sub>n</sub></string>
-    <string name="sampleStdDevi">σ<sub>n-1</sub></string>
-    <string name="stdDeviOfPopu">σ<sub>n</sub></string>
-    <string name="lab_data_del">DATA/DEL</string>
+    <string name="lab_deviation" translatable="false">σ<sub>n-1</sub>/σ<sub>n</sub></string>
+    <string name="sampleStdDevi" translatable="false">σ<sub>n-1</sub></string>
+    <string name="stdDeviOfPopu" translatable="false">σ<sub>n</sub></string>
+    <string name="lab_data_del" translatable="false">DATA/DEL</string>
 
-    <string name="btn_7">7</string>
-    <string name="btn_8">8</string>
-    <string name="btn_9">9</string>
-    <string name="btn_memory_plus">M+</string>
-    <string name="btn_mr">MR</string>
+    <string name="btn_7" translatable="false">7</string>
+    <string name="btn_8" translatable="false">8</string>
+    <string name="btn_9" translatable="false">9</string>
+    <string name="btn_memory_plus" translatable="false">M+</string>
+    <string name="btn_mr" translatable="false">MR</string>
 
-    <string name="lab_oct">OCT</string>
-    <string name="lab_bin">BIN</string>
+    <string name="lab_oct" translatable="false">OCT</string>
+    <string name="lab_bin" translatable="false">BIN</string>
 
-    <string name="btn_4">4</string>
-    <string name="btn_5">5</string>
-    <string name="btn_6">6</string>
-    <string name="btn_mult">×</string>
-    <string name="btn_div">÷</string>
+    <string name="btn_4" translatable="false">4</string>
+    <string name="btn_5" translatable="false">5</string>
+    <string name="btn_6" translatable="false">6</string>
+    <string name="btn_mult" translatable="false">×</string>
+    <string name="btn_div" translatable="false">÷</string>
 
-    <string name="lab_dec">DEC</string>
-    <string name="lab_hex">HEX</string>
+    <string name="lab_dec" translatable="false">DEC</string>
+    <string name="lab_hex" translatable="false">HEX</string>
 
-    <string name="btn_1">1</string>
-    <string name="btn_2">2</string>
-    <string name="btn_3">3</string>
-    <string name="btn_plus">+</string>
-    <string name="btn_minus">-</string>
+    <string name="btn_1" translatable="false">1</string>
+    <string name="btn_2" translatable="false">2</string>
+    <string name="btn_3" translatable="false">3</string>
+    <string name="btn_plus" translatable="false">+</string>
+    <string name="btn_minus" translatable="false">-</string>
 
-    <string name="lab_rnd">RND</string>
-    <string name="lab_percent">%</string>
-    <string name="lab_factorial">x<i>!</i></string>
+    <string name="lab_rnd" translatable="false">RND</string>
+    <string name="lab_percent" translatable="false">%</string>
+    <string name="lab_factorial" translatable="false">x<i>!</i></string>
 
-    <string name="btn_0">0</string>
-    <string name="btn_dot">•</string>
-    <string name="btn_sign">+/-</string>
-    <string name="btn_calc">=</string>
-    <string name="btn_ce">CE</string>
+    <string name="btn_0" translatable="false">0</string>
+    <string name="btn_dot" translatable="false">•</string>
+    <string name="btn_sign" translatable="false">+/-</string>
+    <string name="btn_calc" translatable="false">=</string>
+    <string name="btn_ce" translatable="false">CE</string>
 
-    <string name="dbm_to_w">dbm►W</string>
-    <string name="w_to_dbm">W►dbm</string>
-    <string name="banner_ad_unit_id">ca-app-pub-9802856203007191/1230561785</string>
-    <string name="app_name">FM Calculator</string>
+    <string name="dbm_to_w" translatable="false">dbm►W</string>
+    <string name="w_to_dbm" translatable="false">W►dbm</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9802856203007191/1230561785</string>
+    <string name="app_name" translatable="false">FM Calculator</string>
 
-    <string name="title_activity_currency_rate_query">CurrencyRateQueryActivity</string>
+    <string name="title_activity_currency_rate_query" translatable="false">CurrencyRateQueryActivity</string>
 
-    <string name="bitcoin">₿</string>
-    <string name="protocol">Протокол</string>
-    <string name="settings">Настройки</string>
-    <string name="about">О программе</string>
-    <string name="clear">Очистить</string>
-    <string name="ok_copy_to_clipboard">Число скопировано в буфер обмена</string>
-    <string name="ok_paste_from_clipboard">Число вставлено из буфер обмена</string>
-    <string name="settings_message">Скоро здесь будут настройки программы.</string>
-    <string name="about_message">Автор программы Федоренко Александр.</string>
-    <string name="download_ok">Данные успешно загружены.</string>
-    <string name="download_cancelled">Запрос отменен.</string>
-    <string name="download_error">Ошибка во время запроса.</string>
-    <string name="invalute">INV</string>
-    <string name="evolvent">evo</string>
-    <string name="ok">Ок</string>
+    <string name="bitcoin" translatable="false">₿</string>
+    <string name="protocol">Protocol</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="clear">Clear</string>
+    <string name="ok_copy_to_clipboard">The number has been copied to the clipboard</string>
+    <string name="ok_paste_from_clipboard">The number has been pasted from the clipboard</string>
+    <string name="settings_message">Program settings will be here soon.</string>
+    <string name="about_message">The author of the application is Alexander Fedorenko.</string>
+    <string name="download_ok">Data successfully loaded.</string>
+    <string name="download_cancelled">The request has been canceled.</string>
+    <string name="download_error">Error during request.</string>
+    <string name="invalute" translatable="false">INV</string>
+    <string name="evolvent" translatable="false">evo</string>
+    <string name="ok">OK</string>
+    <string name="close">Close</string>
 
 </resources>

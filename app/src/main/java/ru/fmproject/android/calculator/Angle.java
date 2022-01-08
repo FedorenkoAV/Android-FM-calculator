@@ -8,14 +8,14 @@ package ru.fmproject.android.calculator;
  * отображение едениц измерения углов на статусном дисплее.
  */
 
-class Angle {
+public class Angle {
 
     private static final String TAG = "Angle";
 
     private StatusDisplay statusDisplay;
     private Preferences preferences;
 
-    Angle(Preferences preferences, StatusDisplay statusDisplay) {
+    public Angle(Preferences preferences, StatusDisplay statusDisplay) {
         this.statusDisplay = statusDisplay;
         this.preferences = preferences;
         L.d(TAG, "statusDisplay: " + statusDisplay);
@@ -27,7 +27,7 @@ class Angle {
      *
      * @return - возвращает текущие еденицы измерения углов.
      */
-    AngleUnit getAngleUnit() {
+    public AngleUnit getAngleUnit() {
         AngleUnit angleUnit = preferences.getAngleUnit();
         L.d(TAG, "Получаем значение едениц измерения угла из настроек: " + angleUnit.getName());
         return angleUnit;
@@ -63,7 +63,7 @@ class Angle {
      * Переключает по кругу еденицы измерения углов DEG->RAD->GRAD->DEG.
      */
 
-    void switchAngleUnit() {
+    public void switchAngleUnit() {
         AngleUnit angleUnit = preferences.getAngleUnit();
         switch (angleUnit) {
             case DEG:

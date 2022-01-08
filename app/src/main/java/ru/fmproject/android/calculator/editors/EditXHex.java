@@ -1,4 +1,4 @@
-package ru.fmproject.android.calculator;
+package ru.fmproject.android.calculator.editors;
 
 import android.app.Activity;
 
@@ -8,11 +8,28 @@ import org.apache.commons.lang3.SystemUtils;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+import ru.fmproject.android.calculator.Angle;
+import ru.fmproject.android.calculator.ArgX;
+import ru.fmproject.android.calculator.ArgXHex;
+import ru.fmproject.android.calculator.ComplexStackCalculator;
+import ru.fmproject.android.calculator.CustomToast;
+import ru.fmproject.android.calculator.InputDriver;
+import ru.fmproject.android.calculator.L;
+import ru.fmproject.android.calculator.MainActivity;
+import ru.fmproject.android.calculator.MainDisplay;
+import ru.fmproject.android.calculator.MemoryStore;
+import ru.fmproject.android.calculator.Mode;
+import ru.fmproject.android.calculator.MyExceptions;
+import ru.fmproject.android.calculator.StackCalculator;
+import ru.fmproject.android.calculator.StatisticMode;
+import ru.fmproject.android.calculator.Status;
+import ru.fmproject.android.calculator.StatusDisplay;
+
 /**
  * Created by User on 20.07.2017.
  */
 
-public class EditXHex {
+public class EditXHex implements EditX{
 
     private static final String TAG = "EditXHex";
 
@@ -24,13 +41,13 @@ public class EditXHex {
     private MemoryStore memoryStore;
     private MainDisplay mainDisplay;
     private StackCalculator stackCalculator;
-    private EditX editX;
+    private EditXDec editXDec;
     private EditXBin editXBin;
     private EditXOct editXOct;
     private EditXHex editXHex;
     private ComplexStackCalculator complexStackCalculator;
     private StatisticMode statisticMode;
-    private InputDriver inputDriver;
+//    private InputDriver inputDriver;
     private Activity activity;
 
     private boolean fixModeNumberWait;
@@ -58,13 +75,13 @@ public class EditXHex {
         maxNum = (1 << (mainDisplay.byteLengthHex * 8 - 1)) - 1;
         minNum = -(1 << (mainDisplay.byteLengthHex * 8 - 1));
         stackCalculator = (StackCalculator) objStore[MainActivity.STACK_CALCULATOR];
-        editX = (EditX) objStore[MainActivity.EDIT_X];
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         complexStackCalculator = (ComplexStackCalculator) objStore[MainActivity.CPLX];
         statisticMode = (StatisticMode) objStore[MainActivity.SD];
-        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
+//        inputDriver = (InputDriver) objStore[MainActivity.INPUT_DRIVER];
         activity = (Activity) objStore[MainActivity.MAIN_ACTIVITY];
         for (int i = 0; i < objStore.length; i++) {
 
@@ -107,7 +124,7 @@ public class EditXHex {
         L.d(TAG, "EditXHex успешно создан!");
     }
 
-    void restart() {
+    public void restart() {
         status.offError();
         status.setBracket(false);
         stackCalculator.restart();
@@ -124,7 +141,7 @@ public class EditXHex {
         argX = new ArgXHex();
     }
 
-    void add(char pressedKey) {
+    public void add(char pressedKey) {
         if (!argX.isEditable()) { // Если флаг Editable выключен, то нужно создать новое пустое число
             stackCalculator.setResult(false);
             newArg();
@@ -146,35 +163,40 @@ public class EditXHex {
         makeArg();
     }
 
-    void setNumber(int intNumber) {
+    public void setNumber(int intNumber) {
         argX.setNumber(intNumber);
         L.d(TAG, "В argXHex записали: " + intNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void setNumber(long longNumber) {
+    public void setNumber(long longNumber) {
         argX.setNumber(longNumber);
         L.d(TAG, "В argXHex записали: " + longNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void setNumber(double doubleNumber) {
+    public void setNumber(double doubleNumber) {
         argX.setNumber(doubleNumber);
         L.d(TAG, "В argXHex записали: " + doubleNumber);
         makeArg();
         L.d(TAG, "Отобразили на дисплее: " + argX.getNumber());
     }
 
-    void x_to_y() throws MyExceptions {
+    @Override
+    public double getNumber() {
+        return argX.getDouble(mainDisplay.byteLengthHex);
+    }
+
+    public void x_to_y() throws MyExceptions {
         argX = new ArgXHex(stackCalculator.xToY(argX.getDouble(mainDisplay.byteLengthHex)));
         newInput = true;
         calcpress = true;
         makeArg();
     }
 
-    void plus() throws MyExceptions {
+    public void plus() throws MyExceptions {
         argX = new ArgXHex(calculatorSelector(argX.getDouble(mainDisplay.byteLengthHex), stackCalculator.PLUS));
         newInput = true;
         calcpress = false;
@@ -182,7 +204,7 @@ public class EditXHex {
         makeArg();
     }
 
-    void minus() throws MyExceptions {
+    public void minus() throws MyExceptions {
         argX = new ArgXHex(calculatorSelector(argX.getDouble(mainDisplay.byteLengthHex), stackCalculator.MINUS));
         newInput = true;
         calcpress = false;
@@ -190,7 +212,7 @@ public class EditXHex {
         makeArg();
     }
 
-    void mult() throws MyExceptions {
+    public void mult() throws MyExceptions {
         argX = new ArgXHex(calculatorSelector(argX.getDouble(mainDisplay.byteLengthHex), stackCalculator.MULTIPLY));
         newInput = true;
         calcpress = false;
@@ -198,7 +220,7 @@ public class EditXHex {
         makeArg();
     }
 
-    void div() throws MyExceptions {
+    public void div() throws MyExceptions {
         argX = new ArgXHex(calculatorSelector(argX.getDouble(mainDisplay.byteLengthHex), stackCalculator.DIVIDE));
         newInput = true;
         calcpress = false;
@@ -206,7 +228,7 @@ public class EditXHex {
         makeArg();
     }
 
-    void calc() throws MyExceptions {
+    public void calc() throws MyExceptions {
         argX = new ArgXHex(calcAll(argX.getDouble(mainDisplay.byteLengthHex)));
         newInput = true;
         calcpress = true;
@@ -215,7 +237,7 @@ public class EditXHex {
 
     }
 
-    void del() {
+    public void del() {
         if (!argX.isEditable()) {
             return;
         }
@@ -230,13 +252,13 @@ public class EditXHex {
         makeArg();
     }
 
-    void sign() {
+    public void sign() {
         argX.setSign(!argX.isSign());
         makeArg();
     }
 
 
-    void ce() {
+    public void ce() {
         newArg();
         newInput = true;
         calcpress = false;
@@ -307,24 +329,24 @@ public class EditXHex {
         currentNumber = stackCalculator.calc(currentNumber, currentOperation); //Считаем
         calc = true;
         if (Double.isInfinite(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getTOO_BIG());
+            throw new MyExceptions(MyExceptions.TOO_BIG);
         }
 //        if (currentNumber < 0 && Double.isInfinite(currentNumber)) {
 //            throw new MyExceptions(MyExceptions.TOO_SMALL);
 //        }
         if (Double.isNaN(currentNumber)) {
-            throw new MyExceptions(MyExceptions.Companion.getNOT_NUMBER());
+            throw new MyExceptions(MyExceptions.NOT_NUMBER);
         }
         return currentNumber;
     }
 
-    void x_to_m() {
+    public void x_to_m() {
         setMemory(argX.getDouble(mainDisplay.byteLengthHex));
         newInput = true;
         calcpress = true;
     }
 
-    void readMemory() {
+    public void readMemory() {
         int memNum = (int) getMemory();
 //        if (memNum > maxNum) {
 //            customToast.setToastText("В памяти число больше чем " + maxNum);
@@ -344,13 +366,13 @@ public class EditXHex {
         calcpress = true;
     }
 
-    void clearMemory() {
+    public void clearMemory() {
         setMemory(0);
         newInput = true;
         calcpress = true;
     }
 
-    void memoryPlus() throws MyExceptions {
+    public void memoryPlus() throws MyExceptions {
         double tmp1 = argX.getDouble(mainDisplay.byteLengthHex);
         L.d(TAG, "Набрано: " + tmp1 + " M+");
         if (!stackCalculator.isOperationStackEmpty()) {
@@ -379,20 +401,20 @@ public class EditXHex {
         return mem;
     }
 
-    void toDec() {
-        editX = (EditX) objStore[MainActivity.EDIT_X];
-        if (editX == null) {
-            editX = new EditX(objStore);
+    public void toDec() {
+        editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
+        if (editXDec == null) {
+            editXDec = new EditXDec(objStore);
             L.d(TAG, "Создали объект editX, который будет отвечать за ввод всего");
-            objStore[MainActivity.EDIT_X] = editX;
+            objStore[MainActivity.EDIT_X_DEC] = editXDec;
         }
         L.d(TAG, "Переключаемся в DEC режим.");
         double doubleNumber = argX.getDouble(mainDisplay.byteLengthHex);
         L.d(TAG, "В DEC режим передаем число: " + doubleNumber);
-        editX.setNumber(doubleNumber);
+        editXDec.setNumber(doubleNumber);
     }
 
-    void toBin() {
+    public void toBin() {
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
         if (editXBin == null) {
             editXBin = new EditXBin(objStore);
@@ -405,7 +427,7 @@ public class EditXHex {
         editXBin.setNumber(doubleNumber);
     }
 
-    void toOct() {
+    public void toOct() {
         editXOct = (EditXOct) objStore[MainActivity.EDIT_X_OCT];
         if (editXOct == null) {
             editXOct = new EditXOct(objStore);
@@ -418,7 +440,7 @@ public class EditXHex {
         editXOct.setNumber(doubleNumber);
     }
 
-    void toHex() {
+    public void toHex() {
         editXHex = (EditXHex) objStore[MainActivity.EDIT_X_HEX];
         if (editXHex == null) {
             editXHex = new EditXHex(objStore);
@@ -432,7 +454,7 @@ public class EditXHex {
     }
 
 
-    StringBuilder copyToClipboard() {
+    public StringBuilder copyToClipboard() {
         StringBuilder sb = new StringBuilder("");
 
         if (argX.isSign()) { // Если есть минус, то меняем отображаемое число
@@ -448,7 +470,7 @@ public class EditXHex {
     }
 
 
-    void pasteFromClipboard(String str) {
+    public void pasteFromClipboard(String str) {
         L.d(TAG, "Из буфера обмена получено: " + str);
         StringBuilder sb = (createDouble(str));
         if (sb.length() == 0) {
@@ -1001,7 +1023,4 @@ public class EditXHex {
         }
         return !allowSigns && foundDigit;
     }
-
-
-    
 }

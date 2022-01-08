@@ -16,7 +16,7 @@ import android.widget.Toast;
  * Для разных платформ (Android, Windows) нужно переписывать этот класс, так как он платформозависимый
  */
 
-class CustomToast {
+public class CustomToast {
     //    Context context;
     private Activity activity;
     private LayoutInflater inflater;
@@ -29,7 +29,7 @@ class CustomToast {
     public final static int IC_ERROR_RED_64PT = R.drawable.ic_error_red_24dp;
 
 
-    CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset, int toastDuration,float horizontalMargin, float verticalMargin) {
+    public CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset, int toastDuration,float horizontalMargin, float verticalMargin) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,7 +45,7 @@ class CustomToast {
         toast.setView(toastLayout);
     }
 
-    CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset, int toastDuration) {
+    public CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset, int toastDuration) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,7 +60,7 @@ class CustomToast {
         toast.setView(toastLayout);
     }
 
-    CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset) {
+    public CustomToast(Activity activity, String textOnToast, int imageOnToast, int toastGravity, int xOffset, int yOffset) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,7 +74,7 @@ class CustomToast {
         toast.setView(toastLayout);
     }
 
-    CustomToast(Activity activity, String textOnToast, int imageOnToast) {
+    public CustomToast(Activity activity, String textOnToast, int imageOnToast) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -87,7 +87,7 @@ class CustomToast {
         toast.setView(toastLayout);
     }
 
-    CustomToast(Activity activity, String textOnToast) {
+    public CustomToast(Activity activity, String textOnToast) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -102,7 +102,7 @@ class CustomToast {
 
     }
 
-    CustomToast(Activity activity) {
+    public CustomToast(Activity activity) {
         //        Создаем свой тост https://developer.android.com/guide/topics/ui/notifiers/toasts.html
         this.activity = activity;
         inflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -115,23 +115,23 @@ class CustomToast {
         toast.setView(toastLayout);
     }
 
-    void show() {
+    public void show() {
         toast.show();
     }
 
-    void setToastText(String newText) {
+    public void setToastText(String newText) {
         toastText.setText(newText);
     }
 
-    void setToastImage(int imageOnToast) {
+    public void setToastImage(int imageOnToast) {
         toastImage.setImageResource(imageOnToast); // устанавливаем на него картинку из ресурсов
     }
 
-    void setToastGravity (int toastGravity, int xOffset, int yOffset) {
+    public void setToastGravity (int toastGravity, int xOffset, int yOffset) {
         toast.setGravity(toastGravity, xOffset, yOffset);
     }
 
-    void setToastMargin (float horizontalMargin, float verticalMargin) {
+    public void setToastMargin (float horizontalMargin, float verticalMargin) {
         toast.setMargin(horizontalMargin, verticalMargin);
     }
 }
