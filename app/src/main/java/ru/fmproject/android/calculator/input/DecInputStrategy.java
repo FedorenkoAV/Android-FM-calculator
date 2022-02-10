@@ -78,7 +78,7 @@ public class DecInputStrategy extends AbstractInputStrategy {
     }
 
     @Override
-    public void buttonOpenBracket() {
+    public void buttonOpenBracket() throws MyExceptions {
         editXDec.openBracket();
     }
 

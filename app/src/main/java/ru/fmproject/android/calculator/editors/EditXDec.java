@@ -11,7 +11,6 @@ import ru.fmproject.android.calculator.Angle;
 import ru.fmproject.android.calculator.ArgX;
 import ru.fmproject.android.calculator.ComplexStackCalculator;
 import ru.fmproject.android.calculator.CustomToast;
-import ru.fmproject.android.calculator.InputDriver;
 import ru.fmproject.android.calculator.L;
 import ru.fmproject.android.calculator.MainActivity;
 import ru.fmproject.android.calculator.MainDisplay;
@@ -923,8 +922,11 @@ public class EditXDec implements EditX{
         makeArg();
     }
 
-    public void openBracket() {
+    public void openBracket() throws MyExceptions{
         if (!stackCalculator.isOperationStackEmpty() || (stackCalculator.isNumberStackEmpty()) & newInput) {      // Открываем скобку только в случае, если в стеке операций что-то есть (+,-,*,/,корень, степень) или если стек чисел пуст
+            if(!argX.isVirgin()) {
+                mult();
+            }
             L.d(TAG, "Скобка открыта");
             status.setBracket(true);
 //            if (operationStack.empty()) {

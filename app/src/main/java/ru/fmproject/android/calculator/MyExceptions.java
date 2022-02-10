@@ -1,5 +1,7 @@
 package ru.fmproject.android.calculator;
 
+import android.content.res.Resources;
+
 public class MyExceptions extends Throwable {
 
     public static final int NONE = 0;
@@ -11,6 +13,9 @@ public class MyExceptions extends Throwable {
     public static final int INFINITY = 6;
     public static final int NEGATIVE_INFINITY = 7;
     public static final int NOT_NUMBER = 8;
+    public static final int REDIRECT_ANOTHER_ADDRESS = 9;
+
+    Enum<MyExceptionsMsg> reason2;
 
     private final String[] exp = {
             "",
@@ -40,7 +45,6 @@ public class MyExceptions extends Throwable {
     public MyExceptions(int reason, String msg) {
         this.reason = reason;
         this.msg = msg;
-
     }
 
     public String getReason() {

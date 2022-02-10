@@ -30,9 +30,9 @@ public class Protocol implements View.OnLongClickListener {
     private SpannableStringBuilder sbProtocol;
 
     private ComplexFormat complexFormat;
-    Mode mode;
+    private Mode mode;
 
-    Protocol(TextView tvProtocol, Mode mode, MyDialogFragment myDialogFragment, FragmentManager manager) {
+    public Protocol(TextView tvProtocol, Mode mode, MyDialogFragment myDialogFragment, FragmentManager manager) {
         this.tvProtocol = tvProtocol;
         this.mode = mode;
         this.myDialogFragment = myDialogFragment;
@@ -45,18 +45,18 @@ public class Protocol implements View.OnLongClickListener {
 
     }
 
-    void cls() {
+    public void cls() {
         tvProtocol.setText("");
     }
 
-    void println() {
+    public void println() {
         if (doCls) {
             cls();
         }
         doCls = true;
     }
 
-    void println(String msg) {
+    public void println(String msg) {
         if (doCls) {
             cls();
         }
@@ -65,7 +65,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(msg).append("\n");
     }
 
-    void println(int integerNum) {
+    public void println(int integerNum) {
         String printString = "";
         switch (mode.getMode()) {
             case Mode.BIN:
@@ -89,7 +89,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(printString).append("\n");
     }
 
-    void println(double doubleNum) {
+    public void println(double doubleNum) {
         String printString = "";
         int integerNum = (int) doubleNum;
         switch (mode.getMode()) {
@@ -115,7 +115,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(printString).append("\n");
     }
 
-    void println(Complex complex) {
+    public void println(Complex complex) {
         if (doCls) {
             cls();
         }
@@ -124,7 +124,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append("(").append(complexFormat.format(complex)).append(")\n");
     }
 
-    void println(List<Complex> cplxNumList) {
+    public void println(List<Complex> cplxNumList) {
         if (doCls) {
             cls();
         }
@@ -140,7 +140,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append("\n");
     }
 
-    void println(Object someObj) {
+    public void println(Object someObj) {
         if (doCls) {
             cls();
         }
@@ -150,14 +150,14 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(strToPrint).append("\n");
     }
 
-    void print() {
+    public void print() {
         if (doCls) {
             cls();
         }
         doCls = false;
     }
 
-    void print(String msg) {
+    public void print(String msg) {
         if (doCls) {
             cls();
         }
@@ -166,7 +166,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(msg);
     }
 
-    void print(int integerNum) {
+    public void print(int integerNum) {
         String printString = "";
         switch (mode.getMode()) {
             case Mode.BIN:
@@ -190,7 +190,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(printString);
     }
 
-    void print(double doubleNum) {
+    public void print(double doubleNum) {
         String printString = "";
         int integerNum = (int) doubleNum;
         switch (mode.getMode()) {
@@ -215,7 +215,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append(printString);
     }
 
-    void print(Complex complex) {
+    public void print(Complex complex) {
         if (doCls) {
             cls();
         }
@@ -224,7 +224,7 @@ public class Protocol implements View.OnLongClickListener {
         sbProtocol.append("(").append(complexFormat.format(complex)).append(")");
     }
 
-    void print(List<Complex> cplxNumList) {
+    public void print(List<Complex> cplxNumList) {
         if (doCls) {
             cls();
         }
@@ -239,7 +239,7 @@ public class Protocol implements View.OnLongClickListener {
 
     }
 
-    void print(Object someObj) {
+    public void print(Object someObj) {
         if (doCls) {
             cls();
         }
@@ -255,14 +255,14 @@ public class Protocol implements View.OnLongClickListener {
         return false;
     }
 
-    void alertDialog() {
+    public void alertDialog() {
         myDialogFragment.setText(sbProtocol.toString());
         manager.beginTransaction().add(myDialogFragment, "myDialogFragment")
                                     .show(myDialogFragment)
                                     .commit();
     }
 
-    void clearProtocol () {
+    public void clearProtocol () {
         sbProtocol = new SpannableStringBuilder();
     }
 }

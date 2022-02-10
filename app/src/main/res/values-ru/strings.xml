@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="protocol">Протокол</string>
+    <string name="settings">Настройки</string>
+    <string name="about">О программе</string>
+    <string name="clear">Очистить</string>
+    <string name="ok_copy_to_clipboard">Число скопировано в буфер обмена</string>
+    <string name="ok_paste_from_clipboard">Число вставлено из буфер обмена</string>
+    <string name="settings_message">Скоро здесь будут настройки программы.</string>
+    <string name="about_message">Автор приложения Федоренко Александр.</string>
+    <string name="download_ok">Данные успешно загружены.</string>
+    <string name="download_cancelled">Запрос отменен.</string>
+    <string name="download_error">Ошибка во время запроса.</string>
+    <string name="ok">Ок</string>
+    <string name="close">Закрыть</string>
+</resources>

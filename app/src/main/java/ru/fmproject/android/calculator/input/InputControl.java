@@ -229,10 +229,12 @@ public class InputControl implements View.OnClickListener {
                     break;
             }
             editX.setNumber(editXNumber);
+            return;
         }
 
         if (!status.isShift() && !status.isHyp() && viewId == R.id.FuncButtonDrg) {// Если SHIFT выключен, Hyp выключен и нажата кнопка DRG
             angle.switchAngleUnit();//Переключаем еденицы измерения углов
+            return;
         }
 
         try {
