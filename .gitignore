@@ -179,6 +179,7 @@ obj/
 .idea/libraries/
 .idea/shelf/
 .idea/.name
+.idea/sonarlint/
 .idea/compiler.xml
 .idea/copyright/profiles_settings.xml
 .idea/encodings.xml
@@ -191,6 +192,7 @@ obj/
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/deploymentTargetDropDown.xml
 
 # OS-specific files
 .DS_Store
