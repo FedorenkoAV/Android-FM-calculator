@@ -1,6 +1,7 @@
 package ru.fmproject.android.calculator;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Created by User on 20.06.2017.
@@ -9,13 +10,13 @@ import java.util.Stack;
 public class StatisticMode {
     private static final String TAG = "StatisticMode";
 
-    private Stack<Double> sdStack;
+    private final Deque<Double> sdStack;
 
-    private Protocol protocol;
+    private final Protocol protocol;
 
     public StatisticMode(Protocol protocol) {
         this.protocol = protocol;
-        sdStack = new Stack<>();
+        sdStack = new ArrayDeque<>();
         protocol.println("Statistic mode.");
         L.d(TAG, "Создан стек для статистических вычислений.");
     }
@@ -27,7 +28,7 @@ public class StatisticMode {
     }
 
     public boolean isStackEmpty() {
-        return sdStack.empty();
+        return sdStack.isEmpty();
     }
 
     public int singleNumberToStack(double currentNum) {
@@ -56,7 +57,7 @@ public class StatisticMode {
     }
 
     public int deleteSingleNumber(double currentNum) { //Удаляем конкретное число из стека
-        if (sdStack.removeElement(currentNum)) {
+        if (sdStack.remove(currentNum)) {
             L.d(TAG, "Значение " + currentNum + " успешно удалено из стека");
         } else {
             L.d(TAG, "Значение " + currentNum + " в стеке не найдено");
@@ -68,7 +69,7 @@ public class StatisticMode {
     public int deleteMultipleNumberFromStack(double dataValue, int i) {
         int count = 0;
         for (int n = 0; n < i; n++) {
-            if (sdStack.removeElement(dataValue)) {
+            if (sdStack.remove(dataValue)) {
                 count++;
             }
         }
@@ -102,17 +103,13 @@ public class StatisticMode {
      * @param stack
      * @return
      */
-    private double totalOfDatum(Stack stack) {
-        if (stack.empty()) {
+    private double totalOfDatum(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
-        double totalOfDatum = 0;
-        double stackValue;
-        for (int n = 0; n < stack.size(); n++) {
-            stackValue = (double) stack.get(n);
-            L.d(TAG, "Из стека считан " + n + " элемент = " + stackValue);
-            totalOfDatum = totalOfDatum + stackValue;
-        }
+        double totalOfDatum = stack.stream()
+                .mapToDouble(x -> x)
+                .sum();
         protocol.println("∑(x)=" + totalOfDatum);
         return totalOfDatum;
     }
@@ -121,19 +118,13 @@ public class StatisticMode {
      * @param stack
      * @return
      */
-    private double totalOfSquare(Stack stack) {
-        if (stack.empty()) {
+    private double totalOfSquare(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
-        double totalOfSquare = 0;
-        double stackValue;
-        for (int n = 0; n < stack.size(); n++) {
-            stackValue = (double) stack.get(n);
-            L.d(TAG, "Из стека считан " + n + " элемент = " + stackValue);
-            stackValue = stackValue * stackValue;
-            L.d(TAG, " его квадрат равен " + stackValue);
-            totalOfSquare = totalOfSquare + stackValue;
-        }
+        double totalOfSquare = stack.stream()
+                .mapToDouble(x -> x * x)
+                .sum();
         protocol.println("∑(x²)=" + totalOfSquare);
         return totalOfSquare;
     }
@@ -142,8 +133,8 @@ public class StatisticMode {
      * @param stack
      * @return
      */
-    private double averageOfDatum(Stack stack) {
-        if (stack.empty()) {
+    private double averageOfDatum(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
         double averageOfDatum = totalOfDatum(stack) / stack.size();
@@ -156,13 +147,13 @@ public class StatisticMode {
      * @return
      */
     //Standard deviation of population
-    private double stdDeviOfPopu(Stack stack) {
-        if (stack.empty()) {
+    private double stdDeviOfPopu(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
         int stackSize = stack.size();
-        double totalOfdiffSquare = totalOfdiffSquare(stack);
-        double stdDeviOfPopu = Math.sqrt(totalOfdiffSquare / (stackSize));
+        double totalOfDiffSquare = totalOfDiffSquare(stack);
+        double stdDeviOfPopu = Math.sqrt(totalOfDiffSquare / (stackSize));
         protocol.println("Ϭ\u2099 = " + stdDeviOfPopu);
         return stdDeviOfPopu;
     }
@@ -171,42 +162,28 @@ public class StatisticMode {
      * @param stack
      * @return
      */
-    private double totalOfdiffSquare(Stack stack) {
-        if (stack.empty()) {
+    private double totalOfDiffSquare(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
-        double totalOfdiffSquare = 0;
-        double stackValue;
         double averageOfDatum = averageOfDatum(stack); //вычисляем среднее значение
-        double squareDiff;
-        int stackSize = stack.size();
-        for (int n = 0; n < stackSize; n++) {
-            stackValue = (double) stack.get(n);
-            L.d(TAG, "Из стека считан " + n + " элемент = " + stackValue);
-            squareDiff = Math.pow((stackValue - averageOfDatum), 2);
-            totalOfdiffSquare = totalOfdiffSquare + squareDiff;
-        }
-        return totalOfdiffSquare;
+        return stack.stream()
+                .mapToDouble(stackValue -> Math.pow((stackValue - averageOfDatum), 2))
+                .sum();
     }
 
     /**
      * @param stack
      * @return
      */
-    private double sampleStdDevi(Stack stack) {
-        if (stack.empty()) {
+    private double sampleStdDevi(Deque<Double> stack) {
+        if (stack.isEmpty()) {
             return 0;
         }
         int stackSize = stack.size();
-        double totalOfdiffSquare = totalOfdiffSquare(stack);
-        double sampleStdDevi = Math.sqrt(totalOfdiffSquare / (stackSize - 1));
+        double totalOfDiffSquare = totalOfDiffSquare(stack);
+        double sampleStdDevi = Math.sqrt(totalOfDiffSquare / (stackSize - 1));
         protocol.println("Ϭ\u2099\u208B\u2081 = " + sampleStdDevi);
-//         Create spannable text and set style.
-//        Spannable text = new SpannableString("σn-1");
-//        text.setSpan(new SubscriptSpan(), 1, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        protocol.print(text);
-//        protocol.println(" = " + sampleStdDevi);
-//        protocol.println(Html.fromHtml("Ϭ<sub>n-1</sub>") + " = " + sampleStdDevi);
         return sampleStdDevi;
     }
 }

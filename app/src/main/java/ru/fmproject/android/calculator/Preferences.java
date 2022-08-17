@@ -24,12 +24,12 @@ public class Preferences {
 
     private SharedPreferences mSettings; //переменная, представляющая экземпляр класса SharedPreferences, которая отвечает за работу с настройками
 
-    Preferences(Context context) {
+    public Preferences(Context context) {
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); //инициализируем переменную, которая отвечает за работу с настройками
         L.d(TAG, "Создали новый Preferences");
     }
 
-    double getMemory() {
+    public double getMemory() {
         double memoryValue = 0.0;
         if (mSettings.contains(APP_PREFERENCES_MEMORY)) {
             // Получаем значения из настроек
@@ -39,7 +39,7 @@ public class Preferences {
         return memoryValue;
     }
 
-    void setMemory(double memoryValue) {
+    public void setMemory(double memoryValue) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_MEMORY, String.valueOf(memoryValue));
         L.d(TAG, "Занесли значение памяти в настройки: " + memoryValue);
@@ -47,7 +47,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getFixMode() {
+    public int getFixMode() {
         int fixModeScale = -1;
         if (mSettings.contains(APP_PREFERENCES_FIX)) {
             // Получаем значения из настроек
@@ -58,7 +58,7 @@ public class Preferences {
         return fixModeScale;
     }
 
-    void setFixMode(int fixModeScale) {
+    public void setFixMode(int fixModeScale) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_FIX, fixModeScale);
         L.d(TAG, "Занесли значение режима округления в настройки: " + fixModeScale);
@@ -66,7 +66,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    AngleUnit getAngleUnit() {
+    public AngleUnit getAngleUnit() {
         String angleUnit = AngleUnit.DEG.name();
         if (mSettings.contains(APP_PREFERENCES_ANGLE)) {
             // Получаем значения из настроек
@@ -76,7 +76,7 @@ public class Preferences {
         return AngleUnit.valueOf(angleUnit);
     }
 
-    void setAngleUnit(AngleUnit angleUnit) {
+    public void setAngleUnit(AngleUnit angleUnit) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putString(APP_PREFERENCES_ANGLE, angleUnit.name());
         L.d(TAG, "Занесли значение едениц измерения угла в настройки: " + angleUnit);
@@ -84,7 +84,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getBinLength() {
+    public int getBinLength() {
         int binLength = 1;
         if (mSettings.contains(APP_PREFERENCES_BIN)) {
             // Получаем значения из настроек
@@ -94,7 +94,7 @@ public class Preferences {
         return binLength;
     }
 
-    void setBinLength(int binLength) {
+    public void setBinLength(int binLength) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_BIN, binLength);
         L.d(TAG, "Занесли значение режима округления в настройки: " + binLength);
@@ -102,7 +102,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getHexLength() {
+    public int getHexLength() {
         int hexLength = 5;
         if (mSettings.contains(APP_PREFERENCES_HEX)) {
             // Получаем значения из настроек
@@ -112,7 +112,7 @@ public class Preferences {
         return hexLength;
     }
 
-    void setHexLength(int hexLength) {
+    public void setHexLength(int hexLength) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_HEX, hexLength);
         L.d(TAG, "Занесли значение режима округления в настройки: " + hexLength);
@@ -120,7 +120,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getOctLength() {
+    public int getOctLength() {
         int octLength = 1;
         if (mSettings.contains(APP_PREFERENCES_OCT)) {
             // Получаем значения из настроек
@@ -130,7 +130,7 @@ public class Preferences {
         return octLength;
     }
 
-    void setOctLength(int octLength) {
+    public void setOctLength(int octLength) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_OCT, octLength);
         L.d(TAG, "Занесли значение режима округления в настройки: " + octLength);
@@ -138,7 +138,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getExpLength() {
+    public int getExpLength() {
         int expLength = 2;
         if (mSettings.contains(APP_PREFERENCES_EXP)) {
             // Получаем значения из настроек
@@ -148,7 +148,7 @@ public class Preferences {
         return expLength;
     }
 
-    void setExpLength(int expLength) {
+    public void setExpLength(int expLength) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_EXP, expLength);
         L.d(TAG, "Занесли значение режима округления в настройки: " + expLength);
@@ -156,7 +156,7 @@ public class Preferences {
         L.d(TAG, "Зафиксировали изменения в файле настроек.");
     }
 
-    int getNumLength() {
+    public int getNumLength() {
         int numLength = 18;
         if (mSettings.contains(APP_PREFERENCES_NUM)) {
             // Получаем значения из настроек
@@ -166,7 +166,7 @@ public class Preferences {
         return numLength;
     }
 
-    void setNumLength(int numLength) {
+    public void setNumLength(int numLength) {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt(APP_PREFERENCES_NUM, numLength);
         L.d(TAG, "Занесли значение режима округления в настройки: " + numLength);

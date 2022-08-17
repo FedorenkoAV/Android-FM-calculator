@@ -179,7 +179,8 @@ public class InputControl implements View.OnClickListener {
                     }
                     inputStrategy = decInputStrategy;
                     status.offShift();
-                    break;
+                    editX.setNumber(editXNumber);
+                    return;
                 case (R.id.ButtonMinus)://Включаем режим HEX и соответствующую стратегию
                     mode.setHEX();
                     if (editXHex == null) {
@@ -191,7 +192,8 @@ public class InputControl implements View.OnClickListener {
                     }
                     inputStrategy = hexInputStrategy;
                     status.offShift();
-                    break;
+                    editX.setNumber(editXNumber);
+                    return;
                 case (R.id.ButtonMult)://Включаем режим OCT и соответствующую стратегию
                     mode.setOCT();
                     if (editXOct == null) {
@@ -203,7 +205,8 @@ public class InputControl implements View.OnClickListener {
                     }
                     inputStrategy = octInputStrategy;
                     status.offShift();
-                    break;
+                    editX.setNumber(editXNumber);
+                    return;
                 case (R.id.ButtonDiv)://Включаем режим BIN и соответствующую стратегию
                     mode.setBIN();
                     if (editXBin == null) {
@@ -215,7 +218,8 @@ public class InputControl implements View.OnClickListener {
                     }
                     inputStrategy = binInputStrategy;
                     status.offShift();
-                    break;
+                    editX.setNumber(editXNumber);
+                    return;
                 case (R.id.FuncButtonDel)://Включаем режим CPLX
                     mode.switchCplx();
                     if (mode.getMode() == Mode.COMPLEX) {
@@ -226,10 +230,9 @@ public class InputControl implements View.OnClickListener {
                     }
                     inputStrategy = decInputStrategy;
                     status.offShift();
-                    break;
+                    editX.setNumber(editXNumber);
+                    return;
             }
-            editX.setNumber(editXNumber);
-            return;
         }
 
         if (!status.isShift() && !status.isHyp() && viewId == R.id.FuncButtonDrg) {// Если SHIFT выключен, Hyp выключен и нажата кнопка DRG

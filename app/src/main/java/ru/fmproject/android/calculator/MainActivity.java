@@ -39,6 +39,7 @@ import com.google.android.gms.ads.AdView;
 import java.util.HashMap;
 import java.util.Map;
 
+import ru.fmproject.android.calculator.calculators.StackCalculator;
 import ru.fmproject.android.calculator.editors.EditXDec;
 import ru.fmproject.android.calculator.input.InputControl;
 

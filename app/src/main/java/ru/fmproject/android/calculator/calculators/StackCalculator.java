@@ -1,9 +1,9 @@
 package ru.fmproject.android.calculator.calculators;
 
-import static java.lang.Double.compare;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import static java.lang.Double.compare;
 
 import ru.fmproject.android.calculator.Angle;
 import ru.fmproject.android.calculator.AngleUnit;
@@ -672,20 +672,20 @@ public class StackCalculator {
          * 7. Собираем ответ по формуле degree = degreeInt + minInt/100 + sec/10000
          *
          * */
-        double degreeInt = argX.getMantissaIntegerPartinDouble();
+        double degreeInt = argX.getMantissaIntegerPartInDouble();
         L.d(TAG, "Целая часть градусов = " + degreeInt);
 
-        double degreeFrac = argX.getMantissaFractionalPartinDouble();
+        double degreeFrac = argX.getMantissaFractionalPartInDouble();
         L.d(TAG, "Дробная часть градусов = " + degreeFrac);
 
         double min = degreeFrac * 60;
         L.d(TAG, "Минуты = " + degreeFrac + " * 60 = " + min);
 
         ArgX minArgX = new ArgX(min);
-        double minInt = minArgX.getMantissaIntegerPartinDouble();
+        double minInt = minArgX.getMantissaIntegerPartInDouble();
         L.d(TAG, "Целая часть минут = " + minInt);
 
-        double minFrac = minArgX.getMantissaFractionalPartinDouble();
+        double minFrac = minArgX.getMantissaFractionalPartInDouble();
         L.d(TAG, "Дробная часть минут = " + minFrac);
 
         double sec = minFrac * 60;
@@ -729,7 +729,7 @@ public class StackCalculator {
             L.d(TAG, "Теперь дробная часть мантиссы " + argX.getMantissaFractionalPart());
         }
 
-        degree = argX.getMantissaIntegerPartinDouble();
+        degree = argX.getMantissaIntegerPartInDouble();
         if (argX.isSign()) {
             degree = -degree;
         }
