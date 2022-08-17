@@ -97,6 +97,21 @@ public class ShiftDecInputStrategy extends AbstractShiftInputStrategy {
     }
 
     @Override
+    public void button04() {
+        editXDec.getCurrencyRate("USD");
+    }
+
+    @Override
+    public void button05() {
+        editXDec.getCurrencyRate("EUR");
+    }
+
+    @Override
+    public void button06() {
+        editXDec.getBitcoinRate("BTC_USD");
+    }
+
+    @Override
     public void button01() {
         // dbm to w
         editXDec.dbm_to_w();

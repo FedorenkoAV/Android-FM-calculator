@@ -802,11 +802,18 @@ public class EditXDec implements EditX{
     }
 
     public void dollar(String currency_rate) {
-//        argX = new ArgX(currency_rate);
         argX.setFromString(currency_rate);
         calcpress = true;
         newInput = true;
         makeArg();
+    }
+
+    public void getCurrencyRate(String currency) {
+        activity.currencyRate(currency);
+    }
+
+    public void getBitcoinRate(String currency) {
+        activity.bitcoinRate(currency);
     }
 
     public void plus() throws MyExceptions {

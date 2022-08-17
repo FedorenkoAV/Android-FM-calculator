@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Status status;
     MemoryStore memoryStore;
-//    InputDriver inputDriver;
     InputControl inputControl;
 
     Object[] objStore = new Object[19];
