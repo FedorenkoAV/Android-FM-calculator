@@ -29,7 +29,7 @@ public class ArgXOct extends ArgXParent {
         }
         setNumber(new StringBuilder(Integer.toOctalString(intNumber)));
         setEditable(false);
-        setNotVirgin();
+        setVirginity(false);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ArgXOct extends ArgXParent {
         }
         setNumber(new StringBuilder(Long.toOctalString(longNumber)));
         setEditable(false);
-        setNotVirgin();
+        setVirginity(false);
     }
 
     @Override

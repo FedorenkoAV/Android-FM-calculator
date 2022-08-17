@@ -10,26 +10,12 @@ public abstract class ArgXParent {
 
     public ArgXParent() {
         reset();
-//        number = new StringBuilder();
-//        sign = false;
-//        editable = true;
-//        virginity = true;
-        L.d(TAG, "Создали новый пустой ArgXParent");
+        //L.d(TAG, "Создали новый пустой ArgXParent");
     }
-
-//    ArgXParent(long longNumber) {
-//        setNumber(longNumber);
-//        L.d(TAG, "Создали новый НЕпустой ArgXParent");
-//    }
-//
-//    ArgXParent(int intNumber) {
-//        setNumber(intNumber);
-//        L.d(TAG, "Создали новый НЕпустой ArgXParent");
-//    }
 
     public ArgXParent(double doubleNumber) {
         setNumber(doubleNumber);
-        L.d(TAG, "Создали новый НЕпустой ArgXParent");
+        //L.d(TAG, "Создали новый НЕпустой ArgXParent");
     }
 
     public void reset () {
@@ -61,7 +47,7 @@ public abstract class ArgXParent {
     public double getDouble(int byteLength) {
         double doubleNumber;
         doubleNumber = (double) getLong(byteLength);
-        L.d(TAG, "После преобразования в double получили: " + doubleNumber);
+        //L.d(TAG, "После преобразования в double получили: " + doubleNumber);
         return doubleNumber;
     }
 
@@ -77,7 +63,6 @@ public abstract class ArgXParent {
 
     public void setSign(boolean sign) {
         this.sign = sign;
-        L.d(TAG, "sign: " + this.sign);
     }
 
     public boolean isEditable() {
@@ -88,11 +73,11 @@ public abstract class ArgXParent {
         this.editable = editable;
     }
 
-    public boolean isVirgin() {
+    public boolean isVirginity() {
         return virginity;
     }
 
-    public void setNotVirgin() {
-        virginity = false;
+    public void setVirginity(boolean virginity) {
+        this.virginity = virginity;
     }
 }

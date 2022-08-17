@@ -29,7 +29,7 @@ public class ArgXBin extends ArgXParent {
         }
         setNumber(new StringBuilder(Integer.toBinaryString(intNumber)));
         setEditable(false);
-        setNotVirgin();
+        setVirginity(false);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ArgXBin extends ArgXParent {
         }
         setNumber(new StringBuilder(Long.toBinaryString(longNumber)));
         setEditable(false);
-        setNotVirgin();
+        setVirginity(false);
     }
 
     @Override
