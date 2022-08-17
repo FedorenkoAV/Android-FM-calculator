@@ -8,7 +8,7 @@ android {
         applicationId "ru.fmproject.android.calculator"
         minSdkVersion 19
         targetSdkVersion 32
-        versionCode 7
+        versionCode 8
         versionName getDate()
         project.ext.set("archivesBaseName", "FM-Calculator-" + getDate())
         vectorDrawables.useSupportLibrary = false
