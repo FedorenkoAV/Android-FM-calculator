@@ -11,7 +11,7 @@ import java.util.Locale;
 import ru.fmproject.android.calculator.Angle;
 import ru.fmproject.android.calculator.ArgX;
 import ru.fmproject.android.calculator.ArgXOct;
-import ru.fmproject.android.calculator.ComplexStackCalculator;
+import ru.fmproject.android.calculator.calculators.ComplexStackCalculator;
 import ru.fmproject.android.calculator.CustomToast;
 import ru.fmproject.android.calculator.L;
 import ru.fmproject.android.calculator.MainActivity;
@@ -19,7 +19,7 @@ import ru.fmproject.android.calculator.MainDisplay;
 import ru.fmproject.android.calculator.MemoryStore;
 import ru.fmproject.android.calculator.Mode;
 import ru.fmproject.android.calculator.MyExceptions;
-import ru.fmproject.android.calculator.StackCalculator;
+import ru.fmproject.android.calculator.calculators.StackCalculator;
 import ru.fmproject.android.calculator.StatisticMode;
 import ru.fmproject.android.calculator.Status;
 import ru.fmproject.android.calculator.StatusDisplay;
@@ -152,7 +152,7 @@ public class EditXOct implements EditX{
             return;
         }
         argX.setFromStringBuilder(argX.getNumber().append(pressedKey));
-        argX.setNotVirgin();
+        argX.setVirginity(false);
         newInput = true;
         makeArg();
     }

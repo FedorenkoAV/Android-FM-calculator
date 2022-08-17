@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import ru.fmproject.android.calculator.Angle;
 import ru.fmproject.android.calculator.ArgXBin;
-import ru.fmproject.android.calculator.ComplexStackCalculator;
+import ru.fmproject.android.calculator.calculators.ComplexStackCalculator;
 import ru.fmproject.android.calculator.CustomToast;
 import ru.fmproject.android.calculator.L;
 import ru.fmproject.android.calculator.MainActivity;
@@ -19,7 +19,7 @@ import ru.fmproject.android.calculator.MemoryStore;
 import ru.fmproject.android.calculator.Mode;
 import ru.fmproject.android.calculator.MyExceptions;
 import ru.fmproject.android.calculator.R;
-import ru.fmproject.android.calculator.StackCalculator;
+import ru.fmproject.android.calculator.calculators.StackCalculator;
 import ru.fmproject.android.calculator.StatisticMode;
 import ru.fmproject.android.calculator.Status;
 import ru.fmproject.android.calculator.StatusDisplay;
@@ -72,8 +72,8 @@ public class EditXBin implements EditX{
         angle = (Angle) objStore[MainActivity.ANGLE];
         memoryStore = (MemoryStore) objStore[MainActivity.MEMORY];
         mainDisplay = (MainDisplay) objStore[MainActivity.MAIN_DISPLAY];
-        maxNum = (1 << (mainDisplay.byteLengthBin * 8 - 1)) - 1;
-        minNum = -(1 << (mainDisplay.byteLengthBin * 8 - 1));
+        maxNum = 511;
+        minNum = -512;
         stackCalculator = (StackCalculator) objStore[MainActivity.STACK_CALCULATOR];
         editXDec = (EditXDec) objStore[MainActivity.EDIT_X_DEC];
         editXBin = (EditXBin) objStore[MainActivity.EDIT_X_BIN];
@@ -146,7 +146,7 @@ public class EditXBin implements EditX{
             stackCalculator.setResult(false);
             newArg();
         }
-        if (((argX.getNumber().length()) >= (mainDisplay.byteLengthBin * 8))) {
+        if (((argX.getNumber().length()) >= 16)) {
 
             customToast.setToastText("Превышено максимальное число цифр");
             customToast.setToastImage(CustomToast.IC_WARNING_AMBER);
@@ -158,7 +158,7 @@ public class EditXBin implements EditX{
             return;
         }
         argX.setFromStringBuilder(argX.getNumber().append(pressedKey));
-        argX.setNotVirgin();
+        argX.setVirginity(false);
         newInput = true;
         makeArg();
     }

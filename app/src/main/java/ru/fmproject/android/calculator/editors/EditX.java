@@ -7,31 +7,31 @@ public interface EditX {
 
     void del();
 
-    void x_to_m();
+    void x_to_m();//перенести в input
 
-    void memoryPlus() throws MyExceptions;
+    void memoryPlus() throws MyExceptions;//перенести в input
 
-    void readMemory();
+    void readMemory();//перенести в input
 
-    void clearMemory();
+    void clearMemory();//перенести в input
 
     void add(char pressedKey);
 
-    void mult() throws MyExceptions;
+    void mult() throws MyExceptions;//перенести в input
 
-    void div() throws MyExceptions;
+    void div() throws MyExceptions;//перенести в input
 
-    void plus() throws MyExceptions;
+    void plus() throws MyExceptions;//перенести в input
 
-    void minus() throws MyExceptions;
+    void minus() throws MyExceptions;//перенести в input
 
     void sign();
 
-    void calc() throws MyExceptions;
+    void calc() throws MyExceptions;//перенести в input
 
     void ce();
 
-    void x_to_y() throws MyExceptions;
+    void x_to_y() throws MyExceptions;//перенести в input
 
 //    void setNumber(int intNumber);
 //
@@ -49,7 +49,7 @@ public interface EditX {
 
     void toHex();
 
-    StringBuilder copyToClipboard();
+    StringBuilder copyToClipboard();//перенести в input
 
-    void pasteFromClipboard(String str);
+    void pasteFromClipboard(String str);//перенести в input
 }
