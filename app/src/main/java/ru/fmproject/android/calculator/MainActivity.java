@@ -1,51 +1,47 @@
 package ru.fmproject.android.calculator;
 
-import android.app.Activity;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.Display;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.HashMap;
 import java.util.Map;
 
 import ru.fmproject.android.calculator.calculators.StackCalculator;
 import ru.fmproject.android.calculator.editors.EditXDec;
 import ru.fmproject.android.calculator.input.InputControl;
+import ru.fmproject.android.calculator.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyDialogFragment.NoticeDialogListener {
+public class MainActivity extends AppCompatActivity implements MyDialogFragment.NoticeDialogListener, NavigationView.OnNavigationItemSelectedListener {
 
-    private AdView mAdView;
+    //    private AdView mAdView;
+    @Nullable
+//    private BannerAdView mBannerAd = null;
+    private ActivityMainBinding binding;
 
     private static final String TAG = "MainActivity";
 
@@ -157,9 +153,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ClipData clipData;
 
     private static final int UI_ANIMATION_DELAY = 100;
-    private static final int ADS_DELAY = 30000;
+    //    private static final int ADS_DELAY = 30000;
     private final Handler mHideHandler = new Handler();
-    private final Handler mAdsHandler = new Handler();
+    //    private final Handler mAdsHandler = new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = () -> {
         // Delayed removal of status and navigation bar
@@ -204,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     };
 
-    private final Runnable mAdsRunnable = this::ads;
+//    private final Runnable mAdsRunnable = this::ads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,6 +213,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             android.util.Log.d(TAG, "Это релизная версия. Логов не будет.");
         }
+
+//        mBinding = ActivityInlineBannerAdBinding.inflate(getLayoutInflater());
+//        setContentView(mBinding.getRoot());
+
+        // Since we're loading the banner based on the adContainerView size,
+        // we need to wait until this view is laid out before we can get the width
+//        mBinding.adContainerView.getViewTreeObserver().addOnGlobalLayoutListener(
+//                new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        mBinding.adContainerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                        mBannerAd = loadBannerAd(getAdSize());
+//                    }
+//                }
+//        );
         try {
             setContentView(R.layout.drawable_layout);
             Toolbar toolbar = findViewById(R.id.toolbar);
@@ -365,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             classesMap.put("protocol", protocol);
             L.d(TAG, "Создали объект protocol, который будет протоколировать вычисления");
 
-//        Создаем объект angle, который будет менять удуницы измерения углов
+//        Создаем объект angle, который будет менять едуницы измерения углов
             angle = new Angle(preferences, statusDisplay);
             L.d(TAG, "Создали объект angle, который будет менять удуницы измерения углов");
             objStore[ANGLE] = angle;
@@ -406,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int i = 0; i < objStore.length; i++) {
                 L.d(TAG, "В objStore[" + i + "]: " + objStore[i]);
             }
-            delayedAds(ADS_DELAY);
+//            delayedAds(ADS_DELAY);
 
         } catch (Exception e) {
             customToast.setToastText("Произошла неизвестная ошибка: " + e);
@@ -583,73 +594,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void ads() {
-        MobileAds.initialize(this, initializationStatus -> {
-        });
+//    private void ads() {
+//        MobileAds.initialize(this, initializationStatus -> {
+//        });
+//
+//        mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//        mAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//                L.d("Ads", "onAdLoaded() запустился.");
+//                L.d("Ads", "mAdView responseInfo: " + mAdView.getResponseInfo());
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(LoadAdError adError) {
+//                // Code to be executed when an ad request fails.
+//                L.d("Ads", "onAdFailedToLoad запустился.");
+//                // Gets the domain from which the error came.
+//                L.d("Ads", "errorDomain: " + adError.getDomain());
+//                // Gets the error code. See
+//                // https://developers.google.com/android/reference/com/google/android/gms/ads/AdRequest#constant-summary
+//                // for a list of possible codes.
+//                L.d("Ads", "errorCode: " + adError.getCode());
+//                // Gets an error message.
+//                // For example "Account not approved yet". See
+//                // https://support.google.com/admob/answer/9905175 for explanations of
+//                // common errors.
+//                L.d("Ads", "errorMessage: " + adError.getMessage());
+//                // Gets additional response information about the request. See
+//                // https://developers.google.com/admob/android/response-info for more
+//                // information.
+//                L.d("Ads", "adError responseInfo: " + adError.getResponseInfo());
+//                // Gets the cause of the error, if available.
+//                L.d("Ads", "cause: " + adError.getCause());
+//                // All of this information is available via the error's toString() method.
+//                //L.d("Ads", adError.toString());
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when an ad opens an overlay that
+//                // covers the screen.
+//                L.d("Ads", "onAdOpened() запустился.");
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                // Code to be executed when the user clicks on an ad.
+//                L.d("Ads", "onAdClicked() запустился.");
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when the user is about to return
+//                // to the app after tapping on an ad.
+//                L.d("Ads", "onAdClosed() запустился.");
+//            }
+//        });
+//    }
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-                L.d("Ads", "onAdLoaded() запустился.");
-                L.d("Ads", "mAdView responseInfo: " + mAdView.getResponseInfo());
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-                L.d("Ads", "onAdFailedToLoad запустился.");
-                // Gets the domain from which the error came.
-                L.d("Ads", "errorDomain: " + adError.getDomain());
-                // Gets the error code. See
-                // https://developers.google.com/android/reference/com/google/android/gms/ads/AdRequest#constant-summary
-                // for a list of possible codes.
-                L.d("Ads", "errorCode: " + adError.getCode());
-                // Gets an error message.
-                // For example "Account not approved yet". See
-                // https://support.google.com/admob/answer/9905175 for explanations of
-                // common errors.
-                L.d("Ads", "errorMessage: " + adError.getMessage());
-                // Gets additional response information about the request. See
-                // https://developers.google.com/admob/android/response-info for more
-                // information.
-                L.d("Ads", "adError responseInfo: " + adError.getResponseInfo());
-                // Gets the cause of the error, if available.
-                L.d("Ads", "cause: " + adError.getCause());
-                // All of this information is available via the error's toString() method.
-                //L.d("Ads", adError.toString());
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-                L.d("Ads", "onAdOpened() запустился.");
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-                L.d("Ads", "onAdClicked() запустился.");
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-                L.d("Ads", "onAdClosed() запустился.");
-            }
-        });
-    }
-
-    private void delayedAds(int delayMillis) {
-        L.d(TAG, "delayedAds(int delayMillis) запущен.");
-        mAdsHandler.removeCallbacks(mAdsRunnable);
-        mAdsHandler.postDelayed(mAdsRunnable, delayMillis);
-    }
+//    private void delayedAds(int delayMillis) {
+//        L.d(TAG, "delayedAds(int delayMillis) запущен.");
+//        mAdsHandler.removeCallbacks(mAdsRunnable);
+//        mAdsHandler.postDelayed(mAdsRunnable, delayMillis);
+//    }
 
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
@@ -680,6 +691,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             L.printStackTrace(e);
             this.onDestroy();
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 
     @Override
@@ -780,4 +796,75 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onDialogNegativeClick(MyDialogFragment myDialogFragment) {
         protocol.clearProtocol();
     }
+
+//    public MainActivity() {
+//        super(R.layout.activity_inline_banner_ad);
+//    }
+//
+//    @NonNull
+//    private BannerAdSize getAdSize() {
+//        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//        final int screenHeight = Math.round(displayMetrics.heightPixels / displayMetrics.density);
+//        // Calculate the width of the ad, taking into account the padding in the ad container.
+//        int adWidthPixels = mBinding.adContainerView.getWidth();
+//        if (adWidthPixels == 0) {
+//            // If the ad hasn't been laid out, default to the full screen width
+//            adWidthPixels = displayMetrics.widthPixels;
+//        }
+//        final int adWidth = Math.round(adWidthPixels / displayMetrics.density);
+//        // Determine the maximum allowable ad height. The current value is given as an example.
+//        final int maxAdHeight = screenHeight / 2;
+//
+//        return BannerAdSize.inlineSize(this, adWidth, maxAdHeight);
+//    }
+//
+//    @NonNull
+//    private BannerAdView loadBannerAd(@NonNull final BannerAdSize adSize) {
+//        final BannerAdView bannerAd = mBinding.banner;
+//        bannerAd.setAdSize(adSize);
+//        bannerAd.setAdUnitId("your-ad-unit-id");
+//        bannerAd.setBannerAdEventListener(new BannerAdEventListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // If this callback occurs after the activity is destroyed, you
+//                // must call destroy and return or you may get a memory leak.
+//                // Note `isDestroyed` is a method on Activity.
+//                if (isDestroyed() && mBannerAd != null) {
+//                    mBannerAd.destroy();
+//                }
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(@NonNull final AdRequestError adRequestError) {
+//                // Ad failed to load with AdRequestError.
+//                // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                // Called when a click is recorded for an ad.
+//            }
+//
+//            @Override
+//            public void onLeftApplication() {
+//                // Called when user is about to leave application (e.g., to go to the browser), as a result of clicking on the ad.
+//            }
+//
+//            @Override
+//            public void onReturnedToApplication() {
+//                // Called when user returned to application after click.
+//            }
+//
+//            @Override
+//            public void onImpression(@Nullable ImpressionData impressionData) {
+//                // Called when an impression is recorded for an ad.
+//            }
+//        });
+//        final AdRequest adRequest = new AdRequest.Builder()
+//                // Methods in the AdRequest.Builder class can be used here to specify individual options settings.
+//                .build();
+//        bannerAd.loadAd(adRequest);
+//        return bannerAd;
+//    }
+
 }
